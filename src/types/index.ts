@@ -28,6 +28,9 @@ export interface Exercise {
   title: string;
   description: string;
   type: "fretboard" | "rhythm" | "ear" | "theory" | "technique";
+  requiresRecording: boolean;
+  recordingPrompt?: string;
+  referenceAudioUrl?: string;
 }
 
 export interface Test {
