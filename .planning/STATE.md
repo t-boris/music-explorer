@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** Phase 8 — Dig Deeper (Complete)
+**Current focus:** Phase 9 — Exercise Explanations & Retry
 
 ## Current Position
 
-Phase: 8 of 8 (Dig Deeper)
-Plan: 2 of 2 in current phase
-Status: Complete
-Last activity: 2026-02-06 — Completed 08-02-PLAN.md
+Phase: 9 of 9 (Exercise Explanations & Retry)
+Plan: 0 of 1 in current phase
+Status: Phase planned, executing
+Last activity: 2026-02-06 — Planning and executing Phase 9
 
-Progress: █████████████████████████ 100% (25/25 plans)
+Progress: █████████████████████████░ 96% (25/26 plans)
 
 ## Performance Metrics
 
@@ -111,6 +111,7 @@ Recent decisions affecting current work:
 - Phase 6 added: Sharing & Community — public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
 - Phase 7 added: Interactive Exercises, Knowledge Checks & Music Stories — replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
 - Phase 8 added: Dig Deeper — contextual deep-dive explanations: key concept terms get "Dig Deeper" buttons with popup detail, plus text selection triggers an explain-this popover for any passage
+- Phase 9 added: Exercise Explanations & Retry — AI-generated explanations for exercise answers using existing /api/dig-deeper endpoint, improved retry with full state reset
 
 ### Deferred Issues
 
@@ -123,5 +124,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 08-02-PLAN.md (Dig Deeper UI components — Phase 8 complete)
+Stopped at: Added Phase 9 (Exercise Explanations & Retry) — needs planning
 Resume file: None

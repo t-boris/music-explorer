@@ -18,6 +18,7 @@ None
 - [x] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
 - [x] **Phase 7: Interactive Exercises, Knowledge Checks & Music Stories** — Replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
 - [x] **Phase 8: Dig Deeper** — AI-powered contextual deep-dive explanations: key concept terms get "Dig Deeper" buttons with streaming AI popups, plus text selection triggers an explain-this popover for any passage
+- [ ] **Phase 9: Exercise Explanations & Retry** — AI-generated detailed explanations for exercise answers (correct and wrong), improved retry flow with full state reset
 
 ## Phase Details
 
@@ -235,10 +236,44 @@ Plans:
 - Streaming text appears progressively (typewriter effect)
 - Does not interfere with existing interactive components or exercises
 
+### Phase 9: Exercise Explanations & Retry
+**Goal**: Enhance all interactive exercises with AI-generated detailed explanations for every answer (correct and wrong), and improve the retry flow so students can fully reset and re-attempt exercises. After each answer, the exercise calls the existing `/api/dig-deeper` endpoint to stream a contextual explanation of why the answer is right or wrong.
+**Depends on**: Phase 8
+**Research**: Unlikely (reuses existing AI infrastructure from Phase 8)
+**Research topics**: None — builds on existing dig-deeper API route and interactive exercise component patterns
+**Plans**: 1 plan
+
+Plans:
+- [ ] 09-01: AI exercise explanations + retry improvement (Wave 1)
+
+**Details:**
+
+**AI-generated answer explanations:**
+- After each answer attempt in an interactive exercise, show a collapsible "Why?" section
+- Call `/api/dig-deeper` with the exercise context: the question/task, the student's answer, whether it was correct, and the correct answer
+- Stream the AI explanation into an inline card below the answer feedback
+- Explanation covers: why the answer is correct/wrong, the underlying concept, a tip for next time
+- Reuse the streaming display pattern from DigDeeperPopover (loading → streaming → complete)
+- Cache responses to avoid redundant API calls for the same question+answer combination
+
+**Exercises to enhance (all 6 Level 0 interactive exercises):**
+- WaveformMatcher — explain why the frequency matched/didn't match, what the waveform shape tells you
+- WaveLabeler — explain what each wave parameter means and why the label placement matters
+- HarmonicFinder — explain why that fret position produces that harmonic, the physics behind it
+- OvertoneCalculator — explain the math behind harmonic calculation, show the formula reasoning
+- OctaveMatcher — explain octave relationships, why those fret positions produce the same note
+- FrequencyCalculator — explain equal temperament math, why 2^(n/12) works
+
+**Improved retry flow:**
+- "Try Again" button fully resets the exercise state (clear all answers, progress, streak)
+- Clear any cached explanations for that exercise
+- Exercise starts fresh with a clean UI (no lingering correct/wrong indicators)
+- Knowledge check "Try Again" already works well — extend the same pattern to interactive exercises
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -250,3 +285,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 6. Sharing & Community | 5/5 | Complete | 2026-02-06 |
 | 7. Interactive Exercises, Knowledge Checks & Music Stories | 3/3 | Complete | 2026-02-06 |
 | 8. Dig Deeper | 2/2 | Complete | 2026-02-06 |
+| 9. Exercise Explanations & Retry | 0/1 | Planned | — |
