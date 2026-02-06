@@ -14,6 +14,7 @@ None
 - [x] **Phase 2: Learning Path & Content** — Level/lesson roadmap, lesson pages with MDX theory, song/composition pages
 - [x] **Phase 3: Practice & Recording** — Practice journal, browser audio recording, metronome, tempo training
 - [x] **Phase 4: Tests, Dashboard & Progress** — Theory tests, ear training, test results, dashboard, progress tracking
+- [ ] **Phase 5: Bugfixes & Interactive Learning Visualizations** — Fix auth/routing/UX bugs, replace static diagrams with live interactive visualizations
 
 ## Phase Details
 
@@ -64,10 +65,42 @@ Plans:
 - [x] 04-02: Progress page with skill radar, level tracking, and session history
 - [x] 04-03: Theory tests, ear training with Web Audio, test results with scoring and progress updates
 
+### Phase 5: Bugfixes & Interactive Learning Visualizations
+**Goal**: Fix all auth/routing/UX bugs preventing dashboard/practice/progress from working. Replace static lesson diagrams and schemes with live, interactive visualizations (waveforms, fretboard explorers, interval/chord interactors, animated notation).
+**Depends on**: Phase 4
+**Research**: Likely (interactive visualization libraries for music education — D3, canvas-based waveforms, Web Audio API visualization)
+**Research topics**: React-based interactive graph/chart libraries, Web Audio API AnalyserNode for live waveforms, SVG/canvas fretboard rendering, interactive music notation libraries
+**Plans**: 3 plans
+
+Plans:
+- [x] 05-01: Auth & routing bugfixes (remove force-dynamic, redundant guards, fix login loop, fix test page link)
+- [ ] 05-02: UX polish & metadata (Coming Soon levels, nav loading flash, page metadata)
+- [ ] 05-03: Interactive learning visualizations (WaveformVisualizer, FrequencyExplorer, IntervalPlayer, FretboardDiagram, RhythmVisualizer, MDX integration)
+
+**Details:**
+
+**Bugs to fix (no new content):**
+- Auth: login page redirect loop (useEffect infinite retry when /api/login fails)
+- Auth: `?redirect=` parameter ignored after login (users always land on /dashboard)
+- Auth: sign-out doesn't redirect to home
+- Performance: remove `force-dynamic` from client-side auth pages (unnecessary Cloud Function invocations)
+- UX: redundant auth guard in practice page
+- UX: levels 3-12 show empty pages (mark "Coming Soon" or hide)
+- UX: nav loading flash when auth resolves
+- UX: no page metadata on auth pages
+
+**Interactive visualizations (replace static content):**
+- Live waveform/frequency display for physics of sound lessons (Web Audio API AnalyserNode)
+- Interactive interval explorer (click to hear, visualize on staff and fretboard)
+- Interactive chord/voicing builder (drag notes, hear result)
+- Animated fretboard diagrams (highlight scales, show positions)
+- Interactive rhythm patterns (tap along, visualize subdivisions)
+- Live graph widgets embeddable in MDX lessons via custom components
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -75,3 +108,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 2. Learning Path & Content | 3/3 | Complete | 2026-02-06 |
 | 3. Practice & Recording | 3/3 | Complete | 2026-02-06 |
 | 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
+| 5. Bugfixes & Interactive Visualizations | 1/3 | In progress | — |

@@ -5,23 +5,24 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** Complete — all 4 phases finished
+**Current focus:** Phase 5 — Bugfixes & Interactive Learning Visualizations
 
 ## Current Position
 
-Phase: 4 of 4 (Tests, Dashboard & Progress)
-Plan: 3 of 3 in current phase
-Status: Complete
-Last activity: 2026-02-06 — Completed 04-03-PLAN.md
+Phase: 5 of 5 (Bugfixes & Interactive Learning Visualizations)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-06 — Completed 05-01-PLAN.md
 
-Progress: ████████████ 100%
+Progress: █████████████░ 87%
+**Next action:** Execute 05-02 (UX polish), then Wave 2 (05-03)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 12
+- Total plans completed: 13
 - Average duration: 4 min
-- Total execution time: 50 min
+- Total execution time: 54 min
 
 **By Phase:**
 
@@ -31,9 +32,10 @@ Progress: ████████████ 100%
 | 02 Learning Path & Content | 3/3 | 13 min | 4 min |
 | 03 Practice & Recording | 3/3 | 10 min | 3 min |
 | 04 Tests, Dashboard & Progress | 3/3 | 9 min | 3 min |
+| 05 Bugfixes & Visualizations | 1/3 | 4 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-02 (4 min), 04-01 (3 min), 04-02 (2 min), 04-03 (4 min)
+- Last 5 plans: 04-01 (3 min), 04-02 (2 min), 04-03 (4 min), 05-01 (4 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -48,7 +50,7 @@ Recent decisions affecting current work:
 - Server-only guard on Admin SDK file
 - OKLCH color tokens: surface-900..600, accent-400..600
 - Lazy Firebase client init via getter functions (getFirebaseAuth, getFirebaseDb) to avoid build-time errors
-- force-dynamic on auth-gated pages to prevent static prerendering
+- force-dynamic on auth-gated pages removed in Phase 5 (was unnecessary for "use client" pages)
 - next-mdx-remote/rsc for server-side MDX rendering (not @next/mdx page-level)
 - All 13 level metadata embedded statically in content.ts (not Firestore)
 - Firestore subcollection CRUD service with modular SDK and getFirebaseDb() lazy getter
@@ -61,6 +63,12 @@ Recent decisions affecting current work:
 - Pure question generator functions (no Firebase dependency) for test engine
 - Web Audio OscillatorNode + GainNode envelope (10ms attack, 50ms release) for clean ear training tones
 - Test state machine hook (loading/in-progress/complete) with auth-aware score saving
+- Auth route group pages rely solely on middleware — no client-side redirect guards needed
+- Non-null assertion (user!) for middleware-guaranteed user in (auth) route group
+
+### Roadmap Evolution
+
+- Phase 5 added: Bugfixes & Interactive Learning Visualizations — fix auth loop, redirect params, force-dynamic, sign-out, UX gaps; replace static diagrams with live interactive visualizations (waveforms, fretboard, intervals, chords, rhythm)
 
 ### Deferred Issues
 
@@ -73,5 +81,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Project complete — all 12 plans across 4 phases executed. Full learn-practice-assess loop closed.
+Stopped at: Completed 05-01-PLAN.md (auth & routing bugfixes). Ready for 05-02 + 05-03.
 Resume file: None
