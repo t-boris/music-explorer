@@ -1,0 +1,116 @@
+---
+title: "How We Hear Pitch"
+order: 3
+levelId: "level-0"
+description: "Understand logarithmic perception, equal temperament, and the mathematical system that organizes all of Western music."
+tags:
+  - physics
+  - perception
+  - logarithmic
+exercises:
+  - id: "ex-0-3-1"
+    title: "Match the Octave"
+    type: "fretboard"
+    description: "Play the same note in two different octaves on the guitar. Verify that the higher note's frequency is exactly double."
+    requiresRecording: true
+    recordingPrompt: "Record yourself playing A on the 5th fret of the low E string, then A on the 7th fret of the D string."
+  - id: "ex-0-3-2"
+    title: "Equal Temperament Calculation"
+    type: "theory"
+    description: "Starting from A4 = 440 Hz, calculate the frequencies of all 12 notes up to A5 = 880 Hz using the equal temperament formula."
+    requiresRecording: false
+---
+
+# How We Hear Pitch
+
+Our ears do not perceive frequency on a linear scale. The difference between 100 Hz and 200 Hz sounds like the same "distance" as the difference between 1000 Hz and 2000 Hz -- even though the second gap is ten times larger in absolute terms. Understanding this **logarithmic perception** is the key to understanding why music is organized the way it is.
+
+## Logarithmic Perception
+
+Doubling any frequency produces the same perceptual result: an **octave**. This is true regardless of the starting frequency:
+
+```
+55 Hz  -> 110 Hz  = one octave  (A1 to A2)
+110 Hz -> 220 Hz  = one octave  (A2 to A3)
+220 Hz -> 440 Hz  = one octave  (A3 to A4)
+440 Hz -> 880 Hz  = one octave  (A4 to A5)
+```
+
+Each octave spans a larger range of frequencies, yet they all sound like the "same step." This is because human hearing responds to **ratios**, not differences. A ratio of 2:1 always sounds like an octave, whether you start at 50 Hz or 5000 Hz.
+
+> **Key concept:** Our perception of pitch is **logarithmic** -- we hear equal ratios as equal distances. This is why musical scales are built on multiplicative relationships, not additive ones.
+
+## Equal Temperament: Dividing the Octave
+
+Western music divides each octave into **12 equal semitones**. This system, called **12-tone equal temperament** (12-TET), ensures that every semitone has the same frequency ratio. Since 12 semitones must multiply together to produce a ratio of 2:1 (one octave), each semitone's ratio is:
+
+```
+semitone ratio = 2^(1/12) ~ 1.05946
+
+To go up n semitones from frequency f:
+f_new = f * 2^(n/12)
+```
+
+This formula is the mathematical backbone of the modern Western tuning system. On a guitar, **each fret raises the pitch by exactly one semitone** -- which means moving 12 frets up always doubles the frequency.
+
+**Example: calculating note frequencies from A4 = 440 Hz**
+
+| Semitones from A4 | Note | Calculation | Frequency |
+|-------------------|------|-------------|-----------|
+| 0 | A4 | 440 * 2^(0/12) | 440.00 Hz |
+| 2 | B4 | 440 * 2^(2/12) | 493.88 Hz |
+| 3 | C5 | 440 * 2^(3/12) | 523.25 Hz |
+| 5 | D5 | 440 * 2^(5/12) | 587.33 Hz |
+| 7 | E5 | 440 * 2^(7/12) | 659.26 Hz |
+| 12 | A5 | 440 * 2^(12/12) | 880.00 Hz |
+
+## Why A4 = 440 Hz?
+
+The choice of **A4 = 440 Hz** as the universal tuning reference is a convention, not a law of physics. It was standardized internationally in 1955, though its use had been growing since the 19th century.
+
+Historically, tuning varied dramatically:
+
+- **Baroque era:** A4 ~ 415 Hz (about a semitone lower than modern)
+- **Classical era:** A4 ~ 425-435 Hz
+- **Modern standard:** A4 = 440 Hz
+- **Some orchestras today:** A4 = 442-445 Hz (slightly brighter sound)
+
+For guitar, the standard tuning of the six open strings (low to high) produces these frequencies:
+
+```
+String    Note    Frequency
+──────────────────────────
+6th (E2)   E2     82.41 Hz
+5th (A2)   A2    110.00 Hz
+4th (D3)   D3    146.83 Hz
+3rd (G3)   G3    196.00 Hz
+2nd (B3)   B3    246.94 Hz
+1st (E4)   E4    329.63 Hz
+```
+
+## The Audible Range
+
+The human ear can detect frequencies roughly between **20 Hz and 20,000 Hz** (20 kHz), though the upper limit decreases with age. Musical instruments occupy a subset of this range:
+
+- **Bass guitar lowest note (B0):** ~31 Hz
+- **Guitar lowest note (E2):** ~82 Hz
+- **Guitar highest practical note (~24th fret, E string):** ~1319 Hz
+- **Piano full range:** 27.5 Hz to 4186 Hz
+- **Human voice:** roughly 80 Hz to 1100 Hz (fundamentals)
+
+Most of the guitar's fundamental frequencies fall between 82 Hz and 1320 Hz, but the overtones extend much higher -- which is why the tone knob on a guitar affects brightness by filtering high-frequency harmonics.
+
+## The Tradeoff of Equal Temperament
+
+Equal temperament is a mathematical compromise. The **pure** intervals from the harmonic series (3:2 for a fifth, 5:4 for a major third) are slightly different from their equal-tempered equivalents:
+
+```
+Interval        Pure Ratio    ET Ratio       Difference
+──────────────────────────────────────────────────────
+Perfect fifth   3:2 = 1.5000  2^(7/12) = 1.4983   -0.11%
+Major third     5:4 = 1.2500  2^(4/12) = 1.2599   +0.79%
+```
+
+The differences are small but audible to trained ears. The benefit of equal temperament is that **every key sounds equally in tune** -- you can play in any key and transpose freely. Without it, changing keys on a fixed-pitch instrument would require retuning.
+
+This completes our foundation in the physics of sound. With an understanding of frequency, harmonics, and the logarithmic nature of pitch perception, we are ready to learn how this information is written down -- the notation system.

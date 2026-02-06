@@ -1,0 +1,101 @@
+---
+title: "Harmonics & Overtones"
+order: 2
+levelId: "level-0"
+description: "Discover the harmonic series -- the hidden frequencies that give every instrument its unique voice."
+tags:
+  - physics
+  - harmonics
+  - timbre
+exercises:
+  - id: "ex-0-2-1"
+    title: "Find Natural Harmonics"
+    type: "technique"
+    description: "Play natural harmonics at the 12th and 7th frets on each string. Notice how the pitch changes."
+    requiresRecording: true
+    recordingPrompt: "Record yourself playing natural harmonics on the high E string at frets 12, 7, and 5."
+  - id: "ex-0-2-2"
+    title: "Harmonic Series Calculation"
+    type: "theory"
+    description: "Given a fundamental frequency of 110 Hz (A2), calculate the first 6 harmonics and name their approximate musical pitches."
+    requiresRecording: false
+---
+
+# Harmonics & Overtones
+
+When you pluck a guitar string, it does not vibrate at a single frequency. The string simultaneously produces a **fundamental frequency** (the lowest and loudest pitch) plus a series of higher frequencies called **overtones** or **harmonics**. This phenomenon shapes the very sound of music.
+
+## The Harmonic Series
+
+The **harmonic series** is the set of frequencies produced by a vibrating string. Each harmonic is an integer multiple of the fundamental:
+
+```
+Harmonic    Ratio    Frequency (A2 = 110 Hz)    Note
+─────────────────────────────────────────────────────
+1st (fund)  1x       110 Hz                     A2
+2nd         2x       220 Hz                     A3
+3rd         3x       330 Hz                     E4
+4th         4x       440 Hz                     A4
+5th         5x       550 Hz                     C#5
+6th         6x       660 Hz                     E5
+7th         7x       770 Hz                     ~G5
+8th         8x       880 Hz                     A5
+```
+
+> **Key insight:** The harmonic series is built into the physics of every vibrating string. The intervals between harmonics -- the **octave** (2:1), **perfect fifth** (3:2), **perfect fourth** (4:3), and **major third** (5:4) -- are the physical foundation of Western harmony.
+
+## Why Instruments Sound Different: Timbre
+
+If a guitar and a piano both play A4 (440 Hz), why do they sound completely different? The answer is **timbre** (pronounced "TAM-ber") -- the unique "color" or "texture" of a sound.
+
+Timbre is determined by the **relative amplitudes** of the harmonics present in a sound:
+
+- **Guitar:** Strong fundamental, prominent 2nd and 3rd harmonics, gradually fading higher harmonics. The attack has a complex burst of frequencies that quickly settles.
+- **Piano:** Rich set of harmonics with a percussive attack and long sustain. The stiff steel strings produce slightly **inharmonic** overtones (not perfect integer multiples).
+- **Flute:** Nearly pure tone -- dominant fundamental with very weak upper harmonics.
+- **Distorted guitar:** Clipping adds strong odd-numbered harmonics (3rd, 5th, 7th), which is why distortion sounds "thicker" and more aggressive.
+
+The formula for the frequency of the nth harmonic is simply:
+
+```
+f_n = n * f_1
+
+where f_1 is the fundamental frequency
+and n = 1, 2, 3, 4, ...
+```
+
+## Natural Harmonics on Guitar
+
+You can isolate individual harmonics on a guitar by lightly touching the string at specific **node points** -- positions where a particular harmonic's standing wave has zero displacement.
+
+| Fret | String Division | Harmonic | Interval Above Fundamental |
+|------|----------------|----------|---------------------------|
+| 12th | 1/2 | 2nd | Octave |
+| 7th | 1/3 | 3rd | Octave + perfect fifth |
+| 5th | 1/4 | 4th | Two octaves |
+| 4th (near) | 1/5 | 5th | Two octaves + major third |
+| 3rd (near) | 1/6 | 6th | Two octaves + perfect fifth |
+
+**How to play a natural harmonic:**
+
+1. Lightly touch the string directly above the **fret wire** (not between frets as in normal playing)
+2. Pluck the string with your picking hand
+3. Immediately lift your fretting finger -- the harmonic will ring out as a clear, bell-like tone
+
+The 12th fret harmonic divides the string exactly in half, producing a pitch one octave above the open string. The 7th fret harmonic divides it into thirds, producing a pitch an octave and a fifth above the fundamental.
+
+## The Frequency Ratios That Define Music
+
+The harmonic series gives us the fundamental frequency ratios of Western music:
+
+```
+Octave:         2:1  (2nd harmonic / 1st)
+Perfect fifth:  3:2  (3rd harmonic / 2nd)
+Perfect fourth: 4:3  (4th harmonic / 3rd)
+Major third:    5:4  (5th harmonic / 4th)
+Minor third:    6:5  (6th harmonic / 5th)
+```
+
+These ratios are not arbitrary cultural choices -- they emerge directly from physics. The simpler the ratio, the more **consonant** (harmonically stable) the interval sounds. This connection between mathematics and musical perception is one of the oldest discoveries in science, dating back to **Pythagoras** (6th century BCE).
+
+Understanding the harmonic series is essential because it explains **why** certain note combinations sound good together -- a question we will answer precisely when we study intervals and consonance in Level 2.

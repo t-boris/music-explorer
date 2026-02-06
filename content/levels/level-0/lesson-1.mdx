@@ -2,59 +2,94 @@
 title: "What is Sound?"
 order: 1
 levelId: "level-0"
-description: "Explore the physics behind sound waves, frequency, amplitude, and how we perceive pitch."
+description: "Explore the physics behind sound waves, frequency, amplitude, and how vibrating strings create the tones we hear."
 tags:
   - physics
   - frequency
-  - waves
+  - amplitude
 exercises:
-  - id: "ex-01"
-    title: "Identify High vs Low Pitch"
+  - id: "ex-0-1-1"
+    title: "Identify Higher/Lower Pitch"
     type: "ear"
-    description: "Listen to pairs of tones and identify which has a higher pitch."
+    description: "Listen to two tones and identify which has a higher pitch. Focus on the relationship between frequency and your perception."
     requiresRecording: false
-  - id: "ex-02"
-    title: "Clap the Rhythm"
-    type: "rhythm"
-    description: "Clap along to a steady pulse and record yourself maintaining tempo."
-    requiresRecording: true
-    recordingPrompt: "Record yourself clapping a steady quarter-note pulse at 80 BPM for 8 bars."
+  - id: "ex-0-1-2"
+    title: "Describe a Sound Wave"
+    type: "theory"
+    description: "Draw or describe the wave properties of a plucked open string -- label frequency, amplitude, and wavelength."
+    requiresRecording: false
 ---
 
 # What is Sound?
 
-Sound is a **vibration** that travels through a medium (air, water, or solid material) as a wave. When an object vibrates, it creates pressure changes in the surrounding air that our ears detect and our brains interpret as sound.
+Sound is a **vibration** that travels through a medium -- air, water, or solid material -- as a pressure wave. When you pluck a guitar string, the string oscillates back and forth, pushing and pulling the surrounding air molecules. These pressure changes propagate outward as a **sound wave** that eventually reaches your ear.
+
+## The Anatomy of a Wave
+
+Every sound wave has three fundamental properties:
+
+- **Frequency** -- the number of complete wave cycles per second, measured in **Hertz (Hz)**
+- **Amplitude** -- the height of the wave, which determines **loudness**
+- **Wavelength** -- the physical distance between two identical points on consecutive cycles
+
+```
+        Amplitude
+           |
+     +     v     +
+    / \         / \
+   /   \       /   \        wavelength
+--/-----\-----/-----\----   <---------->
+         \   /       \   /
+          \ /         \ /
+           -           -
+
+  |--- one cycle ---|
+       = 1/frequency
+```
+
+The relationship between these properties follows a simple formula:
+
+```
+speed of sound = frequency x wavelength
+v = f x lambda
+
+In air at room temperature: v ~ 343 m/s
+```
 
 ## Frequency and Pitch
 
-The **frequency** of a sound wave determines its **pitch** -- how high or low we perceive it. Frequency is measured in **Hertz (Hz)**, which represents the number of wave cycles per second.
+**Frequency** directly determines **pitch** -- how high or low we perceive a sound. A faster vibration (higher frequency) produces a higher pitch; a slower vibration (lower frequency) produces a lower pitch.
 
-- **Low frequency** (e.g., 80 Hz) = low pitch (bass guitar, kick drum)
-- **High frequency** (e.g., 4000 Hz) = high pitch (piccolo, cymbal shimmer)
+On guitar, this relationship is intuitive:
 
-> The human ear can typically detect frequencies between **20 Hz and 20,000 Hz**. Musical instruments generally produce fundamentals in the range of about 27 Hz (lowest piano key) to 4186 Hz (highest piano key).
+- **Thicker strings** vibrate more slowly, producing **lower pitches** (the low E string vibrates at about 82 Hz)
+- **Thinner strings** vibrate more quickly, producing **higher pitches** (the high E string vibrates at about 330 Hz)
+- **Fretting a note** shortens the vibrating portion of the string, raising the frequency and pitch
+
+> **Key concept:** The pitch of a vibrating string depends on its **length**, **tension**, and **mass per unit length**. The formula is:
+>
+> `f = (1 / 2L) * sqrt(T / mu)`
+>
+> where `L` is the string length, `T` is the tension, and `mu` is the linear density.
 
 ## Amplitude and Volume
 
-The **amplitude** of a sound wave determines its **volume** (loudness). Greater amplitude means a louder sound. Volume is measured in **decibels (dB)**.
+**Amplitude** determines how loud a sound is, measured in **decibels (dB)**. When you strum a guitar hard, the string swings through a wider arc (greater amplitude), displacing more air and creating a louder sound.
 
-| Source | Approximate dB |
-|--------|---------------|
+| Source | Approximate Level |
+|--------|------------------|
 | Whisper | 30 dB |
 | Normal conversation | 60 dB |
+| Acoustic guitar (strumming) | 70-80 dB |
 | Electric guitar (amplified) | 90-110 dB |
 | Rock concert | 110-120 dB |
 
-## The Overtone Series
+> **Important:** The decibel scale is **logarithmic**. Every increase of 10 dB represents roughly a **doubling** of perceived loudness. A 100 dB signal is not "twice as loud" as 50 dB -- it is perceived as approximately **32 times louder**.
 
-When a guitar string vibrates, it doesn't just vibrate at one frequency. It produces a **fundamental frequency** plus a series of **overtones** (harmonics) at integer multiples of the fundamental:
+## Standing Waves on a Guitar String
 
-```
-Fundamental:  110 Hz  (A2)
-2nd harmonic: 220 Hz  (A3 - one octave up)
-3rd harmonic: 330 Hz  (E4 - octave + fifth)
-4th harmonic: 440 Hz  (A4 - two octaves up)
-5th harmonic: 550 Hz  (C#5 - two octaves + major third)
-```
+When you pluck a guitar string, the wave reflects off the fixed endpoints (the nut and the bridge) and creates a **standing wave**. The string vibrates in a pattern where certain points, called **nodes**, remain stationary while other points, called **antinodes**, oscillate with maximum amplitude.
 
-This overtone series is the physical basis for **intervals**, **chords**, and **harmony** -- concepts we'll explore in depth in later levels.
+The simplest standing wave pattern -- the **fundamental** -- has nodes only at the two endpoints and one antinode at the center. This is the lowest frequency the string can produce and defines the note you hear. Higher-order standing wave patterns (harmonics) divide the string into 2, 3, 4, or more equal segments -- a topic we explore in the next lesson.
+
+Understanding these physical principles is the foundation for everything that follows: intervals, scales, chords, and harmony all emerge from the mathematics of vibrating strings.
