@@ -15,7 +15,7 @@ None
 - [x] **Phase 3: Practice & Recording** — Practice journal, browser audio recording, metronome, tempo training
 - [x] **Phase 4: Tests, Dashboard & Progress** — Theory tests, ear training, test results, dashboard, progress tracking
 - [x] **Phase 5: Bugfixes & Interactive Learning Visualizations** — Fix auth/routing/UX bugs, replace static diagrams with live interactive visualizations
-- [ ] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
+- [x] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
 
 ## Phase Details
 
@@ -110,7 +110,7 @@ Plans:
 - [x] 06-02: Sharing flow — invite generation, invite acceptance, share settings (Wave 2)
 - [x] 06-03: Community page — people list, activity feed, navigation link (Wave 2)
 - [x] 06-04: Comments system — comment service, hook, UI components (Wave 2)
-- [ ] 06-05: Shared dashboard — read-only dashboard view, comment integration, activity logging (Wave 3)
+- [x] 06-05: Shared dashboard — read-only dashboard view, comment integration, activity logging (Wave 3)
 
 **Details:**
 
@@ -143,4 +143,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Practice & Recording | 3/3 | Complete | 2026-02-06 |
 | 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
-| 6. Sharing & Community | 4/5 | In progress | — |
+| 6. Sharing & Community | 5/5 | Complete | 2026-02-06 |
