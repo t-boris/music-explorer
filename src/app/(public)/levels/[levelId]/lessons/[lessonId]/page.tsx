@@ -5,10 +5,22 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { getLevel, getLesson, getExercisesForLesson } from "@/lib/content";
+import { getLevel, getLevels, getLesson, getLessons, getExercisesForLesson } from "@/lib/content";
 import { mdxComponents } from "@/components/content/mdx-components";
 import { ExerciseList } from "@/components/content/exercise-list";
+import { KnowledgeCheck } from "@/components/exercises/knowledge-check";
 import { TheoryTag } from "@/components/content/theory-tag";
+
+export function generateStaticParams() {
+  const levels = getLevels();
+  const params: { levelId: string; lessonId: string }[] = [];
+  for (const level of levels) {
+    for (const lesson of getLessons(level.id)) {
+      params.push({ levelId: level.id, lessonId: lesson.id });
+    }
+  }
+  return params;
+}
 
 interface LessonPageProps {
   params: Promise<{ levelId: string; lessonId: string }>;
@@ -89,7 +101,17 @@ export default async function LessonPage({ params }: LessonPageProps) {
       </article>
 
       {/* Exercises */}
-      <ExerciseList exercises={exercises} />
+      <ExerciseList exercises={exercises} lessonId={lessonId} levelId={levelId} />
+
+      {/* Knowledge Check */}
+      <section className="mt-10">
+        <div className="mb-4 flex items-center gap-2">
+          <h2 className="font-heading text-xl font-semibold text-text-primary">
+            Check Your Knowledge
+          </h2>
+        </div>
+        <KnowledgeCheck levelId={levelId} lessonId={lessonId} lessonOrder={lesson.order} />
+      </section>
 
       {/* Take Test CTA */}
       <div className="mt-10 rounded-xl border border-surface-700 bg-surface-800 p-6">
