@@ -2,10 +2,13 @@
 
 export const dynamic = "force-dynamic";
 
+import { useState } from "react";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Plus, ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SessionList } from "@/components/practice/session-list";
+import { Metronome } from "@/components/practice/metronome";
+import { TempoTrainer } from "@/components/practice/tempo-trainer";
 import { useAuth } from "@/hooks/use-auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -13,6 +16,7 @@ import { useEffect } from "react";
 export default function PracticePage() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const [tempoTrainerOpen, setTempoTrainerOpen] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -22,7 +26,7 @@ export default function PracticePage() {
 
   if (loading) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-8">
+      <main className="mx-auto max-w-5xl px-4 py-8">
         <div className="h-8 w-48 animate-pulse rounded bg-surface-700" />
       </main>
     );
@@ -31,7 +35,7 @@ export default function PracticePage() {
   if (!user) return null;
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
+    <main className="mx-auto max-w-5xl px-4 py-8">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-heading text-text-primary">
           Practice Journal
@@ -44,7 +48,38 @@ export default function PracticePage() {
         </Button>
       </div>
 
-      <SessionList userId={user.uid} />
+      <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+        {/* Left column: Session list */}
+        <div>
+          <SessionList userId={user.uid} />
+        </div>
+
+        {/* Right column: Practice tools */}
+        <aside className="space-y-6">
+          <h2 className="text-lg font-heading text-text-secondary">
+            Practice Tools
+          </h2>
+
+          {/* Metronome - always visible */}
+          <Metronome />
+
+          {/* Tempo Trainer - collapsible */}
+          <div>
+            <button
+              onClick={() => setTempoTrainerOpen(!tempoTrainerOpen)}
+              className="mb-3 flex w-full items-center gap-2 text-sm font-heading text-text-secondary hover:text-text-primary transition-colors"
+            >
+              {tempoTrainerOpen ? (
+                <ChevronDown className="h-4 w-4" />
+              ) : (
+                <ChevronRight className="h-4 w-4" />
+              )}
+              Tempo Training
+            </button>
+            {tempoTrainerOpen && <TempoTrainer userId={user.uid} />}
+          </div>
+        </aside>
+      </div>
     </main>
   );
 }

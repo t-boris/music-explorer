@@ -142,6 +142,18 @@ export interface ProgressEntry {
   createdAt: Timestamp;
 }
 
+export interface TempoAttempt {
+  id: string;
+  userId: string;
+  exerciseId: string;
+  exerciseTitle: string;
+  startBpm: number;
+  targetBpm: number;
+  achievedBpm: number;
+  date: string;
+  createdAt: Timestamp;
+}
+
 export interface ProgressSummary {
   rhythm: SkillScore;
   intervals: SkillScore;
