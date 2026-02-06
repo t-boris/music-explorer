@@ -50,7 +50,7 @@ Plans:
 Plans:
 - [x] 03-01: Practice journal (create/view sessions with date, duration, notes, linked exercises)
 - [ ] 03-02: Audio recording (MediaRecorder API, Firebase Storage upload, playback, attach to entities, version comparison)
-- [ ] 03-03: Metronome and tempo training (Web Audio API metronome, BPM progression rules, attempt logging)
+- [x] 03-03: Metronome and tempo training (Web Audio API metronome, BPM progression rules, attempt logging)
 
 ### Phase 4: Tests, Dashboard & Progress
 **Goal**: Theory tests and ear training with scoring. Dashboard with today's plan, quick record, streak. Progress tracking with level completion % and skill radar.
@@ -73,5 +73,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation & Auth | 3/3 | Complete | 2026-02-06 |
 | 2. Learning Path & Content | 3/3 | Complete | 2026-02-06 |
-| 3. Practice & Recording | 1/3 | In progress | - |
+| 3. Practice & Recording | 2/3 | In progress | - |
 | 4. Tests, Dashboard & Progress | 0/3 | Not started | - |
