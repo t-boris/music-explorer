@@ -10,6 +10,7 @@ import { mdxComponents } from "@/components/content/mdx-components";
 import { ExerciseList } from "@/components/content/exercise-list";
 import { KnowledgeCheck } from "@/components/exercises/knowledge-check";
 import { TheoryTag } from "@/components/content/theory-tag";
+import { LessonContentWrapper } from "@/components/content/lesson-content-wrapper";
 
 export function generateStaticParams() {
   const levels = getLevels();
@@ -86,19 +87,21 @@ export default async function LessonPage({ params }: LessonPageProps) {
         )}
       </header>
 
-      {/* Theory content (MDX) */}
-      <article className="prose-custom">
-        <MDXRemote
-          source={content}
-          components={mdxComponents}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
-            },
-          }}
-        />
-      </article>
+      {/* Theory content (MDX) with Dig Deeper support */}
+      <LessonContentWrapper lessonTitle={lesson.title} levelTitle={level.title} levelOrder={level.order}>
+        <article className="prose-custom">
+          <MDXRemote
+            source={content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings],
+              },
+            }}
+          />
+        </article>
+      </LessonContentWrapper>
 
       {/* Exercises */}
       <ExerciseList exercises={exercises} lessonId={lessonId} levelId={levelId} />
