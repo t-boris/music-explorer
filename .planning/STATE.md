@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** Phase 8 — Dig Deeper
+**Current focus:** Phase 8 — Dig Deeper (Complete)
 
 ## Current Position
 
 Phase: 8 of 8 (Dig Deeper)
-Plan: 1 of 2 in current phase
-Status: In progress
-Last activity: 2026-02-06 — Completed 08-01-PLAN.md
+Plan: 2 of 2 in current phase
+Status: Complete
+Last activity: 2026-02-06 — Completed 08-02-PLAN.md
 
-Progress: ████████████████████████░ 96% (24/25 plans)
+Progress: █████████████████████████ 100% (25/25 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 24
+- Total plans completed: 25
 - Average duration: 4 min
-- Total execution time: 86 min
+- Total execution time: 90 min
 
 **By Phase:**
 
@@ -33,9 +33,11 @@ Progress: ███████████████████████�
 | 04 Tests, Dashboard & Progress | 3/3 | 9 min | 3 min |
 | 05 Bugfixes & Visualizations | 3/3 | 15 min | 5 min |
 | 06 Sharing & Community | 5/5 | 12 min | 2 min |
+| 07 Interactive Exercises | 3/3 | ~9 min | ~3 min |
+| 08 Dig Deeper | 2/2 | 7 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 06-01 (3 min), 06-02 (2 min), 06-03 (2 min), 06-04 (2 min), 06-05 (3 min)
+- Last 5 plans: 07-02 (~3 min), 07-03 (~3 min), 08-01 (3 min), 08-02 (4 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -99,6 +101,9 @@ Recent decisions affecting current work:
 - In-memory rate limiting (20 req/min/IP) for public AI endpoint
 - DigDeeperContext provider for passing lesson metadata to MDX components
 - Client wrapper component pattern for mixing server-rendered MDX with client interactivity
+- Module-level Map cache for API response deduplication in DigDeeperPopover
+- Text selection threshold of 10 chars with requestAnimationFrame for reliable selection detection
+- data-no-dig-deeper attribute on interactive components to prevent selection triggers
 
 ### Roadmap Evolution
 
@@ -118,5 +123,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 08-01-PLAN.md (AI backend for Dig Deeper)
+Stopped at: Completed 08-02-PLAN.md (Dig Deeper UI components — Phase 8 complete)
 Resume file: None
