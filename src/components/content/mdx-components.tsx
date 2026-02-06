@@ -6,6 +6,7 @@ import { IntervalPlayer } from "@/components/interactive/interval-player";
 import { FretboardDiagram } from "@/components/interactive/fretboard-diagram";
 import { RhythmVisualizer } from "@/components/interactive/rhythm-visualizer";
 import { MusicStory } from "@/components/content/music-story";
+import { DigDeeper } from "@/components/content/dig-deeper-term";
 
 /**
  * Custom MDX component overrides for the dark theme.
@@ -22,6 +23,7 @@ export const mdxComponents: MDXComponents = {
   FretboardDiagram,
   RhythmVisualizer,
   MusicStory,
+  DigDeeper,
 
   // Headings
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
