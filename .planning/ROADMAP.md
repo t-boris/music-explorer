@@ -15,6 +15,7 @@ None
 - [x] **Phase 3: Practice & Recording** — Practice journal, browser audio recording, metronome, tempo training
 - [x] **Phase 4: Tests, Dashboard & Progress** — Theory tests, ear training, test results, dashboard, progress tracking
 - [x] **Phase 5: Bugfixes & Interactive Learning Visualizations** — Fix auth/routing/UX bugs, replace static diagrams with live interactive visualizations
+- [ ] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
 
 ## Phase Details
 
@@ -97,10 +98,43 @@ Plans:
 - Interactive rhythm patterns (tap along, visualize subdivisions)
 - Live graph widgets embeddable in MDX lessons via custom components
 
+### Phase 6: Sharing & Community
+**Goal**: Users can share their progress, recordings, test scores, and dashboard with anyone via public links. Other users can view shared profiles and leave comments on recordings and achievements. Dashboard supports "my dashboard" vs "shared with me" views.
+**Depends on**: Phase 5
+**Research**: Likely (Firestore security rules for public read access, sharing URL patterns, comment moderation)
+**Research topics**: Firestore rules for public/shared subcollections, shareable link generation (slug vs UUID), comment data model and moderation, notification patterns for new comments
+**Plans**: 5 plans
+
+Plans:
+- [ ] 06-01: Foundation — types, connection service, activity service, Firestore rules (Wave 1)
+- [ ] 06-02: Sharing flow — invite generation, invite acceptance, share settings (Wave 2)
+- [ ] 06-03: Community page — people list, activity feed, navigation link (Wave 2)
+- [ ] 06-04: Comments system — comment service, hook, UI components (Wave 2)
+- [ ] 06-05: Shared dashboard — read-only dashboard view, comment integration, activity logging (Wave 3)
+
+**Details:**
+
+**Sharing & public profiles:**
+- Public shareable profile page showing progress summary, skill radar, streak
+- Shareable links for individual recordings, test results, practice sessions
+- Privacy controls: choose what to share (all, selected, nothing)
+- Public dashboard view (read-only version of user's dashboard)
+
+**Community & comments:**
+- Comment system on shared recordings and achievements
+- "Shared with me" section on dashboard (dropdown or tab)
+- View other users' shared dashboards
+- Comment notifications (in-app)
+
+**Dashboard dual-view:**
+- Default: user's own dashboard (current behavior)
+- "Shared with me" view: feed of shared items from others
+- Toggle/dropdown to switch between views
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -109,3 +143,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Practice & Recording | 3/3 | Complete | 2026-02-06 |
 | 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
+| 6. Sharing & Community | 0/5 | Planned | — |
