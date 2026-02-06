@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-05)
 ## Current Position
 
 Phase: 4 of 4 (Tests, Dashboard & Progress)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-02-06 — Completed 04-01-PLAN.md
+Last activity: 2026-02-06 — Completed 04-02-PLAN.md
 
-Progress: ██████████░░ 83%
+Progress: ███████████░ 91%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
+- Total plans completed: 11
 - Average duration: 4 min
-- Total execution time: 44 min
+- Total execution time: 46 min
 
 **By Phase:**
 
@@ -30,10 +30,10 @@ Progress: ██████████░░ 83%
 | 01 Foundation & Auth | 3/3 | 18 min | 6 min |
 | 02 Learning Path & Content | 3/3 | 13 min | 4 min |
 | 03 Practice & Recording | 3/3 | 10 min | 3 min |
-| 04 Tests, Dashboard & Progress | 1/3 | 3 min | 3 min |
+| 04 Tests, Dashboard & Progress | 2/3 | 5 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (3 min), 03-03 (3 min), 03-02 (4 min), 04-01 (3 min)
+- Last 5 plans: 03-03 (3 min), 03-02 (4 min), 04-01 (3 min), 04-02 (2 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -69,6 +69,9 @@ Recent decisions affecting current work:
 - Parallel Firestore fetch pattern for dashboard data aggregation (Promise.all for 4 queries)
 - Dashboard widget pattern: typed props, dark surface-800 cards, consistent heading with Lucide icon
 - Quick record on dashboard uses contextType="free" with empty levelId
+- Recharts RadarChart with inline OKLCH color strings (not CSS variables) for dark theme SVG rendering
+- Static level metadata duplicated in client components (content.ts is server-only)
+- Relative date grouping pattern for session history timeline (This Week, Last Week, This Month)
 
 ### Deferred Issues
 
@@ -81,5 +84,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 04-01-PLAN.md — Dashboard with today-plan, quick-record, streak-display, and progress-overview widgets using parallel Firestore data aggregation.
+Stopped at: Completed 04-02-PLAN.md — Progress page with Recharts RadarChart skill radar, level progress bar (0-12), and weekly-grouped session history timeline.
 Resume file: None

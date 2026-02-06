@@ -61,7 +61,7 @@ Plans:
 
 Plans:
 - [x] 04-01: Dashboard (today's plan, quick record, streak, progress overview) with Firestore data aggregation
-- [ ] 04-02: Ear training (audio generation for intervals and chord types, recognition quizzes, recommendations)
+- [x] 04-02: Progress page with skill radar, level tracking, and session history
 - [ ] 04-03: Dashboard (today's plan, quick record, streak) and progress tracking (level %, skill radar, session history)
 
 ## Progress
@@ -74,4 +74,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Foundation & Auth | 3/3 | Complete | 2026-02-06 |
 | 2. Learning Path & Content | 3/3 | Complete | 2026-02-06 |
 | 3. Practice & Recording | 3/3 | Complete | 2026-02-06 |
-| 4. Tests, Dashboard & Progress | 1/3 | In progress | - |
+| 4. Tests, Dashboard & Progress | 2/3 | In progress | - |
