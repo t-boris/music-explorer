@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** Phase 3 — Practice & Recording
+**Current focus:** Phase 4 — Tests, Dashboard & Progress
 
 ## Current Position
 
 Phase: 3 of 4 (Practice & Recording)
-Plan: 2 of 3 in current phase
-Status: In progress
-Last activity: 2026-02-06 — Completed 03-03-PLAN.md
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-06 — Completed 03-02-PLAN.md
 
-Progress: ████████░░░░ 67%
+Progress: █████████░░░ 75%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
+- Total plans completed: 9
 - Average duration: 5 min
-- Total execution time: 37 min
+- Total execution time: 41 min
 
 **By Phase:**
 
@@ -29,10 +29,10 @@ Progress: ████████░░░░ 67%
 |-------|-------|-------|----------|
 | 01 Foundation & Auth | 3/3 | 18 min | 6 min |
 | 02 Learning Path & Content | 3/3 | 13 min | 4 min |
-| 03 Practice & Recording | 2/3 | 6 min | 3 min |
+| 03 Practice & Recording | 3/3 | 10 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (3 min), 02-03 (6 min), 03-01 (3 min), 03-03 (3 min)
+- Last 5 plans: 02-03 (6 min), 03-01 (3 min), 03-03 (3 min), 03-02 (4 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -63,6 +63,8 @@ Recent decisions affecting current work:
 - Look-ahead scheduler pattern for Web Audio metronome (25ms setInterval + AudioContext.currentTime)
 - State machine hook pattern for tempo trainer (setup/training/complete modes)
 - Native HTML range input with Tailwind styling for BPM slider (no extra UI library dep)
+- MediaRecorder mimeType priority: audio/webm;codecs=opus > audio/webm > audio/mp4 (Safari)
+- Firebase Storage upload pattern: blob upload to users/{uid}/recordings/, then getDownloadURL + Firestore doc
 
 ### Deferred Issues
 
@@ -75,5 +77,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 03-03-PLAN.md — Metronome with look-ahead scheduler, tempo trainer with BPM progression, attempt logging to Firestore.
+Stopped at: Completed 03-02-PLAN.md — Audio recording with MediaRecorder, Firebase Storage upload, playback controls, recording comparison, integrated into session detail.
 Resume file: None
