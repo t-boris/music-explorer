@@ -87,7 +87,7 @@ export default function TestPage() {
           <LogIn className="h-5 w-5 text-accent-400" />
           <p className="text-sm text-text-secondary">
             You can take this test as a preview.{" "}
-            <Link href="/auth/signin" className="text-accent-400 hover:text-accent-300">
+            <Link href="/login" className="text-accent-400 hover:text-accent-300">
               Sign in
             </Link>{" "}
             to save your scores and track progress.
