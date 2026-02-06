@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { AuthProvider } from "@/components/providers/auth-provider";
 import { TopNav } from "@/components/layout/top-nav";
 import "./globals.css";
 
@@ -38,8 +39,10 @@ export default function RootLayout({
     >
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <TopNav />
-          {children}
+          <AuthProvider>
+            <TopNav />
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
