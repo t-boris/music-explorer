@@ -1,8 +1,12 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
-import { getLevel, getLessons } from "@/lib/content";
+import { ChevronLeft, BookOpen } from "lucide-react";
+import { getLevel, getLevels, getLessons } from "@/lib/content";
 import { LessonCard } from "@/components/content/lesson-card";
+
+export function generateStaticParams() {
+  return getLevels().map((level) => ({ levelId: level.id }));
+}
 
 interface LevelDetailPageProps {
   params: Promise<{ levelId: string }>;
@@ -79,9 +83,25 @@ export default async function LevelDetailPage({ params }: LevelDetailPageProps) 
         </div>
       ) : (
         <div className="rounded-xl border border-surface-700 bg-surface-800 p-8 text-center">
-          <p className="text-text-muted">
-            No lessons available for this level yet. Check back soon!
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-surface-700">
+            <BookOpen className="h-5 w-5 text-text-muted" />
+          </div>
+          <h3 className="font-heading text-lg font-semibold text-text-primary">
+            Coming Soon
+          </h3>
+          <p className="mt-2 text-sm text-text-muted">
+            Lessons for this level are being developed. Complete the previous
+            levels to build a strong foundation.
           </p>
+          {level.order > 0 && (
+            <Link
+              href={`/levels/level-${level.order - 1}`}
+              className="mt-4 inline-flex items-center gap-1 text-sm text-accent-400 hover:text-accent-500"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Go to Level {level.order - 1}
+            </Link>
+          )}
         </div>
       )}
     </main>
