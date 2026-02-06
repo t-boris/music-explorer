@@ -10,27 +10,27 @@ See: .planning/PROJECT.md (updated 2026-02-05)
 ## Current Position
 
 Phase: 1 of 4 (Foundation & Auth)
-Plan: 2 of 3 in current phase (01-02 running in parallel)
-Status: In progress
-Last activity: 2026-02-06 — Completed 01-03-PLAN.md
+Plan: 3 of 3 in current phase
+Status: Phase complete
+Last activity: 2026-02-06 — Completed 01-02-PLAN.md
 
-Progress: ██░░░░░░░░ 17%
+Progress: █████░░░░░ 25%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 5 min
-- Total execution time: 9 min
+- Total plans completed: 3
+- Average duration: 6 min
+- Total execution time: 18 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 Foundation & Auth | 2/3 | 9 min | 5 min |
+| 01 Foundation & Auth | 3/3 | 18 min | 6 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4 min), 01-03 (5 min)
+- Last 5 plans: 01-01 (4 min), 01-03 (5 min), 01-02 (9 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -47,6 +47,9 @@ Recent decisions affecting current work:
 - FIREBASE_SERVICE_ACCOUNT_KEY env var for seed script (avoids gcloud GOOGLE_APPLICATION_CREDENTIALS conflict)
 - Fixed document IDs for idempotent Firestore seeding
 - Manual Firebase config files (no firebase init, no real project yet)
+- Lazy Firebase client init via getter functions (getFirebaseAuth, getFirebaseDb) to avoid build-time errors
+- force-dynamic on auth-gated pages to prevent static prerendering
+- Mobile sign-in uses signInWithRedirect fallback (popup blocked on mobile browsers)
 
 ### Deferred Issues
 
@@ -59,5 +62,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 01-03-PLAN.md (01-02 may still be in progress)
+Stopped at: Completed 01-02-PLAN.md — Phase 1 complete
 Resume file: None
