@@ -32,10 +32,10 @@ Progress: ███████████████████░ 95%
 | 03 Practice & Recording | 3/3 | 10 min | 3 min |
 | 04 Tests, Dashboard & Progress | 3/3 | 9 min | 3 min |
 | 05 Bugfixes & Visualizations | 3/3 | 15 min | 5 min |
-| 06 Sharing & Community | 2/5 | 5 min | 3 min |
+| 06 Sharing & Community | 4/5 | 9 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-02 (4 min), 05-03 (7 min), 06-01 (3 min), 06-02 (2 min)
+- Last 5 plans: 06-01 (3 min), 06-02 (2 min), 06-03 (2 min), 06-04 (2 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -76,6 +76,11 @@ Recent decisions affecting current work:
 - Client-side merge for multi-user activity feed (Firestore lacks cross-collection queries)
 - Redirect to /share after invite acceptance (connection context visible there)
 - useRef guard to prevent duplicate invite processing on React strict mode re-renders
+- Top-level comments collection (not user subcollection) since comments come from different users
+- Optimistic UI pattern with rollback on error for responsive comment interaction
+- Comment input hidden for own items (users don't comment on their own dashboard items)
+- Community link in authLinks only (Share accessible via Community page, not top nav)
+- Horizontal scroll on mobile, grid on desktop for people list
 
 ### Roadmap Evolution
 
@@ -93,5 +98,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 06-02-PLAN.md (sharing flow)
+Stopped at: Completed 06-04-PLAN.md (comments system)
 Resume file: None
