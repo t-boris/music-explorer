@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** Phase 7 — Interactive Exercises, Knowledge Checks & Music Stories
+**Current focus:** Phase 8 — Dig Deeper
 
 ## Current Position
 
-Phase: 7 of 7 (Interactive Exercises, Knowledge Checks & Music Stories)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-02-06 — Completed 07-01-PLAN.md (interactive exercise components)
+Phase: 8 of 8 (Dig Deeper)
+Plan: 0 of 2 in current phase
+Status: Phase planned, ready for execution
+Last activity: 2026-02-06 — Planned Phase 8 (2 plans in 2 waves)
 
-Progress: ███████████████████████ 100% (23/23 plans)
+Progress: ███████████████████████░░ 92% (23/25 plans)
 
 ## Performance Metrics
 
@@ -94,12 +94,18 @@ Recent decisions affecting current work:
 - ExerciseCard inline expand/collapse for interactive components (not modal/separate page)
 - Component map pattern: INTERACTIVE_COMPONENTS record maps string keys to React components
 - Backward compatibility: exercises without interactiveComponent keep checkbox behavior
+- Anthropic SDK (@anthropic-ai/sdk) for AI-powered "Dig Deeper" explanations
+- Streaming API route pattern: ReadableStream from Anthropic SDK stream events
+- In-memory rate limiting (20 req/min/IP) for public AI endpoint
+- DigDeeperContext provider for passing lesson metadata to MDX components
+- Client wrapper component pattern for mixing server-rendered MDX with client interactivity
 
 ### Roadmap Evolution
 
 - Phase 5 added: Bugfixes & Interactive Learning Visualizations — fix auth loop, redirect params, force-dynamic, sign-out, UX gaps; replace static diagrams with live interactive visualizations (waveforms, fretboard, intervals, chords, rhythm)
 - Phase 6 added: Sharing & Community — public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
 - Phase 7 added: Interactive Exercises, Knowledge Checks & Music Stories — replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
+- Phase 8 added: Dig Deeper — contextual deep-dive explanations: key concept terms get "Dig Deeper" buttons with popup detail, plus text selection triggers an explain-this popover for any passage
 
 ### Deferred Issues
 
@@ -112,5 +118,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 07-01-PLAN.md (interactive exercise components) — all phases complete
+Stopped at: Planned Phase 8 (Dig Deeper) — 2 plans in 2 waves, ready for execution
 Resume file: None

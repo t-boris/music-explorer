@@ -17,6 +17,7 @@ None
 - [x] **Phase 5: Bugfixes & Interactive Learning Visualizations** — Fix auth/routing/UX bugs, replace static diagrams with live interactive visualizations
 - [x] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
 - [x] **Phase 7: Interactive Exercises, Knowledge Checks & Music Stories** — Replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
+- [ ] **Phase 8: Dig Deeper** — Contextual deep-dive explanations: key concept terms get "Dig Deeper" buttons with popup detail, plus text selection triggers an explain-this popover for any passage
 
 ## Phase Details
 
@@ -186,10 +187,58 @@ Lesson 3 (How We Hear Pitch):
   - Lesson 3 (Pitch perception): Why A=440Hz became the standard — the 1939 international conference debate and how orchestras tuned before standardization
 - Stories are engaging, 2-3 paragraphs, with a "Why this matters" connection back to the lesson topic
 
+### Phase 8: Dig Deeper
+**Goal**: Add AI-powered contextual deep-dive explanations to lesson content. Two modes: (1) Key music concepts and terms in lessons are marked with a "Dig Deeper" button that sends the term + lesson context to Claude API and displays the AI-generated explanation in a popup. (2) Users can select any text or paragraph in a lesson and a floating "Dig Deeper" button appears, which sends the selection to Claude API and shows a contextual explanation. Both modes use streaming responses for low latency.
+**Depends on**: Phase 7
+**Research**: Likely (Anthropic Claude API integration, streaming responses in Next.js, text selection API, popover positioning)
+**Research topics**: Anthropic SDK for Node.js (@anthropic-ai/sdk), streaming API responses with Next.js Route Handlers, Window.getSelection() API for text selection, Radix UI Popover or custom floating UI for positioned popups, MDX inline component patterns for marking key terms, response caching strategies
+**Plans**: 2 plans
+
+Plans:
+- [ ] 08-01: AI backend — Anthropic SDK, streaming API route, contextual prompt service (Wave 1)
+- [ ] 08-02: UI components — DigDeeper term component, text selection detector, streaming popover, MDX integration (Wave 2)
+
+**Details:**
+
+**Mode 1 — Key concept "Dig Deeper" buttons (AI-powered):**
+- Specific music/physics terms in lesson MDX content are wrapped in a `<DigDeeper>` component
+- Renders the term inline with a subtle indicator (e.g., dotted underline + small icon)
+- Clicking sends the term + surrounding lesson context to an AI API (Anthropic Claude) via a Next.js API route
+- AI generates a detailed, contextual explanation (2-3 paragraphs) tailored to the lesson's topic and the student's current level
+- Response streams into a popover/popup with a loading state and markdown rendering
+- Examples: "fundamental frequency", "harmonic series", "timbre", "standing wave", "node point", "consonant"
+- Dismissable by clicking outside or pressing Escape
+- Responses can be cached (in-memory or localStorage) to avoid redundant API calls for the same term
+
+**Mode 2 — Text selection "Dig Deeper" (AI-powered):**
+- When the user selects any text within a lesson's MDX content area, a floating "Dig Deeper" button appears near the selection
+- Clicking sends the selected text + lesson context to the same AI API route
+- AI generates a contextual explanation of the selected passage: what it means, why it matters, how it connects to other concepts
+- Response streams into a popover positioned near the selection
+- Button disappears when selection is cleared
+- Works on both desktop (mouse selection) and mobile (long-press selection)
+
+**AI integration:**
+- Next.js API route (`/api/dig-deeper`) calls Anthropic Claude API with structured prompt
+- System prompt includes lesson context (title, level, topic) for accurate, level-appropriate responses
+- Streaming response for low perceived latency
+- Rate limiting to prevent abuse
+- API key stored in environment variable (ANTHROPIC_API_KEY)
+- Fallback: graceful error state if API is unavailable
+
+**UI/UX considerations:**
+- Popovers follow the existing dark theme (surface-800 background, accent borders)
+- Smooth enter/exit animations using Motion library (already installed)
+- Popovers position intelligently (above/below selection, flip if near edge)
+- Mobile: popovers expand to near-full-width cards
+- Loading state with skeleton/spinner while AI generates response
+- Streaming text appears progressively (typewriter effect)
+- Does not interfere with existing interactive components or exercises
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -200,3 +249,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
 | 6. Sharing & Community | 5/5 | Complete | 2026-02-06 |
 | 7. Interactive Exercises, Knowledge Checks & Music Stories | 3/3 | Complete | 2026-02-06 |
+| 8. Dig Deeper | 0/2 | Planned | — |
