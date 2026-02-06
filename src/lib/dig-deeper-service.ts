@@ -1,5 +1,7 @@
 import "server-only";
-import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenAI } from "@google/genai";
+
+const MODEL = "gemini-3-flash-preview";
 
 export interface DigDeeperRequest {
   term?: string;
@@ -77,46 +79,56 @@ function buildExerciseUserPrompt(request: ExerciseExplanationRequest): string {
   return `The student answered "${request.question}" with "${request.studentAnswer}", but the correct answer is "${request.correctAnswer}". Explain why the correct answer is right, what the student might have confused, and give a tip to remember it next time. Keep it to 2-3 short paragraphs.`;
 }
 
-export function streamExerciseExplanation(request: ExerciseExplanationRequest) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+// ─── Shared Client ───
+
+function getClient(): GoogleGenAI {
+  const apiKey = process.env.GENAI_API_KEY;
   if (!apiKey) {
-    throw new Error("ANTHROPIC_API_KEY is not configured");
+    throw new Error("GENAI_API_KEY is not configured");
   }
-
-  const client = new Anthropic({ apiKey });
-
-  return client.messages.stream({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 512,
-    system: buildExerciseSystemPrompt(request),
-    messages: [
-      {
-        role: "user",
-        content: buildExerciseUserPrompt(request),
-      },
-    ],
-  });
+  return new GoogleGenAI({ apiKey });
 }
 
-// ─── Dig Deeper Explanation ───
+// ─── Streaming Functions ───
 
-export function streamDigDeeperExplanation(request: DigDeeperRequest) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    throw new Error("ANTHROPIC_API_KEY is not configured");
-  }
+export async function* streamExerciseExplanation(
+  request: ExerciseExplanationRequest
+): AsyncGenerator<string> {
+  const client = getClient();
 
-  const client = new Anthropic({ apiKey });
-
-  return client.messages.stream({
-    model: "claude-sonnet-4-5-20250929",
-    max_tokens: 1024,
-    system: buildSystemPrompt(request),
-    messages: [
-      {
-        role: "user",
-        content: buildUserPrompt(request),
-      },
-    ],
+  const response = await client.models.generateContentStream({
+    model: MODEL,
+    contents: buildExerciseUserPrompt(request),
+    config: {
+      systemInstruction: buildExerciseSystemPrompt(request),
+      maxOutputTokens: 512,
+    },
   });
+
+  for await (const chunk of response) {
+    if (chunk.text) {
+      yield chunk.text;
+    }
+  }
+}
+
+export async function* streamDigDeeperExplanation(
+  request: DigDeeperRequest
+): AsyncGenerator<string> {
+  const client = getClient();
+
+  const response = await client.models.generateContentStream({
+    model: MODEL,
+    contents: buildUserPrompt(request),
+    config: {
+      systemInstruction: buildSystemPrompt(request),
+      maxOutputTokens: 1024,
+    },
+  });
+
+  for await (const chunk of response) {
+    if (chunk.text) {
+      yield chunk.text;
+    }
+  }
 }

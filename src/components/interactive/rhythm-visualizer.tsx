@@ -32,7 +32,7 @@ const PRESETS: RhythmPreset[] = [
   },
   {
     name: "Waltz",
-    pattern: [1, 0, 0, 1, 0, 0],
+    pattern: [1, 0, 1, 0, 1, 0],
     beatsPerMeasure: 3,
     subdivisions: 2,
   },

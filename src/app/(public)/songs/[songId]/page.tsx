@@ -5,9 +5,13 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { getSong, getLevel } from "@/lib/content";
+import { getSong, getSongs, getLevel } from "@/lib/content";
 import { mdxComponents } from "@/components/content/mdx-components";
 import { TheoryTag } from "@/components/content/theory-tag";
+
+export function generateStaticParams() {
+  return getSongs().map((song) => ({ songId: song.id }));
+}
 
 interface SongDetailPageProps {
   params: Promise<{ songId: string }>;

@@ -70,6 +70,9 @@ export function TopNav() {
           <span className="font-heading text-lg font-bold text-text-primary">
             Music Explorer
           </span>
+          <span className="rounded-full bg-accent-500/15 px-1.5 py-0.5 text-[10px] font-medium text-accent-400">
+            v1.0
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -129,6 +132,9 @@ export function TopNav() {
                 <SheetTitle className="flex items-center gap-2 text-text-primary">
                   <Music className="h-5 w-5 text-accent-400" />
                   Music Explorer
+                  <span className="rounded-full bg-accent-500/15 px-1.5 py-0.5 text-[10px] font-medium text-accent-400">
+                    v1.0
+                  </span>
                 </SheetTitle>
               </SheetHeader>
               <nav className="mt-6 flex flex-col gap-4">

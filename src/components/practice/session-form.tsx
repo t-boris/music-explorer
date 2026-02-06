@@ -86,10 +86,11 @@ export function SessionForm({ exercises, levels, session }: SessionFormProps) {
     try {
       if (isEditing && session) {
         await updatePracticeSession(user.uid, session.id, data);
+        router.push(`/practice/${session.id}`);
       } else {
         await createPracticeSession(user.uid, data);
+        router.push("/practice");
       }
-      router.push("/practice");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to save session.");
     } finally {
@@ -270,7 +271,7 @@ export function SessionForm({ exercises, levels, session }: SessionFormProps) {
         <Button
           type="button"
           variant="ghost"
-          onClick={() => router.push("/practice")}
+          onClick={() => router.push(isEditing && session ? `/practice/${session.id}` : "/practice")}
         >
           Cancel
         </Button>

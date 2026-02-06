@@ -34,7 +34,8 @@ function getApp() {
  * This prevents build-time errors when NEXT_PUBLIC_FIREBASE_API_KEY is empty
  * (e.g., during static page generation in `next build`).
  *
- * Returns null when Firebase is not configured (no API key in env).
+ * getFirebaseAuth returns null when unconfigured (auth-provider handles this).
+ * getFirebaseDb/getFirebaseStorage throw — they're called in user actions, not module init.
  */
 export function getFirebaseAuth() {
   if (!isFirebaseConfigured()) return null;
@@ -42,11 +43,9 @@ export function getFirebaseAuth() {
 }
 
 export function getFirebaseDb() {
-  if (!isFirebaseConfigured()) return null;
   return getFirestore(getApp());
 }
 
 export function getFirebaseStorage() {
-  if (!isFirebaseConfigured()) return null;
   return getStorage(getApp());
 }

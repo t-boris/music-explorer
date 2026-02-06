@@ -12,8 +12,9 @@ exercises:
   - id: "ex-2-3-1"
     title: "Consonance vs Dissonance"
     type: "ear"
-    description: "Listen to pairs of notes played together and categorize each interval as consonant (stable) or dissonant (tense)."
+    description: "Listen to two notes played together and classify the interval as consonant, mildly dissonant, or dissonant."
     requiresRecording: false
+    interactiveComponent: "consonance-judge"
   - id: "ex-2-3-2"
     title: "Tension and Resolution"
     type: "fretboard"
@@ -57,6 +58,10 @@ Tritone            45:32   very complex  most dissonant
 ```
 
 The physical explanation: when two frequencies have a simple ratio (like 3:2), their wave peaks align frequently, producing a smooth, blended sound. When the ratio is complex (like 16:15), the waves rarely align, producing **beating** -- audible fluctuations in volume that our brain interprets as tension.
+
+Hear the difference yourself. Click any interval below -- consonant intervals are shown in green, mildly dissonant in yellow, and dissonant in red. Try switching between harmonic mode (both notes together) and ascending mode (one after the other):
+
+<IntervalPlayer rootNote="C4" />
 
 ## Categories of Consonance
 
@@ -108,6 +113,10 @@ Interval:        P8   P5   P8   M3   P5   ~m7  P8
 The intervals that appear earliest in the harmonic series (octave at harmonic 2, fifth at harmonic 3, major third at harmonic 5) are the most consonant. The intervals that appear later or not at all are progressively more dissonant.
 
 This is not coincidence -- when you play two notes whose frequency ratio matches the harmonic series, you are **reinforcing** the natural overtones already present in each note. Your ear recognizes this alignment as stability.
+
+Explore frequency ratios directly. Set one oscillator to a base frequency (like 220 Hz), then tune the other to simple ratios (Octave = 2:1, Fifth = 3:2) to hear consonance. Then try detuning slightly off the simple ratio -- you will hear the dissonant **beating** as the waves go in and out of alignment:
+
+<FrequencyExplorer />
 
 ## Tension and Resolution on Guitar
 

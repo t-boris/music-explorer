@@ -34,6 +34,9 @@ export function SignInButton() {
       const provider = new GoogleAuthProvider();
 
       const auth = getFirebaseAuth();
+      if (!auth) {
+        throw new Error("Firebase is not configured. Check your environment variables.");
+      }
 
       if (mobile) {
         // Mobile: use redirect flow to avoid popup blocking
@@ -51,18 +54,34 @@ export function SignInButton() {
       await ensureUserDocument(uid, displayName, email, photoURL);
 
       // Set auth cookie via API route
-      await fetch("/api/login", {
+      const response = await fetch("/api/login", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${idToken}`,
         },
       });
 
-      // Redirect to dashboard
+      if (!response.ok) {
+        throw new Error("Failed to establish session. Please try again.");
+      }
+
+      // Clear any cookie-attempt flag and redirect to dashboard
+      sessionStorage.removeItem("me_cookie_attempt");
       window.location.href = "/dashboard";
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Sign in failed. Please try again.";
+      const authErr = err as { code?: string; message?: string };
+      let message: string;
+
+      if (authErr.code === "auth/account-exists-with-different-credential") {
+        message =
+          "An account with this email already exists. Please sign in with email and password.";
+      } else {
+        message =
+          err instanceof Error
+            ? err.message
+            : "Sign in failed. Please try again.";
+      }
+
       setError(message);
       setLoading(false);
     }

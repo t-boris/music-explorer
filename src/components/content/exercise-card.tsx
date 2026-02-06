@@ -12,6 +12,19 @@ import { HarmonicFinder } from "@/components/exercises/harmonic-finder";
 import { OvertoneCalculator } from "@/components/exercises/overtone-calculator";
 import { OctaveMatcher } from "@/components/exercises/octave-matcher";
 import { FrequencyCalculator } from "@/components/exercises/frequency-calculator";
+import { StaffNoteReader } from "@/components/exercises/staff-note-reader";
+import { LedgerLineSpotter } from "@/components/exercises/ledger-line-spotter";
+import { BeatCounter } from "@/components/exercises/beat-counter";
+import { RhythmPatternMatcher } from "@/components/exercises/rhythm-pattern-matcher";
+import { MeasureFiller } from "@/components/exercises/measure-filler";
+import { RhythmMath } from "@/components/exercises/rhythm-math";
+import { TimeSigIdentifier } from "@/components/exercises/time-sig-identifier";
+import { BeatStressMapper } from "@/components/exercises/beat-stress-mapper";
+import { StrumPatternBuilder } from "@/components/exercises/strum-pattern-builder";
+import { IntervalEarTrainer } from "@/components/exercises/interval-ear-trainer";
+import { IntervalSpeller } from "@/components/exercises/interval-speller";
+import { IntervalSongMatch } from "@/components/exercises/interval-song-match";
+import { ConsonanceJudge } from "@/components/exercises/consonance-judge";
 
 // ─── Interactive Component Map ───
 
@@ -31,6 +44,19 @@ const INTERACTIVE_COMPONENTS: Record<
   "overtone-calculator": OvertoneCalculator,
   "octave-matcher": OctaveMatcher,
   "frequency-calculator": FrequencyCalculator,
+  "staff-note-reader": StaffNoteReader,
+  "ledger-line-spotter": LedgerLineSpotter,
+  "beat-counter": BeatCounter,
+  "rhythm-pattern-matcher": RhythmPatternMatcher,
+  "measure-filler": MeasureFiller,
+  "rhythm-math": RhythmMath,
+  "time-sig-identifier": TimeSigIdentifier,
+  "beat-stress-mapper": BeatStressMapper,
+  "strum-pattern-builder": StrumPatternBuilder,
+  "interval-ear-trainer": IntervalEarTrainer,
+  "interval-speller": IntervalSpeller,
+  "interval-song-match": IntervalSongMatch,
+  "consonance-judge": ConsonanceJudge,
 };
 
 // ─── Type Colors ───
@@ -184,7 +210,7 @@ export function ExerciseCard({ exercise, completed, toggling, onToggle }: Exerci
                 <InteractiveComponent
                   key={retryKey}
                   onComplete={handleInteractiveComplete}
-                  completed={!!completed}
+                  completed={retryKey > 0 ? false : !!completed}
                   lessonTitle={lessonTitle}
                   levelTitle={levelTitle}
                   levelOrder={levelOrder}

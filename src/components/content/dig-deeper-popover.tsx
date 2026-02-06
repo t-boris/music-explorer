@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { X, RotateCcw, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -86,8 +87,12 @@ export function DigDeeperPopover({
 }: DigDeeperPopoverProps) {
   const [content, setContent] = useState("");
   const [status, setStatus] = useState<"loading" | "streaming" | "complete" | "error">("loading");
+  const [mounted, setMounted] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+
+  // Portal needs document.body — defer to client mount to avoid SSR crash
+  useEffect(() => { setMounted(true); }, []);
 
   const fetchExplanation = useCallback(async () => {
     const cacheKey = getCacheKey(term, selectedText);
@@ -249,7 +254,9 @@ export function DigDeeperPopover({
   const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
   const displayLabel = term || "Selected text";
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
@@ -336,6 +343,7 @@ export function DigDeeperPopover({
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

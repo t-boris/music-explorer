@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronRight, ClipboardCheck } from "lucide-react";
+import { ArrowRight, ChevronRight, ClipboardCheck } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
@@ -49,6 +49,27 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
   const { lesson, content } = result;
   const exercises = getExercisesForLesson(levelId, lessonId);
+
+  // Compute next lesson (same level, or first lesson of next level)
+  const lessonsInLevel = getLessons(levelId);
+  const currentIdx = lessonsInLevel.findIndex((l) => l.id === lessonId);
+  let nextLesson: { levelId: string; levelTitle: string; lessonId: string; lessonTitle: string; lessonOrder: number } | null = null;
+
+  if (currentIdx >= 0 && currentIdx < lessonsInLevel.length - 1) {
+    const next = lessonsInLevel[currentIdx + 1];
+    nextLesson = { levelId, levelTitle: level.title, lessonId: next.id, lessonTitle: next.title, lessonOrder: next.order };
+  } else {
+    // Last lesson in level — find next level with content
+    const allLevels = getLevels();
+    const nextLevels = allLevels.filter((l) => l.order > level.order);
+    for (const nl of nextLevels) {
+      const nlLessons = getLessons(nl.id);
+      if (nlLessons.length > 0) {
+        nextLesson = { levelId: nl.id, levelTitle: nl.title, lessonId: nlLessons[0].id, lessonTitle: nlLessons[0].title, lessonOrder: nlLessons[0].order };
+        break;
+      }
+    }
+  }
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
@@ -101,10 +122,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
             }}
           />
         </article>
+        {/* Exercises */}
+        <ExerciseList exercises={exercises} lessonId={lessonId} levelId={levelId} />
       </LessonContentWrapper>
-
-      {/* Exercises */}
-      <ExerciseList exercises={exercises} lessonId={lessonId} levelId={levelId} />
 
       {/* Knowledge Check */}
       <section className="mt-10">
@@ -139,6 +159,27 @@ export default async function LessonPage({ params }: LessonPageProps) {
           </div>
         </div>
       </div>
+
+      {/* Next Lesson Link */}
+      {nextLesson && (
+        <Link
+          href={`/levels/${nextLesson.levelId}/lessons/${nextLesson.lessonId}`}
+          className="mt-8 flex items-center justify-between rounded-xl border border-surface-700 bg-surface-800 p-5 transition-colors hover:border-accent-500/40 hover:bg-surface-700"
+        >
+          <div>
+            <p className="text-xs text-text-muted">Next Lesson</p>
+            <p className="mt-0.5 font-heading text-base font-semibold text-text-primary">
+              {nextLesson.lessonTitle}
+            </p>
+            {nextLesson.levelId !== levelId && (
+              <p className="mt-0.5 text-xs text-accent-400">
+                Level {getLevels().find((l) => l.id === nextLesson.levelId)?.order}: {nextLesson.levelTitle}
+              </p>
+            )}
+          </div>
+          <ArrowRight className="h-5 w-5 shrink-0 text-accent-400" />
+        </Link>
+      )}
     </main>
   );
 }

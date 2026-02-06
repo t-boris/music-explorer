@@ -19,6 +19,25 @@ exercises:
     type: "theory"
     description: "Calculate the total number of beats for different sequences of notes and rests in 4/4 time."
     requiresRecording: false
+    interactiveComponent: "beat-counter"
+  - id: "ex-1-2-3"
+    title: "Rhythm Pattern Matcher"
+    type: "rhythm"
+    description: "Listen to rhythm patterns played by a metronome and identify the correct notation."
+    requiresRecording: false
+    interactiveComponent: "rhythm-pattern-matcher"
+  - id: "ex-1-2-4"
+    title: "Fill the Measure"
+    type: "rhythm"
+    description: "Complete a 4/4 measure by selecting the right notes to fill exactly 4 beats."
+    requiresRecording: false
+    interactiveComponent: "measure-filler"
+  - id: "ex-1-2-5"
+    title: "Rhythm Math"
+    type: "theory"
+    description: "Solve equations about note value relationships and beat calculations."
+    requiresRecording: false
+    interactiveComponent: "rhythm-math"
 ---
 
 # Rhythm & Note Duration
@@ -50,6 +69,8 @@ Or inversely:
 
 > **Key concept:** Note values form a **binary tree** of durations. Every division is by 2. This is why counting rhythms in subdivisions of 2 is fundamental to sight-reading.
 
+<NoteValueChart mode="notes" />
+
 ## Rests
 
 For every note value, there is a corresponding **rest** of equal duration -- a measured silence. Rests are just as important as notes; music lives in the interplay between sound and silence.
@@ -65,6 +86,8 @@ Sixteenth rest        1/4 beat
 ```
 
 On guitar, rests require **active damping** -- you must mute the strings to stop them from ringing. This is a critical technique: palm muting, releasing fret pressure, or touching the strings with the fretting hand.
+
+<NoteValueChart mode="rests" />
 
 ## Dotted Notes
 
@@ -90,6 +113,8 @@ double-dotted = original + original/2 + original/4
 double-dotted = original x 1.75
 ```
 
+<DottedNoteDemo />
+
 ## Ties
 
 A **tie** is a curved line connecting two notes of the **same pitch**, combining their durations into a single sustained note. The second note is not attacked -- only the first is struck, and it rings for the total duration of both.
@@ -106,6 +131,8 @@ Ties serve two important purposes:
 
 1. **Sustaining across bar lines:** A note can ring from one measure into the next
 2. **Creating durations not available as single note values:** For example, 5 beats = whole tied to quarter
+
+<TieDemo />
 
 ## Beaming
 
@@ -131,5 +158,7 @@ Sixteenth notes:   1 e + a 2 e + a 3 e + a 4 e + a
 ```
 
 When practicing rhythm on guitar, use a **metronome** to establish a steady pulse. Start slowly (60-80 BPM) and gradually increase tempo only after the rhythm is clean and consistent. Rushing is the most common rhythm error.
+
+<RhythmVisualizer />
 
 The proportional system of note values is elegant in its simplicity: every duration is a power of two, modified only by dots and ties. This mathematical regularity makes complex rhythms analyzable and learnable.

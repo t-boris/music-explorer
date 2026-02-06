@@ -11,13 +11,15 @@ exercises:
   - id: "ex-1-1-1"
     title: "Read Note Names"
     type: "theory"
-    description: "Identify the note names on a treble clef staff. Use the mnemonics to name notes on lines (E-G-B-D-F) and spaces (F-A-C-E)."
+    description: "A note appears on the treble clef staff — identify it by name. Use the line and space mnemonics (Every Good Boy Does Fine, F-A-C-E) to help. Get 4 correct in a row to complete."
     requiresRecording: false
+    interactiveComponent: "staff-note-reader"
   - id: "ex-1-1-2"
     title: "Ledger Line Notes"
     type: "theory"
-    description: "Name the notes on ledger lines above and below the treble clef staff, from middle C up to A above the staff."
+    description: "Click the correct position on the staff for the given note name, focusing on ledger line notes above and below the treble clef. Get 3 correct in a row to complete."
     requiresRecording: false
+    interactiveComponent: "ledger-line-spotter"
 ---
 
 # The Staff & Clefs
@@ -56,6 +58,10 @@ Spaces (bottom to top):    F4 - A4 - C5 - E5
 Mnemonic:                  F-A-C-E (spells "face")
 ```
 
+Try placing notes on the treble clef staff below. Click any line or space to place a note, then press play to hear your sequence:
+
+<StaffComposer clef="treble" />
+
 > **Guitar-specific note:** Guitar music is written in treble clef, but sounds **one octave lower** than written. This convention (called **octave transposition**) keeps guitar music comfortably on the staff without excessive ledger lines. When you see middle C on guitar sheet music, you actually play C3, not C4.
 
 ## Bass Clef (F Clef)
@@ -69,6 +75,10 @@ Mnemonic:                  Good Boys Do Fine Always
 Spaces (bottom to top):    A2 - C3 - E3 - G3
 Mnemonic:                  All Cows Eat Grass
 ```
+
+Now try the bass clef. Notice how the same staff positions map to different, lower notes:
+
+<StaffComposer clef="bass" />
 
 While electric guitarists primarily read treble clef, understanding bass clef is valuable for reading bass lines, piano music, or arranging.
 

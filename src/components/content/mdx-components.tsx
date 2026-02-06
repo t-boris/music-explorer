@@ -7,6 +7,12 @@ import { FretboardDiagram } from "@/components/interactive/fretboard-diagram";
 import { RhythmVisualizer } from "@/components/interactive/rhythm-visualizer";
 import { MusicStory } from "@/components/content/music-story";
 import { DigDeeper } from "@/components/content/dig-deeper-term";
+import { OctaveExplainer } from "@/components/interactive/octave-explainer";
+import { StaffComposer } from "@/components/interactive/staff-composer";
+import { NoteValueChart } from "@/components/interactive/note-value-chart";
+import { DottedNoteDemo } from "@/components/interactive/dotted-note-demo";
+import { TieDemo } from "@/components/interactive/tie-demo";
+import { MeterComparator } from "@/components/interactive/meter-comparator";
 
 /**
  * Custom MDX component overrides for the dark theme.
@@ -24,6 +30,12 @@ export const mdxComponents: MDXComponents = {
   RhythmVisualizer,
   MusicStory,
   DigDeeper,
+  OctaveExplainer,
+  StaffComposer,
+  NoteValueChart,
+  DottedNoteDemo,
+  TieDemo,
+  MeterComparator,
 
   // Headings
   h1: (props: ComponentPropsWithoutRef<"h1">) => (

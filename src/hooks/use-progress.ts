@@ -33,7 +33,15 @@ export function useProgress(): UseProgressResult {
       return;
     }
 
-    const userRef = doc(getFirebaseDb(), "users", user.uid);
+    let userRef;
+    try {
+      userRef = doc(getFirebaseDb(), "users", user.uid);
+    } catch (err) {
+      console.error("Progress init error:", err);
+      setError(err instanceof Error ? err.message : "Failed to connect to database.");
+      setLoading(false);
+      return;
+    }
 
     const unsubscribe = onSnapshot(
       userRef,

@@ -40,7 +40,7 @@ function gcd(a: number, b: number): number {
 function simplifyRatio(
   a: number,
   b: number
-): { num: number; den: number } {
+): { num: number; den: number; exact: boolean } {
   // Find approximate simple ratio
   const ratio = a / b;
   let bestNum = 1;
@@ -59,7 +59,9 @@ function simplifyRatio(
   }
 
   const d = gcd(bestNum, bestDen);
-  return { num: bestNum / d, den: bestDen / d };
+  // Only report as exact if the approximation error is < 0.5%
+  const exact = bestError / ratio < 0.005;
+  return { num: bestNum / d, den: bestDen / d, exact };
 }
 
 // ─── Presets ───
@@ -335,7 +337,10 @@ export function FrequencyExplorer() {
   // ─── Ratio ───
   const higher = Math.max(freq1, freq2);
   const lower = Math.min(freq1, freq2);
-  const { num, den } = simplifyRatio(higher, lower);
+  const { num, den, exact } = simplifyRatio(higher, lower);
+  const ratioLabel = exact
+    ? `${num}:${den}`
+    : `${(higher / lower).toFixed(2)}:1`;
 
   // ─── Apply preset ───
   const applyPreset = (preset: Preset) => {
@@ -383,7 +388,7 @@ export function FrequencyExplorer() {
       {/* Ratio + Hear Together */}
       <div className="mt-4 flex items-center justify-between border-t border-surface-700 pt-3">
         <div className="font-mono text-sm text-text-secondary">
-          Ratio: <span className="text-accent-400">{num}:{den}</span>
+          Ratio: <span className="text-accent-400">{ratioLabel}</span>
         </div>
         <button
           onClick={playing1 && playing2 ? stopBoth : playBoth}

@@ -10,9 +10,9 @@ const publicPaths = [
   "/",
   "/login",
   "/levels",
-  "/levels/(.*)",
+  /^\/levels\/.*/,
   "/songs",
-  "/songs/(.*)",
+  /^\/songs\/.*/,
 ];
 
 export async function middleware(request: NextRequest) {

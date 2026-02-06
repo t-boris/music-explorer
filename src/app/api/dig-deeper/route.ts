@@ -92,7 +92,7 @@ function validateRequest(
 
 export async function POST(request: NextRequest) {
   // Check API key first
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.GENAI_API_KEY) {
     return NextResponse.json(
       { error: "AI service not configured" },
       { status: 503 }
@@ -132,17 +132,21 @@ export async function POST(request: NextRequest) {
   // Stream the response
   try {
     const stream = streamDigDeeperExplanation(validation.data);
+    const encoder = new TextEncoder();
 
     const readableStream = new ReadableStream({
       async start(controller) {
         try {
-          const messageStream = stream.on("text", (text) => {
-            controller.enqueue(new TextEncoder().encode(text));
-          });
-
-          await messageStream.finalMessage();
+          let chunks = 0;
+          for await (const text of stream) {
+            chunks++;
+            console.log(`[dig-deeper] chunk ${chunks}: ${text.length} chars`);
+            controller.enqueue(encoder.encode(text));
+          }
+          console.log(`[dig-deeper] stream complete: ${chunks} chunks`);
           controller.close();
-        } catch {
+        } catch (err) {
+          console.error("[dig-deeper] stream error:", err);
           controller.close();
         }
       },

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, LogOut, Settings, User as UserIcon } from "lucide-react";
+import { LayoutDashboard, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -78,12 +78,6 @@ export function UserMenu() {
             <Link href="/dashboard" className="cursor-pointer">
               <LayoutDashboard className="mr-2 h-4 w-4" />
               Dashboard
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="/settings" className="cursor-pointer">
-              <Settings className="mr-2 h-4 w-4" />
-              Settings
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

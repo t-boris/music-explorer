@@ -30,12 +30,21 @@ export function usePracticeSessions(
       return;
     }
 
-    const col = collection(
-      getFirebaseDb(),
-      "users",
-      userId,
-      "practiceSessions"
-    );
+    let col;
+    try {
+      col = collection(
+        getFirebaseDb(),
+        "users",
+        userId,
+        "practiceSessions"
+      );
+    } catch (err) {
+      console.error("Practice sessions init error:", err);
+      setError(err instanceof Error ? err.message : "Failed to connect to database.");
+      setLoading(false);
+      return;
+    }
+
     const q = query(col, orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(

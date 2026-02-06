@@ -37,7 +37,20 @@ export interface Exercise {
     | "harmonic-finder"
     | "overtone-calculator"
     | "octave-matcher"
-    | "frequency-calculator";
+    | "frequency-calculator"
+    | "staff-note-reader"
+    | "ledger-line-spotter"
+    | "beat-counter"
+    | "rhythm-pattern-matcher"
+    | "measure-filler"
+    | "rhythm-math"
+    | "time-sig-identifier"
+    | "beat-stress-mapper"
+    | "strum-pattern-builder"
+    | "interval-ear-trainer"
+    | "interval-speller"
+    | "interval-song-match"
+    | "consonance-judge";
 }
 
 export interface Test {

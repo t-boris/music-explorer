@@ -38,7 +38,15 @@ export function useRecordings(
       return;
     }
 
-    const col = collection(getFirebaseDb(), "users", userId, "recordings");
+    let col;
+    try {
+      col = collection(getFirebaseDb(), "users", userId, "recordings");
+    } catch (err) {
+      console.error("Recordings init error:", err);
+      setError(err instanceof Error ? err.message : "Failed to connect to database.");
+      setLoading(false);
+      return;
+    }
 
     const constraints: QueryConstraint[] = [orderBy("createdAt", "desc")];
     if (contextType) {
@@ -92,7 +100,16 @@ export function useSessionRecordings(
       return;
     }
 
-    const col = collection(getFirebaseDb(), "users", userId, "recordings");
+    let col;
+    try {
+      col = collection(getFirebaseDb(), "users", userId, "recordings");
+    } catch (err) {
+      console.error("Session recordings init error:", err);
+      setError(err instanceof Error ? err.message : "Failed to connect to database.");
+      setLoading(false);
+      return;
+    }
+
     const q = query(
       col,
       where("sessionId", "==", sessionId),

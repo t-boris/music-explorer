@@ -17,8 +17,9 @@ exercises:
   - id: "ex-2-2-2"
     title: "Interval Song References"
     type: "ear"
-    description: "Match common intervals to the openings of well-known songs. For example: perfect 4th = 'Here Comes the Bride', perfect 5th = 'Star Wars' theme."
+    description: "Listen to an interval and match it to the famous song that opens with those same notes."
     requiresRecording: false
+    interactiveComponent: "interval-song-match"
 ---
 
 # Intervals on the Fretboard
@@ -38,6 +39,10 @@ A ──5──6──7──8──9──10──11──12──13──14─
 ```
 
 This is the **reference map** -- every interval is simply a fret count from the root. You can apply this to any starting fret on any string.
+
+Explore the fretboard below -- click any note to hear it. The highlighted positions show intervals from A on the low E string: the root (P1), major 2nd, major 3rd, perfect 4th, and perfect 5th, all on a single string:
+
+<FretboardDiagram highlightPositions={[{string: 6, fret: 5, label: "A (P1)"}, {string: 6, fret: 7, label: "B (M2)"}, {string: 6, fret: 9, label: "C# (M3)"}, {string: 6, fret: 10, label: "D (P4)"}, {string: 6, fret: 12, label: "E (P5)"}]} rootNote="A" frets={15} />
 
 ## Cross-String Intervals
 
@@ -88,6 +93,10 @@ Perfect 5th  fret X          fret X+3         3 frets up
 
 > **Key insight:** The irregular tuning of the B string (M3 instead of P4) is why chord shapes and scale patterns change shape when they cross strings 3 and 2. Every guitarist must internalize this offset.
 
+See cross-string interval shapes in action. Here are two intervals from A (5th fret, low E string) -- the perfect 5th (E on the A string, 2 frets up) and the octave (A on the D string, also 2 frets up but skipping a string):
+
+<FretboardDiagram highlightPositions={[{string: 6, fret: 5, label: "A (root)"}, {string: 5, fret: 7, label: "E (P5)"}, {string: 4, fret: 7, label: "A (P8)"}]} rootNote="A" frets={12} />
+
 ## The Octave Shapes
 
 Octave patterns are especially useful landmarks on the fretboard:
@@ -126,5 +135,9 @@ Exercise progression:
 4. Any direction (ascending and descending)
 5. By ear only (no visual reference)
 ```
+
+Use the interval player to hear each interval. Try all three modes -- ascending (melodic up), descending (melodic down), and harmonic (both notes together). Notice how each interval has a distinct character:
+
+<IntervalPlayer rootNote="A4" />
 
 The fretboard is an interval calculator. Every fingering pattern, chord shape, and scale form is a collection of intervals from a root. Master the interval shapes, and you will see the logic behind every pattern you play.

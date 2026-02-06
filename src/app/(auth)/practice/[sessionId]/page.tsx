@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar, Music, Trash2, Mic, GitCompareArrows } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Music, Pencil, Trash2, Mic, GitCompareArrows } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import {
@@ -39,7 +39,7 @@ function formatShortDate(dateStr: string): string {
 
 export default function SessionDetailPage() {
   const { sessionId } = useParams<{ sessionId: string }>();
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading, error: authError } = useAuth();
   const router = useRouter();
 
   const [session, setSession] = useState<PracticeSession | null>(null);
@@ -100,6 +100,17 @@ export default function SessionDetailPage() {
           <div className="h-8 w-64 animate-pulse rounded bg-surface-700" />
           <div className="h-40 animate-pulse rounded-xl bg-surface-700" />
         </div>
+      </main>
+    );
+  }
+
+  if (authError) {
+    return (
+      <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4">
+        <p className="text-sm text-red-400">{authError}</p>
+        <p className="mt-1 text-xs text-text-muted">
+          Try refreshing the page.
+        </p>
       </main>
     );
   }
@@ -272,6 +283,12 @@ export default function SessionDetailPage() {
             <Link href="/practice">
               <ArrowLeft className="h-4 w-4" />
               Back to Practice
+            </Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href={`/practice/${sessionId}/edit`}>
+              <Pencil className="h-4 w-4" />
+              Edit
             </Link>
           </Button>
           <div className="ml-auto">

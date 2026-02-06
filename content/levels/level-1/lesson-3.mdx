@@ -10,15 +10,28 @@ tags:
 exercises:
   - id: "ex-1-3-1"
     title: "Identify Time Signature"
-    type: "theory"
-    description: "Listen to rhythm patterns and match them to the correct time signature: 4/4, 3/4, or 6/8."
+    type: "ear"
+    description: "Listen to rhythm patterns with accented beats and identify the correct time signature."
     requiresRecording: false
+    interactiveComponent: "time-sig-identifier"
   - id: "ex-1-3-2"
     title: "Play in Time"
     type: "rhythm"
     description: "Play a simple open-string pattern in 3/4 time, emphasizing beat 1. Maintain steady tempo for 8 measures."
     requiresRecording: true
     recordingPrompt: "Set metronome to 90 BPM in 3/4. Record yourself playing open D string: strong strum on beat 1, lighter on beats 2 and 3, for 8 bars."
+  - id: "ex-1-3-3"
+    title: "Beat Stress Mapper"
+    type: "theory"
+    description: "Mark the strong, medium, and weak beats for different time signatures."
+    requiresRecording: false
+    interactiveComponent: "beat-stress-mapper"
+  - id: "ex-1-3-4"
+    title: "Strum Pattern Builder"
+    type: "rhythm"
+    description: "Build correct guitar strum patterns for different time signatures using downstrokes and upstrokes."
+    requiresRecording: false
+    interactiveComponent: "strum-pattern-builder"
 ---
 
 # Time Signatures & Meter
@@ -66,6 +79,10 @@ Beat emphasis:  STRONG - weak - medium - weak
 Count:          1        2      3        4
 ```
 
+Listen to the 4/4 feel -- notice the strong beat 1 and the lighter secondary accent on beat 3. Try toggling individual beats on and off:
+
+<RhythmVisualizer beatsPerMeasure={4} subdivisions={2} bpm={100} />
+
 ### 3/4 (Waltz Time)
 
 Three quarter-note beats per measure. Creates a **triple** feel -- the classic waltz pattern. Also common in ballads, some folk music, and many classical pieces.
@@ -74,6 +91,10 @@ Three quarter-note beats per measure. Creates a **triple** feel -- the classic w
 Beat emphasis:  STRONG - weak - weak
 Count:          1        2      3
 ```
+
+Hear the waltz feel -- three beats with a strong downbeat. Select the "Waltz" preset below to hear the classic triple-meter pattern:
+
+<RhythmVisualizer beatsPerMeasure={3} subdivisions={2} bpm={90} />
 
 ### 6/8 (Compound Duple)
 
@@ -86,6 +107,10 @@ Groups:         [  group 1  ] [  group 2  ]
 ```
 
 > **3/4 vs 6/8:** Both contain the equivalent of six eighth notes per measure, but they **feel** different. In 3/4, you feel **three strong pulses** with each subdivided in two. In 6/8, you feel **two strong pulses** with each subdivided in three. Think of it as 3 x 2 versus 2 x 3.
+
+Compare 3/4 and 6/8 side by side below. Both have 6 eighth notes per measure, but listen to how the different groupings create a completely different feel:
+
+<MeterComparator />
 
 ### 2/4 and 2/2 (Cut Time)
 
@@ -135,5 +160,9 @@ Time signatures directly determine strumming patterns:
 6/8 flowing:       ↓  ↓  ↓  ↓  ↓  ↓
                    1  2  3  4  5  6
 ```
+
+Experiment with strumming patterns below. Try building your own pattern -- toggle beats on and off, adjust the BPM, and notice how the time signature shapes the groove:
+
+<RhythmVisualizer beatsPerMeasure={4} subdivisions={2} bpm={100} />
 
 When learning a new song, always identify the time signature first. It determines the rhythmic framework that every other musical decision fits into. Tap or count along before you start playing -- establishing the meter internally before adding notes is the hallmark of a solid rhythm player.

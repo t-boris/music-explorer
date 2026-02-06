@@ -3,6 +3,7 @@
 import {
   doc,
   getDoc,
+  addDoc,
   collection,
   query,
   orderBy,
@@ -75,4 +76,31 @@ export async function updateSkillScore(
     [`progressSummary.${skillType}.lastUpdated`]: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });
+}
+
+// --- Create Progress Entry ---
+
+export interface CreateProgressEntryData {
+  skillType: SkillType;
+  levelId: string;
+  score: number;
+  source: ProgressEntry["source"];
+  sourceId: string;
+}
+
+export async function createProgressEntry(
+  userId: string,
+  data: CreateProgressEntryData
+): Promise<string> {
+  const col = collection(getFirebaseDb(), "users", userId, "progress");
+  const docRef = await addDoc(col, {
+    userId,
+    skillType: data.skillType,
+    levelId: data.levelId,
+    score: data.score,
+    source: data.source,
+    sourceId: data.sourceId,
+    createdAt: serverTimestamp(),
+  });
+  return docRef.id;
 }
