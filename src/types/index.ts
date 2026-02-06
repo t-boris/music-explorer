@@ -165,6 +165,19 @@ export interface ProgressSummary {
 
 // ─── Dashboard ───
 
+// ─── Test Questions ───
+
+export interface TestQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  category: string;
+  difficulty: number;
+}
+
+// ─── Dashboard ───
+
 export interface DashboardData {
   user: User | null;
   recentSessions: PracticeSession[];
