@@ -162,3 +162,16 @@ export interface ProgressSummary {
   technique: SkillScore;
   ear: SkillScore;
 }
+
+// ─── Dashboard ───
+
+export interface DashboardData {
+  user: User | null;
+  recentSessions: PracticeSession[];
+  recentRecordingsCount: number;
+  recentTempoAttempts: number;
+  todaySession: PracticeSession | null;
+  currentStreak: number;
+  totalMinutes: number;
+  weeklyMinutes: number;
+}
