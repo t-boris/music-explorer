@@ -37,7 +37,7 @@ Plans:
 
 Plans:
 - [x] 02-01: Level roadmap UI and lesson page structure (MDX theory rendering, exercise lists, checklists)
-- [ ] 02-02: Song/composition pages (theory tags, derived exercises, user notes/tempo)
+- [x] 02-02: Song/composition pages (theory tags, derived exercises, user notes/tempo)
 - [ ] 02-03: Seed content for levels 0-2 (physics of sound, notation, intervals) with exercises
 
 ### Phase 3: Practice & Recording
@@ -72,6 +72,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Auth | 3/3 | Complete | 2026-02-06 |
-| 2. Learning Path & Content | 1/3 | In progress | - |
+| 2. Learning Path & Content | 2/3 | In progress | - |
 | 3. Practice & Recording | 0/3 | Not started | - |
 | 4. Tests, Dashboard & Progress | 0/3 | Not started | - |

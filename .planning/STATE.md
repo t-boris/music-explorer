@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-05)
 ## Current Position
 
 Phase: 2 of 4 (Learning Path & Content)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-02-06 — Completed 02-01-PLAN.md
+Last activity: 2026-02-06 — Completed 02-02-PLAN.md
 
-Progress: █████░░░░░░░ 33%
+Progress: ██████░░░░░░ 42%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 6 min
-- Total execution time: 22 min
+- Total plans completed: 5
+- Average duration: 5 min
+- Total execution time: 25 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 Foundation & Auth | 3/3 | 18 min | 6 min |
-| 02 Learning Path & Content | 1/3 | 4 min | 4 min |
+| 02 Learning Path & Content | 2/3 | 7 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4 min), 01-03 (5 min), 01-02 (9 min), 02-01 (4 min)
+- Last 5 plans: 01-03 (5 min), 01-02 (9 min), 02-01 (4 min), 02-02 (3 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -54,6 +54,8 @@ Recent decisions affecting current work:
 - next-mdx-remote/rsc for server-side MDX rendering (not @next/mdx page-level)
 - All 13 level metadata embedded statically in content.ts (not Firestore)
 - Exercises stored in MDX frontmatter yaml arrays (not separate exercises.json)
+- Song filtering uses client component wrapping server-fetched data (no URL state)
+- Content type expansion pattern: MDX directory + content.ts functions + card + filter + pages
 
 ### Deferred Issues
 
@@ -66,5 +68,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 02-01-PLAN.md — Level roadmap, detail pages, and lesson pages with MDX rendering
+Stopped at: Completed 02-02-PLAN.md — Song/composition pages with MDX content, filtering, and linked levels
 Resume file: None
