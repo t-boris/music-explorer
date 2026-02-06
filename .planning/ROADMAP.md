@@ -16,7 +16,7 @@ None
 - [x] **Phase 4: Tests, Dashboard & Progress** — Theory tests, ear training, test results, dashboard, progress tracking
 - [x] **Phase 5: Bugfixes & Interactive Learning Visualizations** — Fix auth/routing/UX bugs, replace static diagrams with live interactive visualizations
 - [x] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
-- [ ] **Phase 7: Interactive Exercises, Knowledge Checks & Music Stories** — Replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
+- [x] **Phase 7: Interactive Exercises, Knowledge Checks & Music Stories** — Replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
 
 ## Phase Details
 
@@ -140,7 +140,7 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 07-01: Interactive exercise components + exercise system refactor (Wave 1)
+- [x] 07-01: Interactive exercise components + exercise system refactor (Wave 1)
 - [x] 07-02: Knowledge check engine with curriculum-scoped questions (Wave 1)
 - [x] 07-03: Music history stories with MusicStory MDX component (Wave 1)
 
@@ -199,4 +199,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
 | 6. Sharing & Community | 5/5 | Complete | 2026-02-06 |
-| 7. Interactive Exercises, Knowledge Checks & Music Stories | 2/3 | In progress | — |
+| 7. Interactive Exercises, Knowledge Checks & Music Stories | 3/3 | Complete | 2026-02-06 |
