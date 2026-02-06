@@ -74,7 +74,7 @@ Plans:
 
 Plans:
 - [x] 05-01: Auth & routing bugfixes (remove force-dynamic, redundant guards, fix login loop, fix test page link)
-- [ ] 05-02: UX polish & metadata (Coming Soon levels, nav loading flash, page metadata)
+- [x] 05-02: UX polish & metadata (Coming Soon levels, nav loading flash, page metadata)
 - [ ] 05-03: Interactive learning visualizations (WaveformVisualizer, FrequencyExplorer, IntervalPlayer, FretboardDiagram, RhythmVisualizer, MDX integration)
 
 **Details:**
@@ -108,4 +108,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Learning Path & Content | 3/3 | Complete | 2026-02-06 |
 | 3. Practice & Recording | 3/3 | Complete | 2026-02-06 |
 | 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
-| 5. Bugfixes & Interactive Visualizations | 1/3 | In progress | — |
+| 5. Bugfixes & Interactive Visualizations | 2/3 | In progress | — |

@@ -10,19 +10,19 @@ See: .planning/PROJECT.md (updated 2026-02-05)
 ## Current Position
 
 Phase: 5 of 5 (Bugfixes & Interactive Learning Visualizations)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: In progress
-Last activity: 2026-02-06 — Completed 05-01-PLAN.md
+Last activity: 2026-02-06 — Completed 05-02-PLAN.md
 
-Progress: █████████████░ 87%
-**Next action:** Execute 05-02 (UX polish), then Wave 2 (05-03)
+Progress: ██████████████░ 93%
+**Next action:** Execute Wave 2 (05-03 interactive visualizations)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 13
+- Total plans completed: 14
 - Average duration: 4 min
-- Total execution time: 54 min
+- Total execution time: 58 min
 
 **By Phase:**
 
@@ -32,10 +32,10 @@ Progress: █████████████░ 87%
 | 02 Learning Path & Content | 3/3 | 13 min | 4 min |
 | 03 Practice & Recording | 3/3 | 10 min | 3 min |
 | 04 Tests, Dashboard & Progress | 3/3 | 9 min | 3 min |
-| 05 Bugfixes & Visualizations | 1/3 | 4 min | 4 min |
+| 05 Bugfixes & Visualizations | 2/3 | 8 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-01 (3 min), 04-02 (2 min), 04-03 (4 min), 05-01 (4 min)
+- Last 5 plans: 04-02 (2 min), 04-03 (4 min), 05-01 (4 min), 05-02 (4 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -65,6 +65,8 @@ Recent decisions affecting current work:
 - Test state machine hook (loading/in-progress/complete) with auth-aware score saving
 - Auth route group pages rely solely on middleware — no client-side redirect guards needed
 - Non-null assertion (user!) for middleware-guaranteed user in (auth) route group
+- Server layout.tsx per route for metadata on client pages (not shared auth layout)
+- Auth pages marked noindex to prevent search engine indexing
 
 ### Roadmap Evolution
 
@@ -81,5 +83,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 05-01-PLAN.md (auth & routing bugfixes). Ready for 05-02 + 05-03.
+Stopped at: Completed 05-02-PLAN.md (UX polish & metadata). Ready for 05-03 (interactive visualizations).
 Resume file: None
