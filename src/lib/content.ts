@@ -2,7 +2,7 @@ import "server-only";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import type { Level, Lesson, Exercise } from "@/types/index";
+import type { Level, Lesson, Exercise, Song } from "@/types/index";
 
 // ─── Static Level Metadata (all 13 levels) ───
 
@@ -113,9 +113,10 @@ const LEVELS: Level[] = [
   },
 ];
 
-// ─── Content Directory ───
+// ─── Content Directories ───
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "levels");
+const SONGS_DIR = path.join(process.cwd(), "content", "songs");
 
 // ─── Public API ───
 
@@ -257,4 +258,96 @@ export function getLevelsWithContent(): Set<string> {
   }
 
   return result;
+}
+
+// ─── Song API ───
+
+/**
+ * Reads all .mdx song files from the content/songs directory.
+ * Returns songs sorted by difficulty (ascending).
+ */
+export function getSongs(): Song[] {
+  if (!fs.existsSync(SONGS_DIR)) {
+    return [];
+  }
+
+  const files = fs
+    .readdirSync(SONGS_DIR)
+    .filter((f) => f.endsWith(".mdx"));
+
+  const songs: Song[] = files.map((filename) => {
+    const filePath = path.join(SONGS_DIR, filename);
+    const raw = fs.readFileSync(filePath, "utf-8");
+    const { data } = matter(raw);
+    const slug = filename.replace(/\.mdx$/, "");
+
+    return {
+      id: slug,
+      title: (data.title as string) ?? slug,
+      artist: (data.artist as string) ?? "",
+      difficulty: (data.difficulty as number) ?? 1,
+      tags: (data.tags as string[]) ?? [],
+      levelIds: (data.levelIds as string[]) ?? [],
+      description: (data.description as string) ?? "",
+    };
+  });
+
+  return songs.sort((a, b) => a.difficulty - b.difficulty);
+}
+
+/**
+ * Reads a single song's MDX file and returns song data + raw MDX content.
+ * Returns null if the file does not exist.
+ */
+export function getSong(
+  songSlug: string
+): { song: Song; content: string } | null {
+  const filePath = path.join(SONGS_DIR, `${songSlug}.mdx`);
+
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(raw);
+
+  const song: Song = {
+    id: songSlug,
+    title: (data.title as string) ?? songSlug,
+    artist: (data.artist as string) ?? "",
+    difficulty: (data.difficulty as number) ?? 1,
+    tags: (data.tags as string[]) ?? [],
+    levelIds: (data.levelIds as string[]) ?? [],
+    description: (data.description as string) ?? "",
+  };
+
+  return { song, content };
+}
+
+/**
+ * Returns all songs that have a given theory tag.
+ */
+export function getSongsByTag(tag: string): Song[] {
+  return getSongs().filter((song) => song.tags.includes(tag));
+}
+
+/**
+ * Returns all songs linked to a given level ID.
+ */
+export function getSongsByLevel(levelId: string): Song[] {
+  return getSongs().filter((song) => song.levelIds.includes(levelId));
+}
+
+/**
+ * Returns all unique tags across all songs, sorted alphabetically.
+ */
+export function getAllSongTags(): string[] {
+  const songs = getSongs();
+  const tagSet = new Set<string>();
+  for (const song of songs) {
+    for (const tag of song.tags) {
+      tagSet.add(tag);
+    }
+  }
+  return Array.from(tagSet).sort();
 }
