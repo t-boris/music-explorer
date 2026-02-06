@@ -7,7 +7,7 @@ import { SessionHistory } from "@/components/progress/session-history";
 import { useAuth } from "@/hooks/use-auth";
 
 export default function ProgressPage() {
-  const { user, loading: authLoading, error: authError } = useAuth();
+  const { loading: authLoading, error: authError } = useAuth();
   const { progressSummary, currentLevel, sessions, loading, error } = useProgress();
 
   if (authLoading || loading) {
@@ -35,17 +35,6 @@ export default function ProgressPage() {
         <p className="text-sm text-red-400">{authError || error}</p>
         <p className="mt-1 text-xs text-text-muted">
           Try refreshing the page.
-        </p>
-      </main>
-    );
-  }
-
-  if (!user) {
-    return (
-      <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center">
-        <h1 className="text-3xl font-heading text-text-primary">Progress</h1>
-        <p className="mt-2 text-text-secondary">
-          Sign in to track your progress.
         </p>
       </main>
     );
