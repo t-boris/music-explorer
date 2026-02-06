@@ -12,6 +12,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+import { UserMenu } from "@/components/auth/user-menu";
+import { useAuth } from "@/hooks/use-auth";
 import { useState } from "react";
 
 const publicLinks = [
@@ -51,9 +53,12 @@ function NavLink({
 
 export function TopNav() {
   const pathname = usePathname();
+  const { user, loading } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const allLinks = [...publicLinks, ...authLinks];
+  const visibleLinks = user
+    ? [...publicLinks, ...authLinks]
+    : publicLinks;
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-surface-800/95 backdrop-blur supports-[backdrop-filter]:bg-surface-800/80">
@@ -77,28 +82,26 @@ export function TopNav() {
             />
           ))}
 
-          <Separator orientation="vertical" className="h-5" />
-
-          {authLinks.map((link) => (
-            <NavLink
-              key={link.href}
-              href={link.href}
-              label={link.label}
-              isActive={pathname.startsWith(link.href)}
-            />
-          ))}
+          {user && !loading && (
+            <>
+              <Separator orientation="vertical" className="h-5" />
+              {authLinks.map((link) => (
+                <NavLink
+                  key={link.href}
+                  href={link.href}
+                  label={link.label}
+                  isActive={pathname.startsWith(link.href)}
+                />
+              ))}
+            </>
+          )}
         </nav>
 
-        {/* Right side: sign-in placeholder + mobile menu */}
+        {/* Right side: user menu + mobile menu */}
         <div className="flex items-center gap-3">
-          <Button
-            variant="outline"
-            size="sm"
-            asChild
-            className="hidden md:inline-flex"
-          >
-            <Link href="/login">Sign In</Link>
-          </Button>
+          <div className="hidden md:block">
+            <UserMenu />
+          </div>
 
           {/* Mobile hamburger */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -116,7 +119,7 @@ export function TopNav() {
                 </SheetTitle>
               </SheetHeader>
               <nav className="mt-6 flex flex-col gap-4">
-                {allLinks.map((link) => (
+                {visibleLinks.map((link) => (
                   <NavLink
                     key={link.href}
                     href={link.href}
@@ -126,14 +129,9 @@ export function TopNav() {
                   />
                 ))}
                 <Separator className="my-2" />
-                <Button variant="outline" size="sm" asChild>
-                  <Link
-                    href="/login"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    Sign In
-                  </Link>
-                </Button>
+                <div onClick={() => setMobileOpen(false)}>
+                  <UserMenu />
+                </div>
               </nav>
             </SheetContent>
           </Sheet>
