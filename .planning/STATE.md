@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** All phases complete
+**Current focus:** Phase 7 — Interactive Exercises, Knowledge Checks & Music Stories
 
 ## Current Position
 
-Phase: 6 of 6 (Sharing & Community)
-Plan: 5 of 5 in current phase
-Status: Complete
-Last activity: 2026-02-06 — Completed 06-05-PLAN.md
+Phase: 7 of 7 (Interactive Exercises, Knowledge Checks & Music Stories)
+Plan: 0 of 3 in current phase
+Status: Planned — ready for execution
+Last activity: 2026-02-06 — Phase 7 planned (3 plans, 1 wave, all parallel)
 
-Progress: ████████████████████ 100%
+Progress: ████████████████████░░░ 86% (6/7 phases)
 
 ## Performance Metrics
 
@@ -90,6 +90,7 @@ Recent decisions affecting current work:
 
 - Phase 5 added: Bugfixes & Interactive Learning Visualizations — fix auth loop, redirect params, force-dynamic, sign-out, UX gaps; replace static diagrams with live interactive visualizations (waveforms, fretboard, intervals, chords, rhythm)
 - Phase 6 added: Sharing & Community — public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
+- Phase 7 added: Interactive Exercises, Knowledge Checks & Music Stories — replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
 
 ### Deferred Issues
 

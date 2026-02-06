@@ -16,6 +16,7 @@ None
 - [x] **Phase 4: Tests, Dashboard & Progress** — Theory tests, ear training, test results, dashboard, progress tracking
 - [x] **Phase 5: Bugfixes & Interactive Learning Visualizations** — Fix auth/routing/UX bugs, replace static diagrams with live interactive visualizations
 - [x] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
+- [ ] **Phase 7: Interactive Exercises, Knowledge Checks & Music Stories** — Replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
 
 ## Phase Details
 
@@ -131,10 +132,64 @@ Plans:
 - "Shared with me" view: feed of shared items from others
 - Toggle/dropdown to switch between views
 
+### Phase 7: Interactive Exercises, Knowledge Checks & Music Stories
+**Goal**: Transform all exercises from passive checkboxes into interactive, engaging tasks that require real student interaction. Add "Check Your Knowledge" mini-quizzes at the end of each lesson that only test material covered up to that point. Enrich every lesson with a curated music history story that connects theory to real-world music moments.
+**Depends on**: Phase 6
+**Research**: Likely (interactive exercise component patterns, quiz engine design, music history content curation)
+**Research topics**: React drag-and-drop for matching exercises, Web Audio API for interactive ear exercises, quiz state machine patterns, spaced repetition for knowledge checks, music history anecdotes for physics-of-sound topics
+**Plans**: 3 plans
+
+Plans:
+- [ ] 07-01: Interactive exercise components + exercise system refactor (Wave 1)
+- [ ] 07-02: Knowledge check engine with curriculum-scoped questions (Wave 1)
+- [ ] 07-03: Music history stories with MusicStory MDX component (Wave 1)
+
+**Details:**
+
+**Interactive exercises (replace checkbox-only completion):**
+
+*Level 0 — Physics of Sound exercise ideas:*
+
+Lesson 1 (What is Sound?):
+- **Waveform Matcher** (ear): Listen to two sounds, drag a slider to match the frequency — replaces passive "Identify Higher/Lower Pitch"
+- **Wave Parameter Quiz** (theory): Interactive diagram where student labels parts of a wave (amplitude, wavelength, frequency) by dragging labels onto a live waveform — replaces passive "Describe a Sound Wave"
+
+Lesson 2 (Harmonics & Overtones):
+- **Harmonic Finder** (technique): Interactive fretboard where student taps fret positions to find harmonics, hears the result via Web Audio, must find harmonics at frets 12, 7, 5 — replaces passive "Find Natural Harmonics"
+- **Overtone Calculator** (theory): Given a fundamental frequency, student calculates and inputs the first 4 harmonics, gets instant feedback — replaces passive "Harmonic Series Calculation"
+
+Lesson 3 (How We Hear Pitch):
+- **Octave Matcher** (fretboard): Interactive fretboard where student must find the same note in different octaves by clicking positions, hears both to confirm — replaces passive "Match the Octave"
+- **Frequency Calculator** (theory): Interactive tool where student applies the equal temperament formula (f × 2^(n/12)) to calculate semitone frequencies, with step-by-step validation — replaces passive "Equal Temperament Calculation"
+
+*Pattern for all levels:*
+- Each exercise type gets an interactive component (drag-and-drop, click-to-answer, audio-matching, fretboard-tapping)
+- Completion requires correct interaction, not just checkbox
+- Wrong answers show helpful hints, not just "wrong"
+- Exercises still track completion in Firestore but require proof of interaction
+
+**Knowledge checks ("Check Your Knowledge"):**
+- Mini-quiz (3-5 questions) at the end of each lesson
+- Questions ONLY cover material from the current lesson and previous lessons in the same level
+- Never references concepts from future lessons
+- Mix of question types: multiple choice, true/false, fill-in-the-blank, audio identification
+- Must pass (e.g., 80%) to mark lesson section as "checked"
+- Can retry unlimited times
+- Progress tracked separately from exercises
+
+**Music history stories:**
+- Each lesson gets a "From the Stage" sidebar/section with a real music history anecdote
+- Stories connect the lesson's theory concept to a real moment in music history
+- Examples for Level 0:
+  - Lesson 1 (Sound waves): The story of how Pythagoras discovered the relationship between string length and pitch using a monochord — the birth of music theory from a blacksmith's workshop
+  - Lesson 2 (Harmonics): How Jimi Hendrix revolutionized guitar by exploiting harmonics and feedback at Monterey Pop Festival 1967
+  - Lesson 3 (Pitch perception): Why A=440Hz became the standard — the 1939 international conference debate and how orchestras tuned before standardization
+- Stories are engaging, 2-3 paragraphs, with a "Why this matters" connection back to the lesson topic
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -144,3 +199,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
 | 6. Sharing & Community | 5/5 | Complete | 2026-02-06 |
+| 7. Interactive Exercises, Knowledge Checks & Music Stories | 0/3 | Planned | — |
