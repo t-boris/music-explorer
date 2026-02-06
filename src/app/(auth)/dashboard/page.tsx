@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export default function DashboardPage() {
   return (
     <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center">

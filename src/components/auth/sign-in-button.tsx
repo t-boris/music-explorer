@@ -6,7 +6,7 @@ import {
   signInWithRedirect,
   GoogleAuthProvider,
 } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { getFirebaseAuth } from "@/lib/firebase";
 import { ensureUserDocument } from "@/lib/user-service";
 import { Button } from "@/components/ui/button";
 
@@ -32,6 +32,8 @@ export function SignInButton() {
 
     try {
       const provider = new GoogleAuthProvider();
+
+      const auth = getFirebaseAuth();
 
       if (mobile) {
         // Mobile: use redirect flow to avoid popup blocking

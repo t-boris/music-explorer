@@ -5,7 +5,7 @@ import {
   updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { getFirebaseDb } from "@/lib/firebase";
 
 /**
  * Ensure a user document exists in Firestore.
@@ -20,6 +20,7 @@ export async function ensureUserDocument(
   email: string | null,
   photoURL: string | null
 ): Promise<void> {
+  const db = getFirebaseDb();
   const userRef = doc(db, "users", uid);
   const userSnap = await getDoc(userRef);
 
