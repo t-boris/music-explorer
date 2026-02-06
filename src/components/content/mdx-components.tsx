@@ -1,11 +1,26 @@
 import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
+import { WaveformVisualizer } from "@/components/interactive/waveform-visualizer";
+import { FrequencyExplorer } from "@/components/interactive/frequency-explorer";
+import { IntervalPlayer } from "@/components/interactive/interval-player";
+import { FretboardDiagram } from "@/components/interactive/fretboard-diagram";
+import { RhythmVisualizer } from "@/components/interactive/rhythm-visualizer";
 
 /**
  * Custom MDX component overrides for the dark theme.
  * Used with next-mdx-remote/rsc to render lesson theory content.
+ *
+ * Interactive components (WaveformVisualizer, FrequencyExplorer, etc.) are
+ * "use client" components that hydrate as client islands within server-rendered MDX.
  */
 export const mdxComponents: MDXComponents = {
+  // Interactive learning components
+  WaveformVisualizer,
+  FrequencyExplorer,
+  IntervalPlayer,
+  FretboardDiagram,
+  RhythmVisualizer,
+
   // Headings
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <h1
