@@ -17,7 +17,7 @@ None
 - [x] **Phase 5: Bugfixes & Interactive Learning Visualizations** — Fix auth/routing/UX bugs, replace static diagrams with live interactive visualizations
 - [x] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
 - [x] **Phase 7: Interactive Exercises, Knowledge Checks & Music Stories** — Replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
-- [ ] **Phase 8: Dig Deeper** — Contextual deep-dive explanations: key concept terms get "Dig Deeper" buttons with popup detail, plus text selection triggers an explain-this popover for any passage
+- [x] **Phase 8: Dig Deeper** — AI-powered contextual deep-dive explanations: key concept terms get "Dig Deeper" buttons with streaming AI popups, plus text selection triggers an explain-this popover for any passage
 
 ## Phase Details
 
@@ -249,4 +249,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
 | 6. Sharing & Community | 5/5 | Complete | 2026-02-06 |
 | 7. Interactive Exercises, Knowledge Checks & Music Stories | 3/3 | Complete | 2026-02-06 |
-| 8. Dig Deeper | 1/2 | In progress | — |
+| 8. Dig Deeper | 2/2 | Complete | 2026-02-06 |
