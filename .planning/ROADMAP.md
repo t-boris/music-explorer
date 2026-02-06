@@ -142,7 +142,7 @@ Plans:
 Plans:
 - [ ] 07-01: Interactive exercise components + exercise system refactor (Wave 1)
 - [ ] 07-02: Knowledge check engine with curriculum-scoped questions (Wave 1)
-- [ ] 07-03: Music history stories with MusicStory MDX component (Wave 1)
+- [x] 07-03: Music history stories with MusicStory MDX component (Wave 1)
 
 **Details:**
 
@@ -199,4 +199,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
 | 6. Sharing & Community | 5/5 | Complete | 2026-02-06 |
-| 7. Interactive Exercises, Knowledge Checks & Music Stories | 0/3 | Planned | — |
+| 7. Interactive Exercises, Knowledge Checks & Music Stories | 1/3 | In progress | — |
