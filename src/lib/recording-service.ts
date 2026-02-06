@@ -19,6 +19,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { getFirebaseDb, getFirebaseStorage } from "@/lib/firebase";
+import { logActivity } from "@/lib/activity-service";
 import type { Recording } from "@/types/index";
 
 // ─── Collection Path Helpers ───
@@ -45,7 +46,9 @@ export interface UploadRecordingMetadata {
 export async function uploadRecording(
   userId: string,
   blob: Blob,
-  metadata: UploadRecordingMetadata
+  metadata: UploadRecordingMetadata,
+  userDisplayName?: string,
+  userPhotoURL?: string | null
 ): Promise<Recording> {
   const id = `rec_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
@@ -74,6 +77,22 @@ export async function uploadRecording(
   };
 
   await setDoc(recordingDoc(userId, id), recording);
+
+  // Log activity event (non-critical)
+  try {
+    await logActivity(userId, {
+      type: "recording_created",
+      title: `Recorded: ${metadata.contextTitle}`,
+      metadata: {
+        contextType: metadata.contextType,
+        contextId: metadata.contextId,
+      },
+      userDisplayName: userDisplayName ?? "User",
+      userPhotoURL: userPhotoURL ?? null,
+    });
+  } catch (err) {
+    console.error("Failed to log recording activity:", err);
+  }
 
   return recording as unknown as Recording;
 }

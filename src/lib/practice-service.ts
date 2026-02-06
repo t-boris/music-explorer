@@ -14,6 +14,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { getFirebaseDb } from "@/lib/firebase";
+import { logActivity } from "@/lib/activity-service";
 import type { PracticeSession } from "@/types/index";
 
 // ─── Collection Path Helper ───
@@ -38,7 +39,9 @@ export interface CreatePracticeSessionData {
 
 export async function createPracticeSession(
   userId: string,
-  data: CreatePracticeSessionData
+  data: CreatePracticeSessionData,
+  userDisplayName?: string,
+  userPhotoURL?: string | null
 ): Promise<string> {
   const docRef = await addDoc(sessionsCollection(userId), {
     userId,
@@ -49,6 +52,23 @@ export async function createPracticeSession(
     levelId: data.levelId,
     createdAt: serverTimestamp(),
   });
+
+  // Log activity event (non-critical)
+  try {
+    await logActivity(userId, {
+      type: "session_logged",
+      title: `Logged ${data.durationMinutes} min practice session`,
+      metadata: {
+        levelId: data.levelId,
+        duration: String(data.durationMinutes),
+      },
+      userDisplayName: userDisplayName ?? "User",
+      userPhotoURL: userPhotoURL ?? null,
+    });
+  } catch (err) {
+    console.error("Failed to log practice session activity:", err);
+  }
+
   return docRef.id;
 }
 

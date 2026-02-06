@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { getFirebaseDb } from "@/lib/firebase";
 import { updateSkillScore, createProgressEntry } from "@/lib/progress-service";
+import { logActivity } from "@/lib/activity-service";
 import type { Exercise, ExerciseCompletion, SkillType } from "@/types/index";
 
 // ─── Collection Path Helper ───
@@ -53,7 +54,9 @@ export interface ToggleExerciseData {
  */
 export async function toggleExerciseCompletion(
   userId: string,
-  data: ToggleExerciseData
+  data: ToggleExerciseData,
+  userDisplayName?: string,
+  userPhotoURL?: string | null
 ): Promise<boolean> {
   const col = completionsCollection(userId);
   const q = query(col, where("exerciseId", "==", data.exerciseId));
@@ -97,6 +100,23 @@ export async function toggleExerciseCompletion(
     } catch (err) {
       console.error("Failed to update skill score for exercise completion:", err);
     }
+  }
+
+  // Log activity event (non-critical)
+  try {
+    await logActivity(userId, {
+      type: "exercise_completed",
+      title: `Completed exercise: ${data.exerciseTitle}`,
+      metadata: {
+        exerciseId: data.exerciseId,
+        lessonId: data.lessonId,
+        levelId: data.levelId,
+      },
+      userDisplayName: userDisplayName ?? "User",
+      userPhotoURL: userPhotoURL ?? null,
+    });
+  } catch (err) {
+    console.error("Failed to log exercise activity:", err);
   }
 
   return true;

@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { getFirebaseDb } from "@/lib/firebase";
 import { updateSkillScore } from "@/lib/progress-service";
+import { logActivity } from "@/lib/activity-service";
 import type { TestAttempt, TestError, SkillType } from "@/types/index";
 
 // ─── Collection Path Helper ───
@@ -32,7 +33,9 @@ export interface SaveTestAttemptData {
 
 export async function saveTestAttempt(
   userId: string,
-  data: SaveTestAttemptData
+  data: SaveTestAttemptData,
+  userDisplayName?: string,
+  userPhotoURL?: string | null
 ): Promise<string> {
   const docRef = await addDoc(attemptsCollection(userId), {
     userId,
@@ -44,6 +47,24 @@ export async function saveTestAttempt(
     errors: data.errors,
     completedAt: serverTimestamp(),
   });
+
+  // Log activity event (non-critical)
+  try {
+    await logActivity(userId, {
+      type: "test_completed",
+      title: `Completed test: ${data.testTitle} (${data.score}/${data.totalQuestions})`,
+      metadata: {
+        testId: data.testId,
+        score: String(data.score),
+        total: String(data.totalQuestions),
+      },
+      userDisplayName: userDisplayName ?? "User",
+      userPhotoURL: userPhotoURL ?? null,
+    });
+  } catch (err) {
+    console.error("Failed to log test activity:", err);
+  }
+
   return docRef.id;
 }
 
