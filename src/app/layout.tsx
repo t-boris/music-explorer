@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { TopNav } from "@/components/layout/top-nav";
 import "./globals.css";
 
 const heading = Space_Grotesk({
@@ -37,6 +38,7 @@ export default function RootLayout({
     >
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <TopNav />
           {children}
         </ThemeProvider>
       </body>
