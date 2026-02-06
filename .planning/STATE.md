@@ -9,28 +9,29 @@ See: .planning/PROJECT.md (updated 2026-02-05)
 
 ## Current Position
 
-Phase: 1 of 4 (Foundation & Auth)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-02-06 — Completed 01-02-PLAN.md
+Phase: 2 of 4 (Learning Path & Content)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-06 — Completed 02-01-PLAN.md
 
-Progress: █████░░░░░ 25%
+Progress: █████░░░░░░░ 33%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 6 min
-- Total execution time: 18 min
+- Total execution time: 22 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 Foundation & Auth | 3/3 | 18 min | 6 min |
+| 02 Learning Path & Content | 1/3 | 4 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4 min), 01-03 (5 min), 01-02 (9 min)
+- Last 5 plans: 01-01 (4 min), 01-03 (5 min), 01-02 (9 min), 02-01 (4 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -50,6 +51,9 @@ Recent decisions affecting current work:
 - Lazy Firebase client init via getter functions (getFirebaseAuth, getFirebaseDb) to avoid build-time errors
 - force-dynamic on auth-gated pages to prevent static prerendering
 - Mobile sign-in uses signInWithRedirect fallback (popup blocked on mobile browsers)
+- next-mdx-remote/rsc for server-side MDX rendering (not @next/mdx page-level)
+- All 13 level metadata embedded statically in content.ts (not Firestore)
+- Exercises stored in MDX frontmatter yaml arrays (not separate exercises.json)
 
 ### Deferred Issues
 
@@ -62,5 +66,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Phase 1 complete — ready for Phase 2
+Stopped at: Completed 02-01-PLAN.md — Level roadmap, detail pages, and lesson pages with MDX rendering
 Resume file: None
