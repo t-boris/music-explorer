@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** Phase 1 — Foundation & Auth
+**Current focus:** Phase 2 — Learning Path & Content
 
 ## Current Position
 
@@ -62,5 +62,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 01-02-PLAN.md — Phase 1 complete
+Stopped at: Phase 1 complete — ready for Phase 2
 Resume file: None
