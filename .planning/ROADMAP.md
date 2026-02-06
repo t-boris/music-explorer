@@ -195,7 +195,7 @@ Lesson 3 (How We Hear Pitch):
 **Plans**: 2 plans
 
 Plans:
-- [ ] 08-01: AI backend — Anthropic SDK, streaming API route, contextual prompt service (Wave 1)
+- [x] 08-01: AI backend — Anthropic SDK, streaming API route, contextual prompt service (Wave 1)
 - [ ] 08-02: UI components — DigDeeper term component, text selection detector, streaming popover, MDX integration (Wave 2)
 
 **Details:**
@@ -249,4 +249,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
 | 6. Sharing & Community | 5/5 | Complete | 2026-02-06 |
 | 7. Interactive Exercises, Knowledge Checks & Music Stories | 3/3 | Complete | 2026-02-06 |
-| 8. Dig Deeper | 0/2 | Planned | — |
+| 8. Dig Deeper | 1/2 | In progress | — |
