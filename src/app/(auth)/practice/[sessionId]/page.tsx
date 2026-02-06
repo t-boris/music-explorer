@@ -5,13 +5,17 @@ export const dynamic = "force-dynamic";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar, Music, Trash2, Mic } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Music, Trash2, Mic, GitCompareArrows } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import {
   getPracticeSession,
   deletePracticeSession,
 } from "@/lib/practice-service";
+import { AudioRecorder } from "@/components/recording/audio-recorder";
+import { RecordingList } from "@/components/recording/recording-list";
+import { RecordingComparison } from "@/components/recording/recording-comparison";
+import { useSessionRecordings } from "@/hooks/use-recordings";
 import type { PracticeSession } from "@/types/index";
 
 function formatDate(dateStr: string): string {
@@ -43,6 +47,12 @@ export default function SessionDetailPage() {
   const [error, setError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [showComparison, setShowComparison] = useState(false);
+
+  const {
+    recordings,
+    loading: recordingsLoading,
+  } = useSessionRecordings(user?.uid, sessionId);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -206,15 +216,51 @@ export default function SessionDetailPage() {
           )}
         </div>
 
-        {/* Recordings placeholder */}
-        <div className="rounded-xl border border-dashed border-surface-600 bg-surface-800/50 p-6 text-center">
-          <Mic className="mx-auto h-8 w-8 text-text-muted" />
-          <p className="mt-2 text-sm font-medium text-text-muted">
-            Recordings
-          </p>
-          <p className="mt-1 text-xs text-text-muted">
-            Audio recording will be available in the next update.
-          </p>
+        {/* Recordings Section */}
+        <div>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="flex items-center gap-2 text-sm font-medium text-text-secondary">
+              <Mic className="h-4 w-4 text-accent-400" />
+              Recordings
+            </h2>
+            {recordings.length >= 2 && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowComparison((v) => !v)}
+                className="text-xs text-text-muted hover:text-accent-400"
+              >
+                <GitCompareArrows className="mr-1 h-3.5 w-3.5" />
+                {showComparison ? "Hide Comparison" : "Compare"}
+              </Button>
+            )}
+          </div>
+
+          {/* Recorder widget */}
+          <AudioRecorder
+            userId={user.uid}
+            contextType="free"
+            contextId={session.id}
+            contextTitle={`Session ${formatShortDate(session.date)}`}
+            levelId={session.levelId}
+            sessionId={session.id}
+          />
+
+          {/* Recording list */}
+          <div className="mt-4">
+            <RecordingList
+              recordings={recordings}
+              userId={user.uid}
+              loading={recordingsLoading}
+            />
+          </div>
+
+          {/* Comparison view */}
+          {showComparison && recordings.length >= 2 && (
+            <div className="mt-4">
+              <RecordingComparison recordings={recordings} />
+            </div>
+          )}
         </div>
 
         {/* Actions */}
