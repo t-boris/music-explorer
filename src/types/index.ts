@@ -142,6 +142,17 @@ export interface ProgressEntry {
   createdAt: Timestamp;
 }
 
+export interface ExerciseCompletion {
+  id: string;
+  userId: string;
+  exerciseId: string;
+  exerciseTitle: string;
+  lessonId: string;
+  levelId: string;
+  exerciseType: Exercise["type"];
+  completedAt: Timestamp;
+}
+
 export interface TempoAttempt {
   id: string;
   userId: string;
@@ -164,6 +175,60 @@ export interface ProgressSummary {
 }
 
 // ─── Dashboard ───
+
+// ─── Community Entities ───
+
+export interface Connection {
+  id: string;
+  fromUserId: string;
+  toUserId: string;
+  fromDisplayName: string;
+  toDisplayName: string;
+  fromPhotoURL: string | null;
+  toPhotoURL: string | null;
+  inviteCode: string;
+  createdAt: Timestamp;
+}
+
+export interface ActivityEvent {
+  id: string;
+  userId: string;
+  userDisplayName: string;
+  userPhotoURL: string | null;
+  type:
+    | "exercise_completed"
+    | "test_completed"
+    | "recording_created"
+    | "session_logged"
+    | "level_up";
+  title: string;
+  metadata: Record<string, string>;
+  createdAt: Timestamp;
+}
+
+export interface Comment {
+  id: string;
+  authorId: string;
+  authorDisplayName: string;
+  authorPhotoURL: string | null;
+  targetUserId: string;
+  targetType:
+    | "recording"
+    | "test_attempt"
+    | "exercise_completion"
+    | "practice_session";
+  targetId: string;
+  text: string;
+  createdAt: Timestamp;
+}
+
+export interface InviteLink {
+  id: string;
+  userId: string;
+  code: string;
+  active: boolean;
+  createdAt: Timestamp;
+}
 
 // ─── Test Questions ───
 
