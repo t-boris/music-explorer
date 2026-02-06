@@ -18,7 +18,7 @@ None
 - [x] **Phase 6: Sharing & Community** — Public sharing of progress/recordings, public profiles, community comments, "shared with me" dashboard view
 - [x] **Phase 7: Interactive Exercises, Knowledge Checks & Music Stories** — Replace checkbox exercises with interactive tasks, add per-lesson knowledge checks covering only passed material, enrich each lesson with real music history stories
 - [x] **Phase 8: Dig Deeper** — AI-powered contextual deep-dive explanations: key concept terms get "Dig Deeper" buttons with streaming AI popups, plus text selection triggers an explain-this popover for any passage
-- [ ] **Phase 9: Exercise Explanations & Retry** — AI-generated detailed explanations for exercise answers (correct and wrong), improved retry flow with full state reset
+- [x] **Phase 9: Exercise Explanations & Retry** — AI-generated detailed explanations for exercise answers (correct and wrong), improved retry flow with full state reset
 
 ## Phase Details
 
@@ -244,7 +244,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 09-01: AI exercise explanations + retry improvement (Wave 1)
+- [x] 09-01: AI exercise explanations + retry improvement (Wave 1)
 
 **Details:**
 

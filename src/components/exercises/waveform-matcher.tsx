@@ -3,12 +3,16 @@
 import { useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
+import { ExerciseExplanation } from "@/components/exercises/exercise-explanation";
 
 // ─── Types ───
 
 interface WaveformMatcherProps {
   onComplete: () => void;
   completed: boolean;
+  lessonTitle: string;
+  levelTitle: string;
+  levelOrder: number;
 }
 
 // ─── Helpers ───
@@ -19,13 +23,19 @@ function randomFrequency(): number {
 
 // ─── Component ───
 
-export function WaveformMatcher({ onComplete, completed }: WaveformMatcherProps) {
+export function WaveformMatcher({ onComplete, completed, lessonTitle, levelTitle, levelOrder }: WaveformMatcherProps) {
   const [freq1, setFreq1] = useState(() => randomFrequency());
   const [freq2, setFreq2] = useState(() => randomFrequency());
   const [streak, setStreak] = useState(0);
   const [feedback, setFeedback] = useState<{ correct: boolean; freq1: number; freq2: number } | null>(null);
   const [done, setDone] = useState(completed);
   const completedRef = useRef(false);
+  const [explanation, setExplanation] = useState<{
+    question: string;
+    studentAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+  } | null>(null);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
 
@@ -76,6 +86,14 @@ export function WaveformMatcher({ onComplete, completed }: WaveformMatcherProps)
 
       setFeedback({ correct, freq1, freq2 });
 
+      const higherTone = freq1 > freq2 ? "Tone 1" : "Tone 2";
+      setExplanation({
+        question: `Which tone has a higher pitch? (Tone 1: ${freq1} Hz, Tone 2: ${freq2} Hz)`,
+        studentAnswer: answer === "first" ? "Tone 1" : "Tone 2",
+        correctAnswer: `${higherTone} (${Math.max(freq1, freq2)} Hz)`,
+        isCorrect: correct,
+      });
+
       if (correct) {
         const newStreak = streak + 1;
         setStreak(newStreak);
@@ -91,9 +109,10 @@ export function WaveformMatcher({ onComplete, completed }: WaveformMatcherProps)
       // Next round after brief pause
       setTimeout(() => {
         setFeedback(null);
+        setExplanation(null);
         setFreq1(randomFrequency());
         setFreq2(randomFrequency());
-      }, 1500);
+      }, 4000);
     },
     [freq1, freq2, streak, onComplete]
   );
@@ -174,6 +193,23 @@ export function WaveformMatcher({ onComplete, completed }: WaveformMatcherProps)
                   {feedback.correct ? "Correct!" : "Not quite."}{" "}
                   Tone 1: {feedback.freq1} Hz, Tone 2: {feedback.freq2} Hz
                 </motion.div>
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {explanation && (
+                <ExerciseExplanation
+                  exerciseTitle="Identify Higher/Lower Pitch"
+                  exerciseType="ear"
+                  question={explanation.question}
+                  studentAnswer={explanation.studentAnswer}
+                  correctAnswer={explanation.correctAnswer}
+                  isCorrect={explanation.isCorrect}
+                  lessonTitle={lessonTitle}
+                  levelTitle={levelTitle}
+                  levelOrder={levelOrder}
+                  onClose={() => setExplanation(null)}
+                />
               )}
             </AnimatePresence>
           </motion.div>

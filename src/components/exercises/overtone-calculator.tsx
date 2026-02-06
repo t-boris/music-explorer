@@ -3,12 +3,16 @@
 import { useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
+import { ExerciseExplanation } from "@/components/exercises/exercise-explanation";
 
 // ─── Types ───
 
 interface OvertoneCalculatorProps {
   onComplete: () => void;
   completed: boolean;
+  lessonTitle: string;
+  levelTitle: string;
+  levelOrder: number;
 }
 
 interface HarmonicField {
@@ -31,10 +35,16 @@ const INITIAL_FIELDS: HarmonicField[] = [
 
 // ─── Component ───
 
-export function OvertoneCalculator({ onComplete, completed }: OvertoneCalculatorProps) {
+export function OvertoneCalculator({ onComplete, completed, lessonTitle, levelTitle, levelOrder }: OvertoneCalculatorProps) {
   const [fields, setFields] = useState<HarmonicField[]>(INITIAL_FIELDS);
   const [done, setDone] = useState(completed);
   const completedRef = useRef(false);
+  const [explanation, setExplanation] = useState<{
+    question: string;
+    studentAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+  } | null>(null);
 
   const handleChange = useCallback(
     (index: number, value: string) => {
@@ -61,6 +71,21 @@ export function OvertoneCalculator({ onComplete, completed }: OvertoneCalculator
 
         const correct = numVal === field.expected;
         next[index] = { ...field, status: correct ? "correct" : "wrong" };
+
+        if (!correct) {
+          const nth =
+            field.harmonicNumber === 2
+              ? "2nd"
+              : field.harmonicNumber === 3
+                ? "3rd"
+                : `${field.harmonicNumber}th`;
+          setExplanation({
+            question: `${nth} harmonic of ${FUNDAMENTAL} Hz`,
+            studentAnswer: `${field.value} Hz`,
+            correctAnswer: `${field.expected} Hz`,
+            isCorrect: false,
+          });
+        }
 
         // Check if all correct
         if (correct && next.every((f) => f.status === "correct") && !completedRef.current) {
@@ -150,6 +175,23 @@ export function OvertoneCalculator({ onComplete, completed }: OvertoneCalculator
                 </div>
               ))}
             </div>
+
+            <AnimatePresence>
+              {explanation && (
+                <ExerciseExplanation
+                  exerciseTitle="Harmonic Series Calculation"
+                  exerciseType="theory"
+                  question={explanation.question}
+                  studentAnswer={explanation.studentAnswer}
+                  correctAnswer={explanation.correctAnswer}
+                  isCorrect={explanation.isCorrect}
+                  lessonTitle={lessonTitle}
+                  levelTitle={levelTitle}
+                  levelOrder={levelOrder}
+                  onClose={() => setExplanation(null)}
+                />
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>

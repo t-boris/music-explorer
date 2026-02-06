@@ -37,6 +37,69 @@ function buildUserPrompt(request: DigDeeperRequest): string {
   return `The student is reading about ${request.lessonTitle} and wants to understand this passage better: "${request.selectedText}". Explain what this means in simpler terms, why it's important, and how it connects to the bigger picture.`;
 }
 
+// ─── Exercise Explanation Support ───
+
+export interface ExerciseExplanationRequest {
+  exerciseTitle: string;
+  exerciseType: string;
+  question: string;
+  studentAnswer: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+  lessonTitle: string;
+  levelTitle: string;
+  levelOrder: number;
+}
+
+function buildExerciseSystemPrompt(request: ExerciseExplanationRequest): string {
+  const depthDescriptor =
+    request.levelOrder === 0
+      ? "beginner-friendly, using simple language and everyday analogies"
+      : request.levelOrder <= 2
+        ? "intermediate, assuming basic music theory knowledge"
+        : "advanced, using precise technical terminology";
+
+  return `You are a music theory tutor explaining an exercise result to an electric guitar student. The student just completed an exercise in their lesson "${request.lessonTitle}" (part of "${request.levelTitle}").
+
+Explanation depth: ${depthDescriptor}
+
+Guidelines:
+- Be encouraging, concise, and connect the explanation to practical guitar playing
+- Use markdown formatting: **bold** for key terms, \`backticks\` for frequencies and math
+- Keep it brief and focused on helping them understand the concept`;
+}
+
+function buildExerciseUserPrompt(request: ExerciseExplanationRequest): string {
+  if (request.isCorrect) {
+    return `The student correctly answered "${request.question}" with "${request.studentAnswer}". Briefly explain why this is correct and what concept it demonstrates. Keep it to 1-2 short paragraphs.`;
+  }
+
+  return `The student answered "${request.question}" with "${request.studentAnswer}", but the correct answer is "${request.correctAnswer}". Explain why the correct answer is right, what the student might have confused, and give a tip to remember it next time. Keep it to 2-3 short paragraphs.`;
+}
+
+export function streamExerciseExplanation(request: ExerciseExplanationRequest) {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    throw new Error("ANTHROPIC_API_KEY is not configured");
+  }
+
+  const client = new Anthropic({ apiKey });
+
+  return client.messages.stream({
+    model: "claude-sonnet-4-5-20250929",
+    max_tokens: 512,
+    system: buildExerciseSystemPrompt(request),
+    messages: [
+      {
+        role: "user",
+        content: buildExerciseUserPrompt(request),
+      },
+    ],
+  });
+}
+
+// ─── Dig Deeper Explanation ───
+
 export function streamDigDeeperExplanation(request: DigDeeperRequest) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {

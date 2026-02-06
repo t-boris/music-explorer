@@ -3,12 +3,16 @@
 import { useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
+import { ExerciseExplanation } from "@/components/exercises/exercise-explanation";
 
 // ─── Types ───
 
 interface HarmonicFinderProps {
   onComplete: () => void;
   completed: boolean;
+  lessonTitle: string;
+  levelTitle: string;
+  levelOrder: number;
 }
 
 interface FretResult {
@@ -44,11 +48,17 @@ const DOUBLE_DOTS = [12];
 
 // ─── Component ───
 
-export function HarmonicFinder({ onComplete, completed }: HarmonicFinderProps) {
+export function HarmonicFinder({ onComplete, completed, lessonTitle, levelTitle, levelOrder }: HarmonicFinderProps) {
   const [found, setFound] = useState<Set<number>>(new Set());
   const [lastTap, setLastTap] = useState<FretResult | null>(null);
   const [done, setDone] = useState(completed);
   const completedRef = useRef(false);
+  const [explanation, setExplanation] = useState<{
+    question: string;
+    studentAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+  } | null>(null);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
 
@@ -98,6 +108,13 @@ export function HarmonicFinder({ onComplete, completed }: HarmonicFinderProps) {
         setFound(newFound);
         setLastTap({ fret, correct: true });
 
+        setExplanation({
+          question: "Which fret produces a natural harmonic on the high E string?",
+          studentAnswer: `Fret ${fret} (${harmonic.label})`,
+          correctAnswer: `Fret ${fret} — ${harmonic.label} at ${Math.round(HIGH_E_FUNDAMENTAL * harmonic.multiplier)} Hz`,
+          isCorrect: true,
+        });
+
         if (
           TARGET_FRETS.every((f) => newFound.has(f)) &&
           !completedRef.current
@@ -111,6 +128,12 @@ export function HarmonicFinder({ onComplete, completed }: HarmonicFinderProps) {
       } else if (!harmonic) {
         // Wrong
         setLastTap({ fret, correct: false });
+        setExplanation({
+          question: "Which fret produces a natural harmonic on the high E string?",
+          studentAnswer: `Fret ${fret}`,
+          correctAnswer: "Frets 12, 7, and 5 produce natural harmonics",
+          isCorrect: false,
+        });
       }
 
       setTimeout(() => setLastTap(null), 800);
@@ -341,6 +364,23 @@ export function HarmonicFinder({ onComplete, completed }: HarmonicFinderProps) {
                   ))}
               </div>
             )}
+
+            <AnimatePresence>
+              {explanation && (
+                <ExerciseExplanation
+                  exerciseTitle="Find Natural Harmonics"
+                  exerciseType="fretboard"
+                  question={explanation.question}
+                  studentAnswer={explanation.studentAnswer}
+                  correctAnswer={explanation.correctAnswer}
+                  isCorrect={explanation.isCorrect}
+                  lessonTitle={lessonTitle}
+                  levelTitle={levelTitle}
+                  levelOrder={levelOrder}
+                  onClose={() => setExplanation(null)}
+                />
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>

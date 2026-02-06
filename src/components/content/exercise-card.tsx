@@ -4,6 +4,7 @@ import { useState, type ComponentType } from "react";
 import { Check, ChevronDown, ChevronUp, Loader2, Mic, Play, RotateCcw } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import type { Exercise } from "@/types/index";
+import { useDigDeeperContext } from "@/components/content/dig-deeper-term";
 
 import { WaveformMatcher } from "@/components/exercises/waveform-matcher";
 import { WaveLabeler } from "@/components/exercises/wave-labeler";
@@ -16,7 +17,13 @@ import { FrequencyCalculator } from "@/components/exercises/frequency-calculator
 
 const INTERACTIVE_COMPONENTS: Record<
   string,
-  ComponentType<{ onComplete: () => void; completed: boolean }>
+  ComponentType<{
+    onComplete: () => void;
+    completed: boolean;
+    lessonTitle: string;
+    levelTitle: string;
+    levelOrder: number;
+  }>
 > = {
   "waveform-matcher": WaveformMatcher,
   "wave-labeler": WaveLabeler,
@@ -49,6 +56,20 @@ interface ExerciseCardProps {
 
 export function ExerciseCard({ exercise, completed, toggling, onToggle }: ExerciseCardProps) {
   const [expanded, setExpanded] = useState(false);
+  const [retryKey, setRetryKey] = useState(0);
+
+  // Read lesson context from DigDeeperContext (provided by DigDeeperProvider wrapping lesson content)
+  let lessonTitle = "";
+  let levelTitle = "";
+  let levelOrder = 0;
+  try {
+    const ctx = useDigDeeperContext();
+    lessonTitle = ctx.lessonTitle;
+    levelTitle = ctx.levelTitle;
+    levelOrder = ctx.levelOrder;
+  } catch {
+    // Gracefully handle if not within a DigDeeperProvider
+  }
 
   const isInteractive = exercise.interactiveComponent && INTERACTIVE_COMPONENTS[exercise.interactiveComponent];
   const InteractiveComponent = exercise.interactiveComponent
@@ -125,7 +146,12 @@ export function ExerciseCard({ exercise, completed, toggling, onToggle }: Exerci
           {!expanded ? (
             <button
               type="button"
-              onClick={() => setExpanded(true)}
+              onClick={() => {
+                if (completed) {
+                  setRetryKey((prev) => prev + 1);
+                }
+                setExpanded(true);
+              }}
               className={`flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
                 completed
                   ? "bg-surface-700 text-text-secondary hover:bg-surface-600"
@@ -156,8 +182,12 @@ export function ExerciseCard({ exercise, completed, toggling, onToggle }: Exerci
               </button>
               {InteractiveComponent && (
                 <InteractiveComponent
+                  key={retryKey}
                   onComplete={handleInteractiveComplete}
                   completed={!!completed}
+                  lessonTitle={lessonTitle}
+                  levelTitle={levelTitle}
+                  levelOrder={levelOrder}
                 />
               )}
             </div>

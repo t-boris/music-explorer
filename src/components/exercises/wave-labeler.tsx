@@ -3,12 +3,16 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
+import { ExerciseExplanation } from "@/components/exercises/exercise-explanation";
 
 // ─── Types ───
 
 interface WaveLabelerProps {
   onComplete: () => void;
   completed: boolean;
+  lessonTitle: string;
+  levelTitle: string;
+  levelOrder: number;
 }
 
 type LabelName = "Frequency" | "Amplitude" | "Wavelength";
@@ -150,7 +154,7 @@ function drawWave(canvas: HTMLCanvasElement) {
 
 // ─── Component ───
 
-export function WaveLabeler({ onComplete, completed }: WaveLabelerProps) {
+export function WaveLabeler({ onComplete, completed, lessonTitle, levelTitle, levelOrder }: WaveLabelerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [placed, setPlaced] = useState<Record<string, LabelName | null>>({
     Amplitude: null,
@@ -160,6 +164,12 @@ export function WaveLabeler({ onComplete, completed }: WaveLabelerProps) {
   const [draggingLabel, setDraggingLabel] = useState<LabelName | null>(null);
   const [done, setDone] = useState(completed);
   const completedRef = useRef(false);
+  const [explanation, setExplanation] = useState<{
+    question: string;
+    studentAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+  } | null>(null);
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -194,10 +204,19 @@ export function WaveLabeler({ onComplete, completed }: WaveLabelerProps) {
       setDraggingLabel(null);
 
       if (label !== zoneId) {
-        // Wrong placement -- brief shake feedback, don't place
+        // Wrong placement -- show explanation
+        const wrongZone = DROP_ZONES.find((z) => z.id === zoneId);
+        const correctZone = DROP_ZONES.find((z) => z.id === label);
+        setExplanation({
+          question: `Where does "${label}" go on the wave diagram?`,
+          studentAnswer: wrongZone?.description ?? zoneId,
+          correctAnswer: correctZone?.description ?? label,
+          isCorrect: false,
+        });
         return;
       }
 
+      setExplanation(null);
       const newPlaced = { ...placed, [zoneId]: label };
       setPlaced(newPlaced);
 
@@ -217,10 +236,20 @@ export function WaveLabeler({ onComplete, completed }: WaveLabelerProps) {
     (zoneId: LabelName) => {
       if (!draggingLabel) return;
       if (draggingLabel !== zoneId) {
+        // Wrong placement -- show explanation
+        const wrongZone = DROP_ZONES.find((z) => z.id === zoneId);
+        const correctZone = DROP_ZONES.find((z) => z.id === draggingLabel);
+        setExplanation({
+          question: `Where does "${draggingLabel}" go on the wave diagram?`,
+          studentAnswer: wrongZone?.description ?? zoneId,
+          correctAnswer: correctZone?.description ?? draggingLabel,
+          isCorrect: false,
+        });
         setDraggingLabel(null);
         return;
       }
 
+      setExplanation(null);
       const newPlaced = { ...placed, [zoneId]: draggingLabel };
       setPlaced(newPlaced);
       setDraggingLabel(null);
@@ -322,6 +351,23 @@ export function WaveLabeler({ onComplete, completed }: WaveLabelerProps) {
                 </div>
               ))}
             </div>
+
+            <AnimatePresence>
+              {explanation && (
+                <ExerciseExplanation
+                  exerciseTitle="Label the Wave Properties"
+                  exerciseType="theory"
+                  question={explanation.question}
+                  studentAnswer={explanation.studentAnswer}
+                  correctAnswer={explanation.correctAnswer}
+                  isCorrect={explanation.isCorrect}
+                  lessonTitle={lessonTitle}
+                  levelTitle={levelTitle}
+                  levelOrder={levelOrder}
+                  onClose={() => setExplanation(null)}
+                />
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>

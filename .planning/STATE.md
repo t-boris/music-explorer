@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** Phase 9 — Exercise Explanations & Retry
+**Current focus:** All phases complete
 
 ## Current Position
 
 Phase: 9 of 9 (Exercise Explanations & Retry)
-Plan: 0 of 1 in current phase
-Status: Phase planned, executing
-Last activity: 2026-02-06 — Planning and executing Phase 9
+Plan: 1 of 1 in current phase
+Status: Phase complete — all 9 phases done
+Last activity: 2026-02-06 — Executed Phase 9
 
-Progress: █████████████████████████░ 96% (25/26 plans)
+Progress: ██████████████████████████ 100% (26/26 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 25
+- Total plans completed: 26
 - Average duration: 4 min
-- Total execution time: 90 min
+- Total execution time: ~95 min
 
 **By Phase:**
 
@@ -35,9 +35,10 @@ Progress: ███████████████████████�
 | 06 Sharing & Community | 5/5 | 12 min | 2 min |
 | 07 Interactive Exercises | 3/3 | ~9 min | ~3 min |
 | 08 Dig Deeper | 2/2 | 7 min | 4 min |
+| 09 Exercise Explanations | 1/1 | ~5 min | ~5 min |
 
 **Recent Trend:**
-- Last 5 plans: 07-02 (~3 min), 07-03 (~3 min), 08-01 (3 min), 08-02 (4 min)
+- Last 5 plans: 07-03 (~3 min), 08-01 (3 min), 08-02 (4 min), 09-01 (~5 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -96,6 +97,11 @@ Recent decisions affecting current work:
 - ExerciseCard inline expand/collapse for interactive components (not modal/separate page)
 - Component map pattern: INTERACTIVE_COMPONENTS record maps string keys to React components
 - Backward compatibility: exercises without interactiveComponent keep checkbox behavior
+- React key prop remounting for full exercise state reset on retry
+- ExerciseCard reads lesson context from DigDeeperContext (no new props needed)
+- ExerciseExplanation inline card: green border-l for correct, amber for wrong answers
+- Module-level Map cache in ExerciseExplanation keyed by exerciseTitle+question+studentAnswer
+- Reuse existing /api/dig-deeper endpoint via constructed selectedText (no API route changes)
 - Anthropic SDK (@anthropic-ai/sdk) for AI-powered "Dig Deeper" explanations
 - Streaming API route pattern: ReadableStream from Anthropic SDK stream events
 - In-memory rate limiting (20 req/min/IP) for public AI endpoint
@@ -124,5 +130,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Added Phase 9 (Exercise Explanations & Retry) — needs planning
+Stopped at: Phase 9 complete — all 9 phases executed
 Resume file: None

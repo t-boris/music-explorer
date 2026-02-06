@@ -3,12 +3,16 @@
 import { useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
+import { ExerciseExplanation } from "@/components/exercises/exercise-explanation";
 
 // ─── Types ───
 
 interface FrequencyCalculatorProps {
   onComplete: () => void;
   completed: boolean;
+  lessonTitle: string;
+  levelTitle: string;
+  levelOrder: number;
 }
 
 interface NoteField {
@@ -33,10 +37,16 @@ const INITIAL_FIELDS: NoteField[] = [
 
 // ─── Component ───
 
-export function FrequencyCalculator({ onComplete, completed }: FrequencyCalculatorProps) {
+export function FrequencyCalculator({ onComplete, completed, lessonTitle, levelTitle, levelOrder }: FrequencyCalculatorProps) {
   const [fields, setFields] = useState<NoteField[]>(INITIAL_FIELDS);
   const [done, setDone] = useState(completed);
   const completedRef = useRef(false);
+  const [explanation, setExplanation] = useState<{
+    question: string;
+    studentAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+  } | null>(null);
 
   const handleChange = useCallback(
     (index: number, value: string) => {
@@ -67,6 +77,15 @@ export function FrequencyCalculator({ onComplete, completed }: FrequencyCalculat
           status: correct ? "correct" : "wrong",
           attempts: field.attempts + (correct ? 0 : 1),
         };
+
+        if (!correct) {
+          setExplanation({
+            question: `Calculate frequency of ${field.note} using equal temperament (n = ${field.semitones})`,
+            studentAnswer: `${field.value} Hz`,
+            correctAnswer: `${field.expected.toFixed(2)} Hz`,
+            isCorrect: false,
+          });
+        }
 
         // Check if all correct
         if (correct && next.every((f) => f.status === "correct") && !completedRef.current) {
@@ -152,6 +171,23 @@ export function FrequencyCalculator({ onComplete, completed }: FrequencyCalculat
                 </div>
               ))}
             </div>
+
+            <AnimatePresence>
+              {explanation && (
+                <ExerciseExplanation
+                  exerciseTitle="Equal Temperament Calculation"
+                  exerciseType="theory"
+                  question={explanation.question}
+                  studentAnswer={explanation.studentAnswer}
+                  correctAnswer={explanation.correctAnswer}
+                  isCorrect={explanation.isCorrect}
+                  lessonTitle={lessonTitle}
+                  levelTitle={levelTitle}
+                  levelOrder={levelOrder}
+                  onClose={() => setExplanation(null)}
+                />
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>

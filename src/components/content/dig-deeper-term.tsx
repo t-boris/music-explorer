@@ -34,7 +34,7 @@ export function DigDeeperProvider({
   );
 }
 
-function useDigDeeperContext(): DigDeeperContextValue {
+export function useDigDeeperContext(): DigDeeperContextValue {
   const ctx = useContext(DigDeeperContext);
   if (!ctx) {
     throw new Error("DigDeeper must be used within a DigDeeperProvider");

@@ -3,12 +3,16 @@
 import { useCallback, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check } from "lucide-react";
+import { ExerciseExplanation } from "@/components/exercises/exercise-explanation";
 
 // ─── Types ───
 
 interface OctaveMatcherProps {
   onComplete: () => void;
   completed: boolean;
+  lessonTitle: string;
+  levelTitle: string;
+  levelOrder: number;
 }
 
 // ─── Constants ───
@@ -57,10 +61,16 @@ function midiToFrequency(midi: number): number {
 
 // ─── Component ───
 
-export function OctaveMatcher({ onComplete, completed }: OctaveMatcherProps) {
+export function OctaveMatcher({ onComplete, completed, lessonTitle, levelTitle, levelOrder }: OctaveMatcherProps) {
   const [done, setDone] = useState(completed);
   const [lastTap, setLastTap] = useState<{ string: number; fret: number; correct: boolean } | null>(null);
   const completedRef = useRef(false);
+  const [explanation, setExplanation] = useState<{
+    question: string;
+    studentAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+  } | null>(null);
 
   const audioCtxRef = useRef<AudioContext | null>(null);
 
@@ -110,10 +120,19 @@ export function OctaveMatcher({ onComplete, completed }: OctaveMatcherProps) {
       // Play the tapped note
       playTone(freq);
 
+      const stringLabel = STRING_LABELS[stringIdx];
+
       if (isCorrect) {
         // Play both notes in sequence for comparison
         playTone(START_FREQ, 0.5);
         setLastTap({ string: stringIdx, fret, correct: true });
+
+        setExplanation({
+          question: `Find the octave of A (${START_FREQ} Hz) on the fretboard`,
+          studentAnswer: `String ${stringLabel}, Fret ${fret} (${Math.round(freq)} Hz)`,
+          correctAnswer: `String ${stringLabel}, Fret ${fret} — ${OCTAVE_FREQ} Hz (double the original frequency)`,
+          isCorrect: true,
+        });
 
         if (!completedRef.current) {
           completedRef.current = true;
@@ -124,6 +143,12 @@ export function OctaveMatcher({ onComplete, completed }: OctaveMatcherProps) {
         }
       } else {
         setLastTap({ string: stringIdx, fret, correct: false });
+        setExplanation({
+          question: `Find the octave of A (${START_FREQ} Hz) on the fretboard`,
+          studentAnswer: `String ${stringLabel}, Fret ${fret} (${Math.round(freq)} Hz)`,
+          correctAnswer: "String A fret 12, String D fret 7, or String G fret 2 (all produce 220 Hz)",
+          isCorrect: false,
+        });
         setTimeout(() => setLastTap(null), 600);
       }
     },
@@ -354,6 +379,23 @@ export function OctaveMatcher({ onComplete, completed }: OctaveMatcherProps) {
                 Hear starting note (A = {START_FREQ} Hz)
               </button>
             </div>
+
+            <AnimatePresence>
+              {explanation && (
+                <ExerciseExplanation
+                  exerciseTitle="Match the Octave"
+                  exerciseType="fretboard"
+                  question={explanation.question}
+                  studentAnswer={explanation.studentAnswer}
+                  correctAnswer={explanation.correctAnswer}
+                  isCorrect={explanation.isCorrect}
+                  lessonTitle={lessonTitle}
+                  levelTitle={levelTitle}
+                  levelOrder={levelOrder}
+                  onClose={() => setExplanation(null)}
+                />
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
