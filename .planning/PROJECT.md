@@ -70,6 +70,7 @@ Own exercises and riffs, public domain material, external links. No embedding of
 - **Audio**: Browser Recorder API — start simple, no advanced analysis
 - **Data model**: Firestore (NoSQL) — design document structure to support: User, Level, Lesson, Song/Composition, Exercise, PracticeSession, Recording, Test, TestAttempt, Skill, Progress
 - **Privacy**: Recordings private by default, secure storage URLs
+- **Design**: Slick, modern UI with a music aesthetic — dark theme, subtle musical visual cues (waveforms, fretboard motifs, rhythm-inspired spacing), polished animations. Not a generic SaaS look. Should feel like a premium music tool.
 - **a11y**: Basic accessibility (keyboard navigation, contrast)
 
 ## Key Decisions
@@ -81,6 +82,7 @@ Own exercises and riffs, public domain material, external links. No embedding of
 | Levels 0-5 for MVP content | Covers fundamentals through functional harmony — enough to analyze songs | — Pending |
 | NoSQL (Firestore) for relational-ish data | Simpler infra vs Postgres, but requires careful document design for nested entities | — Pending |
 | Browser Recorder API for audio | Simplest path, cross-browser support improving, avoids native dependencies | — Pending |
+| Premium visual design | Dark theme, music-inspired aesthetics, polished feel — not a generic CRUD app | — Pending |
 
 ---
-*Last updated: 2026-02-05 after initialization*
+*Last updated: 2026-02-05 after design constraint added*
