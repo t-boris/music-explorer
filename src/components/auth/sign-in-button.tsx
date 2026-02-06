@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { ensureUserDocument } from "@/lib/user-service";
 import { Button } from "@/components/ui/button";
 
 function isMobile(): boolean {
@@ -42,6 +43,10 @@ export function SignInButton() {
       // Desktop: use popup flow
       const result = await signInWithPopup(auth, provider);
       const idToken = await result.user.getIdToken();
+
+      // Ensure user document exists in Firestore
+      const { uid, displayName, email, photoURL } = result.user;
+      await ensureUserDocument(uid, displayName, email, photoURL);
 
       // Set auth cookie via API route
       await fetch("/api/login", {
