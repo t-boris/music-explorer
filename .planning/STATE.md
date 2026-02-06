@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-05)
 
 **Core value:** A structured, evidence-based learning system where every practice session produces proof of work: recordings, test scores, tempo logs, and skill progression that demonstrate measurable growth over time.
-**Current focus:** Phase 6 — Sharing & Community (Not started)
+**Current focus:** Phase 6 — Sharing & Community (In progress)
 
 ## Current Position
 
 Phase: 6 of 6 (Sharing & Community)
-Plan: 0 of 0 in current phase (not yet planned)
-Status: Not started
-Last activity: 2026-02-06 — Added Phase 6
+Plan: 1 of 5 in current phase
+Status: In progress
+Last activity: 2026-02-06 — Completed 06-01-PLAN.md
 
-Progress: ████████████████░░░ 83%
+Progress: ████████████████░░░ 85%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 15
+- Total plans completed: 16
 - Average duration: 4 min
-- Total execution time: 65 min
+- Total execution time: 68 min
 
 **By Phase:**
 
@@ -32,9 +32,10 @@ Progress: ████████████████░░░ 83%
 | 03 Practice & Recording | 3/3 | 10 min | 3 min |
 | 04 Tests, Dashboard & Progress | 3/3 | 9 min | 3 min |
 | 05 Bugfixes & Visualizations | 3/3 | 15 min | 5 min |
+| 06 Sharing & Community | 1/5 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 04-03 (4 min), 05-01 (4 min), 05-02 (4 min), 05-03 (7 min)
+- Last 5 plans: 05-01 (4 min), 05-02 (4 min), 05-03 (7 min), 06-01 (3 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -69,6 +70,10 @@ Recent decisions affecting current work:
 - Canvas for waveform visualization (AnalyserNode requires pixel-level drawing), SVG for fretboard (declarative + accessible)
 - Shared lazy AudioContext pattern across interactive components
 - MDX component registration: import in mdx-components.tsx, use JSX tags in .mdx files
+- Top-level connections collection (not user subcollection) for bidirectional queries
+- Authenticated-read for all user data; privacy enforced at service/UI layer, not Firestore rules
+- Collection group query on inviteLinks for cross-user invite code resolution
+- Client-side merge for multi-user activity feed (Firestore lacks cross-collection queries)
 
 ### Roadmap Evolution
 
@@ -86,5 +91,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Added Phase 6 (Sharing & Community). Ready for planning.
+Stopped at: Completed 06-01-PLAN.md (community data foundation)
 Resume file: None

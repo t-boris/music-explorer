@@ -106,7 +106,7 @@ Plans:
 **Plans**: 5 plans
 
 Plans:
-- [ ] 06-01: Foundation — types, connection service, activity service, Firestore rules (Wave 1)
+- [x] 06-01: Foundation — types, connection service, activity service, Firestore rules (Wave 1)
 - [ ] 06-02: Sharing flow — invite generation, invite acceptance, share settings (Wave 2)
 - [ ] 06-03: Community page — people list, activity feed, navigation link (Wave 2)
 - [ ] 06-04: Comments system — comment service, hook, UI components (Wave 2)
@@ -143,4 +143,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 3. Practice & Recording | 3/3 | Complete | 2026-02-06 |
 | 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
 | 5. Bugfixes & Interactive Visualizations | 3/3 | Complete | 2026-02-06 |
-| 6. Sharing & Community | 0/5 | Planned | — |
+| 6. Sharing & Community | 1/5 | In progress | — |
