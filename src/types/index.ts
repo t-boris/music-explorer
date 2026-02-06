@@ -31,6 +31,13 @@ export interface Exercise {
   requiresRecording: boolean;
   recordingPrompt?: string;
   referenceAudioUrl?: string;
+  interactiveComponent?:
+    | "waveform-matcher"
+    | "wave-labeler"
+    | "harmonic-finder"
+    | "overtone-calculator"
+    | "octave-matcher"
+    | "frequency-calculator";
 }
 
 export interface Test {

@@ -229,6 +229,7 @@ export function getExercisesForLesson(
       requiresRecording: (ex.requiresRecording as boolean) ?? false,
       recordingPrompt: ex.recordingPrompt as string | undefined,
       referenceAudioUrl: ex.referenceAudioUrl as string | undefined,
+      interactiveComponent: ex.interactiveComponent as Exercise["interactiveComponent"],
     })
   );
 
