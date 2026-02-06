@@ -8,19 +8,10 @@ import { SessionList } from "@/components/practice/session-list";
 import { Metronome } from "@/components/practice/metronome";
 import { TempoTrainer } from "@/components/practice/tempo-trainer";
 import { useAuth } from "@/hooks/use-auth";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function PracticePage() {
   const { user, loading, error: authError } = useAuth();
-  const router = useRouter();
   const [tempoTrainerOpen, setTempoTrainerOpen] = useState(false);
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push("/login");
-    }
-  }, [loading, user, router]);
 
   if (loading) {
     return (
@@ -41,8 +32,6 @@ export default function PracticePage() {
     );
   }
 
-  if (!user) return null;
-
   return (
     <main className="mx-auto max-w-5xl px-4 py-8">
       <div className="mb-6 flex items-center justify-between">
@@ -60,7 +49,7 @@ export default function PracticePage() {
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
         {/* Left column: Session list */}
         <div>
-          <SessionList userId={user.uid} />
+          <SessionList userId={user!.uid} />
         </div>
 
         {/* Right column: Practice tools */}
@@ -85,7 +74,7 @@ export default function PracticePage() {
               )}
               Tempo Training
             </button>
-            {tempoTrainerOpen && <TempoTrainer userId={user.uid} />}
+            {tempoTrainerOpen && <TempoTrainer userId={user!.uid} />}
           </div>
         </aside>
       </div>
