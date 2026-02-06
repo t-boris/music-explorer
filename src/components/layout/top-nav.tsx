@@ -25,6 +25,7 @@ const authLinks = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/practice", label: "Practice" },
   { href: "/progress", label: "Progress" },
+  { href: "/community", label: "Community" },
 ];
 
 function NavLink({
