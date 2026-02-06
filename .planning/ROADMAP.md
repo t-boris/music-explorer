@@ -27,7 +27,7 @@ None
 Plans:
 - [x] 01-01: Next.js project setup, Firebase config, environment, base layout with navigation
 - [ ] 01-02: Firebase Auth integration (sign up, login, protected routes)
-- [ ] 01-03: Firestore schema design and seed data structure (levels, lessons, exercises)
+- [x] 01-03: Firestore schema design and seed data structure (levels, lessons, exercises)
 
 ### Phase 2: Learning Path & Content
 **Goal**: Browsable learning roadmap with levels 0-5. Each level has lesson pages with MDX theory, exercises, and completion checklists. Song/composition pages show tagged theory elements.
@@ -71,7 +71,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Auth | 1/3 | In progress | - |
+| 1. Foundation & Auth | 2/3 | In progress | - |
 | 2. Learning Path & Content | 0/3 | Not started | - |
 | 3. Practice & Recording | 0/3 | Not started | - |
 | 4. Tests, Dashboard & Progress | 0/3 | Not started | - |

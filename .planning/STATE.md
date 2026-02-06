@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-05)
 ## Current Position
 
 Phase: 1 of 4 (Foundation & Auth)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase (01-02 running in parallel)
 Status: In progress
-Last activity: 2026-02-06 — Completed 01-01-PLAN.md
+Last activity: 2026-02-06 — Completed 01-03-PLAN.md
 
-Progress: █░░░░░░░░░ 8%
+Progress: ██░░░░░░░░ 17%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 4 min
-- Total execution time: 4 min
+- Total plans completed: 2
+- Average duration: 5 min
+- Total execution time: 9 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01 Foundation & Auth | 1/3 | 4 min | 4 min |
+| 01 Foundation & Auth | 2/3 | 9 min | 5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4 min)
-- Trend: Starting
+- Last 5 plans: 01-01 (4 min), 01-03 (5 min)
+- Trend: Stable
 
 ## Accumulated Context
 
@@ -44,6 +44,9 @@ Recent decisions affecting current work:
 - Firebase singleton pattern with getApps().length check
 - Server-only guard on Admin SDK file
 - OKLCH color tokens: surface-900..600, accent-400..600
+- FIREBASE_SERVICE_ACCOUNT_KEY env var for seed script (avoids gcloud GOOGLE_APPLICATION_CREDENTIALS conflict)
+- Fixed document IDs for idempotent Firestore seeding
+- Manual Firebase config files (no firebase init, no real project yet)
 
 ### Deferred Issues
 
@@ -51,10 +54,10 @@ None yet.
 
 ### Blockers/Concerns
 
-None yet.
+- Firebase project not yet configured with real credentials — seed script and deploy commands will fail until .env.local is populated
 
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 01-01-PLAN.md
+Stopped at: Completed 01-03-PLAN.md (01-02 may still be in progress)
 Resume file: None
