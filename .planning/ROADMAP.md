@@ -13,7 +13,7 @@ None
 - [x] **Phase 1: Foundation & Auth** — Next.js project, Firebase integration, auth, data model, base layout
 - [x] **Phase 2: Learning Path & Content** — Level/lesson roadmap, lesson pages with MDX theory, song/composition pages
 - [x] **Phase 3: Practice & Recording** — Practice journal, browser audio recording, metronome, tempo training
-- [ ] **Phase 4: Tests, Dashboard & Progress** — Theory tests, ear training, test results, dashboard, progress tracking
+- [x] **Phase 4: Tests, Dashboard & Progress** — Theory tests, ear training, test results, dashboard, progress tracking
 
 ## Phase Details
 
@@ -62,7 +62,7 @@ Plans:
 Plans:
 - [x] 04-01: Dashboard (today's plan, quick record, streak, progress overview) with Firestore data aggregation
 - [x] 04-02: Progress page with skill radar, level tracking, and session history
-- [ ] 04-03: Dashboard (today's plan, quick record, streak) and progress tracking (level %, skill radar, session history)
+- [x] 04-03: Theory tests, ear training with Web Audio, test results with scoring and progress updates
 
 ## Progress
 
@@ -74,4 +74,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Foundation & Auth | 3/3 | Complete | 2026-02-06 |
 | 2. Learning Path & Content | 3/3 | Complete | 2026-02-06 |
 | 3. Practice & Recording | 3/3 | Complete | 2026-02-06 |
-| 4. Tests, Dashboard & Progress | 2/3 | In progress | - |
+| 4. Tests, Dashboard & Progress | 3/3 | Complete | 2026-02-06 |
