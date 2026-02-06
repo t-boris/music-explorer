@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ClipboardCheck } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
@@ -90,6 +90,30 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
       {/* Exercises */}
       <ExerciseList exercises={exercises} />
+
+      {/* Take Test CTA */}
+      <div className="mt-10 rounded-xl border border-surface-700 bg-surface-800 p-6">
+        <div className="flex items-start gap-4">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-500/20">
+            <ClipboardCheck className="h-5 w-5 text-accent-400" />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-heading text-lg font-medium text-text-primary">
+              Test Your Knowledge
+            </h3>
+            <p className="mt-1 text-sm text-text-secondary">
+              Ready to check what you learned? Take a theory test or practice ear training.
+            </p>
+            <Link
+              href={`/levels/${levelId}/lessons/${lessonId}/test`}
+              className="mt-3 inline-flex items-center gap-2 rounded-lg bg-accent-500 px-4 py-2 text-sm font-medium text-surface-900 transition-colors hover:bg-accent-600"
+            >
+              <ClipboardCheck className="h-4 w-4" />
+              Take Test
+            </Link>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
