@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-02-05)
 
 ## Current Position
 
-Phase: 2 of 4 (Learning Path & Content)
-Plan: 3 of 3 in current phase
-Status: Phase complete
-Last activity: 2026-02-06 — Completed 02-03-PLAN.md
+Phase: 3 of 4 (Practice & Recording)
+Plan: 1 of 3 in current phase
+Status: In progress
+Last activity: 2026-02-06 — Completed 03-01-PLAN.md
 
-Progress: ██████░░░░░░ 50%
+Progress: ███████░░░░░ 58%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 5 min
-- Total execution time: 31 min
+- Total execution time: 34 min
 
 **By Phase:**
 
@@ -29,9 +29,10 @@ Progress: ██████░░░░░░ 50%
 |-------|-------|-------|----------|
 | 01 Foundation & Auth | 3/3 | 18 min | 6 min |
 | 02 Learning Path & Content | 3/3 | 13 min | 4 min |
+| 03 Practice & Recording | 1/3 | 3 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (9 min), 02-01 (4 min), 02-02 (3 min), 02-03 (6 min)
+- Last 5 plans: 02-01 (4 min), 02-02 (3 min), 02-03 (6 min), 03-01 (3 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -56,6 +57,9 @@ Recent decisions affecting current work:
 - Exercises stored in MDX frontmatter yaml arrays (not separate exercises.json)
 - Song filtering uses client component wrapping server-fetched data (no URL state)
 - Content type expansion pattern: MDX directory + content.ts functions + card + filter + pages
+- Server component wrapper in /practice/new to bridge content.ts (server-only) to client form
+- Firestore subcollection CRUD service with modular SDK and getFirebaseDb() lazy getter
+- Real-time onSnapshot hook pattern for live practice session list
 
 ### Deferred Issues
 
@@ -68,5 +72,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 02-03-PLAN.md — Seed content for levels 0-2 (9 lessons, 18 exercises). Phase 2 complete.
+Stopped at: Completed 03-01-PLAN.md — Practice journal with Firestore CRUD, real-time session list, create form, detail view.
 Resume file: None
