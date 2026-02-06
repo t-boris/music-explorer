@@ -82,6 +82,18 @@ export function TopNav() {
             />
           ))}
 
+          {loading && (
+            <>
+              <Separator orientation="vertical" className="h-5" />
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="h-4 w-16 animate-pulse rounded bg-surface-700"
+                />
+              ))}
+            </>
+          )}
+
           {user && !loading && (
             <>
               <Separator orientation="vertical" className="h-5" />
@@ -128,6 +140,16 @@ export function TopNav() {
                     onClick={() => setMobileOpen(false)}
                   />
                 ))}
+                {loading && (
+                  <>
+                    {[1, 2, 3].map((i) => (
+                      <div
+                        key={i}
+                        className="h-4 w-20 animate-pulse rounded bg-surface-700"
+                      />
+                    ))}
+                  </>
+                )}
                 <Separator className="my-2" />
                 <div onClick={() => setMobileOpen(false)}>
                   <UserMenu />
