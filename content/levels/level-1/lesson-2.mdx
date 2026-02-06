@@ -1,0 +1,135 @@
+---
+title: "Rhythm & Note Duration"
+order: 2
+levelId: "level-1"
+description: "Understand how rhythm is written: note values, rests, dots, ties, and the mathematical relationships between durations."
+tags:
+  - notation
+  - rhythm
+  - duration
+exercises:
+  - id: "ex-1-2-1"
+    title: "Clap the Rhythm"
+    type: "rhythm"
+    description: "Clap or tap the rhythm shown in a series of note patterns. Maintain a steady pulse throughout."
+    requiresRecording: true
+    recordingPrompt: "Set a metronome to 80 BPM. Record yourself clapping: 4 quarter notes, then 2 half notes, then 1 whole note. Repeat twice."
+  - id: "ex-1-2-2"
+    title: "Count the Beats"
+    type: "theory"
+    description: "Calculate the total number of beats for different sequences of notes and rests in 4/4 time."
+    requiresRecording: false
+---
+
+# Rhythm & Note Duration
+
+Pitch tells us **what** to play; rhythm tells us **when** and **for how long**. Rhythm is built on a system of proportional note values, where each duration is exactly half or double another.
+
+## Note Values
+
+Every note has a specific **duration** relative to a **beat**. In the most common time signature (4/4), the quarter note typically represents one beat:
+
+```
+Note Name        Symbol    Beats (in 4/4)
+──────────────────────────────────────────
+Whole note         o          4 beats
+Half note          d          2 beats
+Quarter note       ♩          1 beat
+Eighth note        ♪          1/2 beat
+Sixteenth note     ♬          1/4 beat
+```
+
+The mathematical pattern is straightforward -- each value is exactly **half** the duration of the previous one:
+
+```
+whole = 2 x half = 4 x quarter = 8 x eighth = 16 x sixteenth
+
+Or inversely:
+1 whole = 2 halves = 4 quarters = 8 eighths = 16 sixteenths
+```
+
+> **Key concept:** Note values form a **binary tree** of durations. Every division is by 2. This is why counting rhythms in subdivisions of 2 is fundamental to sight-reading.
+
+## Rests
+
+For every note value, there is a corresponding **rest** of equal duration -- a measured silence. Rests are just as important as notes; music lives in the interplay between sound and silence.
+
+```
+Rest Name          Beats (in 4/4)
+──────────────────────────────────
+Whole rest            4 beats
+Half rest             2 beats
+Quarter rest          1 beat
+Eighth rest           1/2 beat
+Sixteenth rest        1/4 beat
+```
+
+On guitar, rests require **active damping** -- you must mute the strings to stop them from ringing. This is a critical technique: palm muting, releasing fret pressure, or touching the strings with the fretting hand.
+
+## Dotted Notes
+
+A **dot** after a note increases its duration by **half its original value**:
+
+```
+dotted value = original + (original / 2)
+dotted value = original x 1.5
+```
+
+Common examples:
+
+| Dotted Note | Calculation | Total Beats |
+|-------------|-------------|-------------|
+| Dotted half | 2 + 1 | 3 beats |
+| Dotted quarter | 1 + 0.5 | 1.5 beats |
+| Dotted eighth | 0.5 + 0.25 | 0.75 beats |
+
+A **double dot** adds half of the dot's value:
+
+```
+double-dotted = original + original/2 + original/4
+double-dotted = original x 1.75
+```
+
+## Ties
+
+A **tie** is a curved line connecting two notes of the **same pitch**, combining their durations into a single sustained note. The second note is not attacked -- only the first is struck, and it rings for the total duration of both.
+
+```
+Quarter + Quarter (tied) = Half note duration
+♩  ⌒  ♩  =  d
+
+Half + Quarter (tied) = 3 beats
+d  ⌒  ♩  =  3 beats (same as dotted half)
+```
+
+Ties serve two important purposes:
+
+1. **Sustaining across bar lines:** A note can ring from one measure into the next
+2. **Creating durations not available as single note values:** For example, 5 beats = whole tied to quarter
+
+## Beaming
+
+Eighth notes, sixteenth notes, and shorter values are often connected by horizontal **beams** instead of individual flags. Beaming groups notes into **beat units**, making rhythms easier to read at a glance:
+
+```
+Individual flags:   ♪  ♪  ♪  ♪     (hard to read)
+Beamed:             ♪♪ ♪♪           (grouped by beat - easier)
+```
+
+The standard beaming convention groups notes by **beat** within a measure. In 4/4, eighth notes are typically beamed in groups of 2 (one per beat); sixteenth notes in groups of 4.
+
+## Counting Rhythms
+
+Musicians count rhythms using a system of **beat numbers** and **subdivisions**:
+
+```
+4/4 time, quarter note = 1 beat:
+
+Quarter notes:     1    2    3    4
+Eighth notes:      1 + 2 + 3 + 4 +      ("and" for the off-beats)
+Sixteenth notes:   1 e + a 2 e + a 3 e + a 4 e + a
+```
+
+When practicing rhythm on guitar, use a **metronome** to establish a steady pulse. Start slowly (60-80 BPM) and gradually increase tempo only after the rhythm is clean and consistent. Rushing is the most common rhythm error.
+
+The proportional system of note values is elegant in its simplicity: every duration is a power of two, modified only by dots and ties. This mathematical regularity makes complex rhythms analyzable and learnable.

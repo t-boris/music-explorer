@@ -1,0 +1,130 @@
+---
+title: "Intervals on the Fretboard"
+order: 2
+levelId: "level-2"
+description: "Map every interval to physical shapes on the guitar neck -- turning abstract theory into playable patterns."
+tags:
+  - intervals
+  - fretboard
+  - shapes
+exercises:
+  - id: "ex-2-2-1"
+    title: "Build Intervals"
+    type: "fretboard"
+    description: "Starting from given root notes, play the requested intervals on the guitar. Use both same-string and cross-string shapes."
+    requiresRecording: true
+    recordingPrompt: "Record yourself playing these intervals from A (5th fret, low E string): major 3rd, perfect 5th, minor 7th. Name each interval as you play it."
+  - id: "ex-2-2-2"
+    title: "Interval Song References"
+    type: "ear"
+    description: "Match common intervals to the openings of well-known songs. For example: perfect 4th = 'Here Comes the Bride', perfect 5th = 'Star Wars' theme."
+    requiresRecording: false
+---
+
+# Intervals on the Fretboard
+
+The guitar fretboard is a **grid** where every interval maps to a specific geometric shape. Because the guitar is tuned in fourths (with one exception), these shapes are consistent and repeatable across the neck.
+
+## Same-String Intervals
+
+The simplest way to visualize any interval is on a **single string**. Since each fret equals one semitone, the interval in frets equals the interval in semitones:
+
+```
+Starting from A (5th fret, low E string):
+
+A ──5──6──7──8──9──10──11──12──13──14──15──16──17──
+    P1 m2 M2 m3 M3  P4  A4   P5  m6  M6  m7  M7  P8
+    0   1  2  3  4   5   6    7   8   9  10  11  12 frets
+```
+
+This is the **reference map** -- every interval is simply a fret count from the root. You can apply this to any starting fret on any string.
+
+## Cross-String Intervals
+
+Playing intervals on a single string often requires large position shifts. In practice, guitarists use **cross-string shapes** to keep the hand stationary. The guitar's tuning determines these shapes.
+
+### Standard Tuning Intervals
+
+The guitar is tuned in **perfect fourths** (5 semitones) between each pair of adjacent strings, except between strings 3 and 2 (G to B), which is a **major third** (4 semitones):
+
+```
+String:   6(E)  5(A)  4(D)  3(G)  2(B)  1(E)
+Interval:    P4    P4    P4    M3    P4
+Frets:        5     5     5     4     5
+```
+
+This means that to play the **same note** on the next higher string, you move:
+- **5 frets back** (toward the nut) on strings 6-5, 5-4, 4-3, 2-1
+- **4 frets back** on strings 3-2
+
+### Common Two-String Shapes
+
+Here are the most important interval shapes between adjacent strings. The numbers show the fret offset from the root note on the lower string:
+
+**Between strings 6-5, 5-4, 4-3, 2-1 (tuned in P4):**
+
+```
+Interval     Lower String    Higher String    Shape
+──────────────────────────────────────────────────────
+Minor 3rd    fret X          fret X-2         2 frets back
+Major 3rd    fret X          fret X-1         1 fret back
+Perfect 4th  fret X          fret X (same)    same fret
+Perfect 5th  fret X          fret X+2         2 frets up
+Octave       fret X          fret X+5*        (* skip one string)
+```
+
+**Between strings 3-2 (tuned in M3, 4 semitones apart):**
+
+All shapes shift **1 fret higher** on string 2 compared to the other pairs:
+
+```
+Interval     String 3        String 2         Shape
+──────────────────────────────────────────────────────
+Minor 3rd    fret X          fret X-1         1 fret back
+Major 3rd    fret X          fret X (same)    same fret
+Perfect 4th  fret X          fret X+1         1 fret up
+Perfect 5th  fret X          fret X+3         3 frets up
+```
+
+> **Key insight:** The irregular tuning of the B string (M3 instead of P4) is why chord shapes and scale patterns change shape when they cross strings 3 and 2. Every guitarist must internalize this offset.
+
+## The Octave Shapes
+
+Octave patterns are especially useful landmarks on the fretboard:
+
+```
+Shape 1: Skip one string, up 2 frets
+  (works for root on strings 6, 5, 4)
+
+  String X:    ●──────────
+  String X+1:  ───────────
+  String X+2:  ──●────────  (+2 frets)
+
+Shape 2: Skip one string, up 3 frets
+  (when crossing the G-B string pair)
+
+  String 4:    ●──────────
+  String 3:    ───────────
+  String 2:    ───●───────  (+3 frets, because of M3 tuning)
+```
+
+## Practicing Interval Recognition
+
+To develop fretboard fluency with intervals, practice in two directions:
+
+**1. Building (root + interval = target):**
+Pick any fret as a root. Choose an interval. Play the target note using a cross-string shape without counting frets. Verify by counting semitones.
+
+**2. Identifying (two notes = what interval?):**
+Play two random notes. Count the semitones between them. Name the interval. This builds the automatic association between sound and distance.
+
+```
+Exercise progression:
+1. Same string, ascending only
+2. Adjacent strings, ascending
+3. Any two strings, ascending
+4. Any direction (ascending and descending)
+5. By ear only (no visual reference)
+```
+
+The fretboard is an interval calculator. Every fingering pattern, chord shape, and scale form is a collection of intervals from a root. Master the interval shapes, and you will see the logic behind every pattern you play.
