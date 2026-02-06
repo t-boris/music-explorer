@@ -230,6 +230,19 @@ export interface InviteLink {
   createdAt: Timestamp;
 }
 
+// ─── Knowledge Check ───
+
+export interface KnowledgeCheckQuestion {
+  id: string;
+  question: string;
+  type: "multiple-choice" | "true-false";
+  options: string[];
+  correctAnswer: string;
+  explanation: string;
+  lessonId: string;
+  lessonOrder: number;
+}
+
 // ─── Test Questions ───
 
 export interface TestQuestion {
