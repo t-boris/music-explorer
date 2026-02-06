@@ -12,7 +12,20 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+/**
+ * Returns true if Firebase config has a valid API key.
+ * When running without credentials (local dev), Firebase operations are skipped gracefully.
+ */
+export function isFirebaseConfigured(): boolean {
+  return Boolean(firebaseConfig.apiKey);
+}
+
 function getApp() {
+  if (!isFirebaseConfigured()) {
+    throw new Error(
+      "Firebase is not configured. Add NEXT_PUBLIC_FIREBASE_API_KEY to .env.local"
+    );
+  }
   return getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 }
 
@@ -20,21 +33,20 @@ function getApp() {
  * Lazy getters that defer Firebase initialization until first access.
  * This prevents build-time errors when NEXT_PUBLIC_FIREBASE_API_KEY is empty
  * (e.g., during static page generation in `next build`).
+ *
+ * Returns null when Firebase is not configured (no API key in env).
  */
 export function getFirebaseAuth() {
+  if (!isFirebaseConfigured()) return null;
   return getAuth(getApp());
 }
 
 export function getFirebaseDb() {
+  if (!isFirebaseConfigured()) return null;
   return getFirestore(getApp());
 }
 
 export function getFirebaseStorage() {
+  if (!isFirebaseConfigured()) return null;
   return getStorage(getApp());
 }
-
-// Direct exports for convenience — only safe to use at runtime (not during build/SSR prerender)
-// Use the getter functions above when access may happen during build
-export const auth = typeof window !== "undefined" ? getFirebaseAuth() : (null as unknown as ReturnType<typeof getAuth>);
-export const db = typeof window !== "undefined" ? getFirebaseDb() : (null as unknown as ReturnType<typeof getFirestore>);
-export const storage = typeof window !== "undefined" ? getFirebaseStorage() : (null as unknown as ReturnType<typeof getStorage>);

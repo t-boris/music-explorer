@@ -12,7 +12,7 @@ import {
   signOut as firebaseSignOut,
   type User,
 } from "firebase/auth";
-import { getFirebaseAuth } from "@/lib/firebase";
+import { getFirebaseAuth, isFirebaseConfigured } from "@/lib/firebase";
 
 export interface AuthContextValue {
   user: User | null;
@@ -31,8 +31,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Only subscribe to auth state changes on the client
     const auth = getFirebaseAuth();
+    if (!auth) {
+      setLoading(false);
+      return;
+    }
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
       setLoading(false);
@@ -43,6 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = useCallback(async () => {
     const auth = getFirebaseAuth();
+    if (!auth) return;
     await firebaseSignOut(auth);
     await fetch("/api/logout");
     setUser(null);
