@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-02-05)
 ## Current Position
 
 Phase: 6 of 6 (Sharing & Community)
-Plan: 1 of 5 in current phase
+Plan: 4 of 5 in current phase
 Status: In progress
-Last activity: 2026-02-06 — Completed 06-01-PLAN.md
+Last activity: 2026-02-06 — Completed 06-04-PLAN.md
 
-Progress: ████████████████░░░ 85%
+Progress: ███████████████████░ 95%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 16
+- Total plans completed: 19
 - Average duration: 4 min
-- Total execution time: 68 min
+- Total execution time: 74 min
 
 **By Phase:**
 
@@ -32,10 +32,10 @@ Progress: ████████████████░░░ 85%
 | 03 Practice & Recording | 3/3 | 10 min | 3 min |
 | 04 Tests, Dashboard & Progress | 3/3 | 9 min | 3 min |
 | 05 Bugfixes & Visualizations | 3/3 | 15 min | 5 min |
-| 06 Sharing & Community | 1/5 | 3 min | 3 min |
+| 06 Sharing & Community | 2/5 | 5 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 05-01 (4 min), 05-02 (4 min), 05-03 (7 min), 06-01 (3 min)
+- Last 5 plans: 05-02 (4 min), 05-03 (7 min), 06-01 (3 min), 06-02 (2 min)
 - Trend: Stable
 
 ## Accumulated Context
@@ -74,6 +74,8 @@ Recent decisions affecting current work:
 - Authenticated-read for all user data; privacy enforced at service/UI layer, not Firestore rules
 - Collection group query on inviteLinks for cross-user invite code resolution
 - Client-side merge for multi-user activity feed (Firestore lacks cross-collection queries)
+- Redirect to /share after invite acceptance (connection context visible there)
+- useRef guard to prevent duplicate invite processing on React strict mode re-renders
 
 ### Roadmap Evolution
 
@@ -91,5 +93,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 06-01-PLAN.md (community data foundation)
+Stopped at: Completed 06-02-PLAN.md (sharing flow)
 Resume file: None
