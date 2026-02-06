@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import { useState } from "react";
 import Link from "next/link";
 import { Plus, ChevronDown, ChevronRight } from "lucide-react";
@@ -14,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function PracticePage() {
-  const { user, loading } = useAuth();
+  const { user, loading, error: authError } = useAuth();
   const router = useRouter();
   const [tempoTrainerOpen, setTempoTrainerOpen] = useState(false);
 
@@ -28,6 +26,17 @@ export default function PracticePage() {
     return (
       <main className="mx-auto max-w-5xl px-4 py-8">
         <div className="h-8 w-48 animate-pulse rounded bg-surface-700" />
+      </main>
+    );
+  }
+
+  if (authError) {
+    return (
+      <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4">
+        <p className="text-sm text-red-400">{authError}</p>
+        <p className="mt-1 text-xs text-text-muted">
+          Try refreshing the page.
+        </p>
       </main>
     );
   }

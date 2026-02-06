@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import { Loader2 } from "lucide-react";
 import { useDashboard } from "@/hooks/use-dashboard";
 import { useAuth } from "@/hooks/use-auth";
@@ -11,7 +9,7 @@ import { StreakDisplay } from "@/components/dashboard/streak-display";
 import { ProgressOverview } from "@/components/dashboard/progress-overview";
 
 export default function DashboardPage() {
-  const { user: authUser } = useAuth();
+  const { user: authUser, loading: authLoading, error: authError } = useAuth();
   const { data, loading, error } = useDashboard();
 
   const displayName =
@@ -23,7 +21,7 @@ export default function DashboardPage() {
     day: "numeric",
   });
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-accent-400" />
@@ -32,10 +30,10 @@ export default function DashboardPage() {
     );
   }
 
-  if (error) {
+  if (authError || error) {
     return (
       <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4">
-        <p className="text-sm text-red-400">{error}</p>
+        <p className="text-sm text-red-400">{authError || error}</p>
         <p className="mt-1 text-xs text-text-muted">
           Try refreshing the page.
         </p>

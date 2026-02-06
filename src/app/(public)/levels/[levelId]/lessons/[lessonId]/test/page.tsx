@@ -14,8 +14,6 @@ import { TheoryTest } from "@/components/test/theory-test";
 import { EarTraining } from "@/components/test/ear-training";
 import type { TestType } from "@/hooks/use-test";
 
-export const dynamic = "force-dynamic";
-
 type TabType = "theory" | "ear";
 
 const THEORY_TYPES: { value: TestType; label: string }[] = [

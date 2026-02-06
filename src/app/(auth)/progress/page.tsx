@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import { useProgress } from "@/hooks/use-progress";
 import { SkillRadar } from "@/components/progress/skill-radar";
 import { LevelProgress } from "@/components/progress/level-progress";
@@ -9,8 +7,8 @@ import { SessionHistory } from "@/components/progress/session-history";
 import { useAuth } from "@/hooks/use-auth";
 
 export default function ProgressPage() {
-  const { user, loading: authLoading } = useAuth();
-  const { progressSummary, currentLevel, sessions, loading } = useProgress();
+  const { user, loading: authLoading, error: authError } = useAuth();
+  const { progressSummary, currentLevel, sessions, loading, error } = useProgress();
 
   if (authLoading || loading) {
     return (
@@ -27,6 +25,17 @@ export default function ProgressPage() {
             />
           ))}
         </div>
+      </main>
+    );
+  }
+
+  if (authError || error) {
+    return (
+      <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4">
+        <p className="text-sm text-red-400">{authError || error}</p>
+        <p className="mt-1 text-xs text-text-muted">
+          Try refreshing the page.
+        </p>
       </main>
     );
   }
