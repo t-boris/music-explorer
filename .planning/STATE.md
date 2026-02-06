@@ -87,6 +87,9 @@ Recent decisions affecting current work:
 - Non-critical activity logging wrapped in try/catch to never break primary operations
 - Amber/orange left border accent for MusicStory cards to distinguish from blue interactive components
 - MusicStory MDX component: reusable card with title, era badge, connection footer for music history
+- Pure question generator for knowledge checks (no Firebase dependency, same pattern as test-questions.ts)
+- 80% pass threshold (4/5) for knowledge checks; no Firestore persistence (lightweight inline quiz)
+- Curriculum-scoped question filtering: lessonOrder <= currentLessonOrder (never leak future material)
 
 ### Roadmap Evolution
 
@@ -105,5 +108,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-06
-Stopped at: Completed 07-03-PLAN.md (music history stories) — 07-01 and 07-02 remain
+Stopped at: Completed 07-02-PLAN.md (knowledge check engine) — 07-01 remains
 Resume file: None
