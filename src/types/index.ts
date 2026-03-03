@@ -120,6 +120,8 @@ export interface Recording {
   contextTitle: string;
   levelId: string;
   sessionId?: string;
+  title?: string;
+  notes?: string;
 }
 
 export interface TestAttempt {
@@ -149,6 +151,7 @@ export interface PracticeSession {
   exerciseIds: string[];
   levelId: string;
   createdAt: Timestamp;
+  title?: string;
 }
 
 export interface ProgressEntry {
@@ -171,6 +174,103 @@ export interface ExerciseCompletion {
   levelId: string;
   exerciseType: Exercise["type"];
   completedAt: Timestamp;
+}
+
+export interface LessonProgress {
+  id: string;
+  lessonId: string;
+  levelId: string;
+  contentReadAt: Timestamp | null;
+  completedAt: Timestamp | null;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+// ─── Lesson Notes ───
+
+export interface LessonNote {
+  id: string;
+  lessonId: string;
+  levelId: string;
+  selectedText: string;
+  noteText: string;
+  aiExpansion: string | null;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
+}
+
+// ─── Gamification ───
+
+export type GamificationEventType =
+  | "exercise_completed"
+  | "lesson_completed"
+  | "level_up"
+  | "session_logged"
+  | "test_completed"
+  | "recording_created";
+
+export interface GamificationEvent {
+  type: GamificationEventType;
+  sourceId: string;
+  levelId: string;
+  lessonId: string;
+  occurredAt: Timestamp;
+  dedupeKey: string;
+  meta: Record<string, string>;
+}
+
+export interface DailyCounts {
+  dayKey: string;
+  exercise_completed: number;
+  lesson_completed: number;
+  level_up: number;
+  session_logged: number;
+  test_completed: number;
+  recording_created: number;
+}
+
+export interface GamificationProfile {
+  totalXp: number;
+  rank: string;
+  streakDays: number;
+  lastActiveDay: string;
+  dailyCounts: DailyCounts;
+  totalCounts: Record<GamificationEventType, number>;
+  updatedAt: Timestamp;
+}
+
+export type BadgeId =
+  | "first_exercise"
+  | "first_lesson"
+  | "first_test"
+  | "first_recording"
+  | "first_session"
+  | "exercises_10"
+  | "exercises_50"
+  | "lessons_5"
+  | "lessons_10"
+  | "streak_3"
+  | "streak_7"
+  | "streak_30"
+  | "xp_500"
+  | "xp_2000"
+  | "level_up_first";
+
+export interface Badge {
+  id: BadgeId;
+  title: string;
+  description: string;
+  icon: string;
+  unlockedAt: Timestamp;
+}
+
+export interface DailyMission {
+  id: string;
+  title: string;
+  description: string;
+  target: number;
+  current: number;
+  completed: boolean;
 }
 
 export interface TempoAttempt {
@@ -220,6 +320,7 @@ export interface ActivityEvent {
     | "test_completed"
     | "recording_created"
     | "session_logged"
+    | "lesson_completed"
     | "level_up";
   title: string;
   metadata: Record<string, string>;

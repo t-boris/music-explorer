@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Lock } from "lucide-react";
+import { Check, Lock } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { motion } from "motion/react";
 import type { Level } from "@/types/index";
@@ -10,9 +10,10 @@ interface LevelCardProps {
   level: Level;
   isActive: boolean;
   lessonCount: number;
+  completedLessons?: number;
 }
 
-export function LevelCard({ level, isActive, lessonCount }: LevelCardProps) {
+export function LevelCard({ level, isActive, lessonCount, completedLessons }: LevelCardProps) {
   const content = (
     <Card
       className={`relative border transition-colors ${
@@ -70,7 +71,17 @@ export function LevelCard({ level, isActive, lessonCount }: LevelCardProps) {
             </span>
           ))}
           {isActive && lessonCount > 0 && (
-            <span className="ml-auto text-xs text-text-muted">
+            <span className="ml-auto flex items-center gap-2 text-xs text-text-muted">
+              {completedLessons != null && completedLessons >= lessonCount ? (
+                <span className="inline-flex items-center gap-1 rounded-full bg-green-500/15 px-2 py-0.5 text-xs font-medium text-green-400">
+                  <Check className="h-3 w-3" />
+                  Completed
+                </span>
+              ) : completedLessons != null && completedLessons > 0 ? (
+                <span className="rounded-full bg-accent-500/15 px-2 py-0.5 text-xs font-medium text-accent-400">
+                  {completedLessons}/{lessonCount} completed
+                </span>
+              ) : null}
               {lessonCount} {lessonCount === 1 ? "lesson" : "lessons"}
             </span>
           )}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Plus, ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SessionList } from "@/components/practice/session-list";
+import { QuickRecordingList } from "@/components/practice/quick-recording-list";
 import { Metronome } from "@/components/practice/metronome";
 import { TempoTrainer } from "@/components/practice/tempo-trainer";
 import { useAuth } from "@/hooks/use-auth";
@@ -47,9 +48,10 @@ export default function PracticePage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
-        {/* Left column: Session list */}
-        <div>
+        {/* Left column: Session list + quick recordings */}
+        <div className="space-y-6">
           <SessionList userId={user!.uid} />
+          <QuickRecordingList userId={user!.uid} />
         </div>
 
         {/* Right column: Practice tools */}

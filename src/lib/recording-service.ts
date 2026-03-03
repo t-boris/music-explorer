@@ -6,6 +6,7 @@ import {
   setDoc,
   getDocs,
   deleteDoc,
+  updateDoc,
   query,
   where,
   orderBy,
@@ -20,6 +21,7 @@ import {
 } from "firebase/storage";
 import { getFirebaseDb, getFirebaseStorage } from "@/lib/firebase";
 import { logActivity } from "@/lib/activity-service";
+import { emitGamificationEvent } from "@/lib/gamification-service";
 import type { Recording } from "@/types/index";
 
 // ─── Collection Path Helpers ───
@@ -94,6 +96,17 @@ export async function uploadRecording(
     console.error("Failed to log recording activity:", err);
   }
 
+  // Gamification event (non-critical)
+  try {
+    await emitGamificationEvent(userId, {
+      type: "recording_created",
+      sourceId: id,
+      levelId: metadata.levelId,
+    });
+  } catch (err) {
+    console.error("Failed to emit gamification event:", err);
+  }
+
   return recording as unknown as Recording;
 }
 
@@ -139,6 +152,16 @@ export async function getRecordingsBySession(
     id: d.id,
     ...d.data(),
   })) as Recording[];
+}
+
+// ─── Update Recording ───
+
+export async function updateRecording(
+  userId: string,
+  recordingId: string,
+  data: { title?: string; notes?: string }
+): Promise<void> {
+  await updateDoc(recordingDoc(userId, recordingId), data);
 }
 
 // ─── Delete Recording ───

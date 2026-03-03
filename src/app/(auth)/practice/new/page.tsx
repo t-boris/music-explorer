@@ -4,8 +4,6 @@ import { getLevels, getLessons, getExercisesForLesson } from "@/lib/content";
 import { SessionForm } from "@/components/practice/session-form";
 import type { Exercise, Level } from "@/types/index";
 
-export const dynamic = "force-dynamic";
-
 /**
  * Server component wrapper that fetches exercise + level data from the
  * server-only content module and passes it to the client SessionForm.

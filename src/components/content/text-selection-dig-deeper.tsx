@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback, type ReactNode } from "react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, StickyNote } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { DigDeeperPopover } from "./dig-deeper-popover";
+import { useNotes } from "@/components/notes/notes-provider";
 
 // ─── Props ───
 
@@ -113,10 +114,19 @@ export function TextSelectionDigDeeper({
     return () => document.removeEventListener("selectionchange", handleSelectionChange);
   }, [showPopover, clearSelection]);
 
+  // Notes context (safe — NotesProvider always wraps this component)
+  const notesCtx = useNotes();
+
   const handleButtonClick = useCallback(() => {
     setShowButton(false);
     setShowPopover(true);
   }, []);
+
+  const handleAddNote = useCallback(() => {
+    setShowButton(false);
+    notesCtx.startNote({ selectedText });
+    window.getSelection()?.removeAllRanges();
+  }, [notesCtx, selectedText]);
 
   const handlePopoverClose = useCallback(() => {
     setShowPopover(false);
@@ -130,12 +140,12 @@ export function TextSelectionDigDeeper({
   const getButtonStyle = (): React.CSSProperties => {
     if (!buttonRect) return { display: "none" };
 
-    const buttonWidth = 140;
+    const toolbarWidth = notesCtx.isAuthenticated ? 260 : 140;
     const left = Math.max(
       8,
       Math.min(
-        buttonRect.left + buttonRect.width / 2 - buttonWidth / 2,
-        window.innerWidth - buttonWidth - 8
+        buttonRect.left + buttonRect.width / 2 - toolbarWidth / 2,
+        window.innerWidth - toolbarWidth - 8
       )
     );
 
@@ -160,15 +170,27 @@ export function TextSelectionDigDeeper({
             transition={{ duration: 0.15 }}
             style={getButtonStyle()}
           >
-            <button
-              ref={buttonRef}
-              type="button"
-              onClick={handleButtonClick}
-              className="flex min-h-[44px] items-center gap-1.5 rounded-lg border border-surface-600 bg-surface-800 px-3 py-2 text-sm font-medium text-text-primary shadow-xl transition-colors hover:bg-surface-700"
-            >
-              <Sparkles className="h-3.5 w-3.5 text-accent-400" />
-              Dig Deeper
-            </button>
+            <div className="flex items-center gap-1 rounded-lg border border-surface-600 bg-surface-800 p-1 shadow-xl">
+              <button
+                ref={buttonRef}
+                type="button"
+                onClick={handleButtonClick}
+                className="flex min-h-[36px] items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium text-text-primary transition-colors hover:bg-surface-700"
+              >
+                <Sparkles className="h-3.5 w-3.5 text-accent-400" />
+                Dig Deeper
+              </button>
+              {notesCtx.isAuthenticated && (
+                <button
+                  type="button"
+                  onClick={handleAddNote}
+                  className="flex min-h-[36px] items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium text-text-primary transition-colors hover:bg-surface-700"
+                >
+                  <StickyNote className="h-3.5 w-3.5 text-amber-400" />
+                  Add Note
+                </button>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

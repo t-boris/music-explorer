@@ -261,6 +261,45 @@ export function getLevelsWithContent(): Set<string> {
   return result;
 }
 
+// ─── Content Summary (for client components) ───
+
+export interface ContentSummaryItem {
+  levelId: string;
+  levelTitle: string;
+  levelOrder: number;
+  lessonCount: number;
+  exerciseCount: number;
+}
+
+/**
+ * Returns a summary of all levels with content, including lesson and exercise counts.
+ * Designed to be called server-side and passed as props to client components.
+ */
+export function getContentSummary(): ContentSummaryItem[] {
+  const activeLevelIds = getLevelsWithContent();
+  const result: ContentSummaryItem[] = [];
+
+  for (const level of LEVELS) {
+    if (!activeLevelIds.has(level.id)) continue;
+
+    const lessons = getLessons(level.id);
+    let exerciseCount = 0;
+    for (const lesson of lessons) {
+      exerciseCount += getExercisesForLesson(level.id, lesson.id).length;
+    }
+
+    result.push({
+      levelId: level.id,
+      levelTitle: level.title,
+      levelOrder: level.order,
+      lessonCount: lessons.length,
+      exerciseCount,
+    });
+  }
+
+  return result;
+}
+
 // ─── Song API ───
 
 /**

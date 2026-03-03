@@ -35,6 +35,7 @@ const eventIcons: Record<ActivityEvent["type"], React.ReactNode> = {
   test_completed: <ClipboardCheck className="h-4 w-4 text-blue-400" />,
   recording_created: <Mic className="h-4 w-4 text-red-400" />,
   session_logged: <BookOpen className="h-4 w-4 text-yellow-400" />,
+  lesson_completed: <BookOpen className="h-4 w-4 text-green-400" />,
   level_up: <ArrowUp className="h-4 w-4 text-accent-400" />,
 };
 

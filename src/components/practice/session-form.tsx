@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Calendar, Clock, FileText, Music, BookOpen } from "lucide-react";
+import { Calendar, Clock, FileText, Music, BookOpen, Type } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import {
@@ -35,6 +35,7 @@ export function SessionForm({ exercises, levels, session }: SessionFormProps) {
   const router = useRouter();
   const { user } = useAuth();
 
+  const [title, setTitle] = useState(session?.title ?? "");
   const [date, setDate] = useState(
     session?.date ?? new Date().toISOString().slice(0, 10)
   );
@@ -81,6 +82,7 @@ export function SessionForm({ exercises, levels, session }: SessionFormProps) {
       notes,
       exerciseIds: selectedExerciseIds,
       levelId,
+      ...(title ? { title } : {}),
     };
 
     try {
@@ -100,6 +102,25 @@ export function SessionForm({ exercises, levels, session }: SessionFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Title */}
+      <div>
+        <label
+          htmlFor="session-title"
+          className="mb-1.5 flex items-center gap-2 text-sm font-medium text-text-primary"
+        >
+          <Type className="h-4 w-4 text-accent-400" />
+          Title
+        </label>
+        <input
+          id="session-title"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Session title (optional)"
+          className="w-full rounded-lg border border-surface-600 bg-surface-800 px-3 py-2 text-sm text-text-primary placeholder:text-text-muted outline-none transition-colors focus:border-accent-500 focus:ring-1 focus:ring-accent-500"
+        />
+      </div>
+
       {/* Date + Duration row */}
       <div className="grid gap-4 sm:grid-cols-2">
         {/* Date picker */}

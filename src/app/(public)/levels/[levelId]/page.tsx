@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, BookOpen } from "lucide-react";
 import { getLevel, getLevels, getLessons } from "@/lib/content";
-import { LessonCard } from "@/components/content/lesson-card";
+import { LessonsWithProgress } from "@/components/content/lessons-with-progress";
 
 export function generateStaticParams() {
   return getLevels().map((level) => ({ levelId: level.id }));
@@ -75,11 +75,7 @@ export default async function LevelDetailPage({ params }: LevelDetailPageProps) 
               ({lessons.length})
             </span>
           </h2>
-          <div className="flex flex-col gap-3">
-            {lessons.map((lesson, index) => (
-              <LessonCard key={lesson.id} lesson={lesson} index={index} />
-            ))}
-          </div>
+          <LessonsWithProgress lessons={lessons} />
         </div>
       ) : (
         <div className="rounded-xl border border-surface-700 bg-surface-800 p-8 text-center">

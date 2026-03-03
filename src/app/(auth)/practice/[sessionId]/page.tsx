@@ -16,6 +16,7 @@ import { AudioRecorder } from "@/components/recording/audio-recorder";
 import { RecordingList } from "@/components/recording/recording-list";
 import { RecordingComparison } from "@/components/recording/recording-comparison";
 import { useSessionRecordings } from "@/hooks/use-recordings";
+import { CommentSection } from "@/components/community/comment-section";
 import type { PracticeSession } from "@/types/index";
 
 function formatDate(dateStr: string): string {
@@ -272,6 +273,18 @@ export default function SessionDetailPage() {
               <RecordingComparison recordings={recordings} />
             </div>
           )}
+        </div>
+
+        {/* Session Comments */}
+        <div className="rounded-xl border border-surface-700 bg-surface-800 p-6">
+          <h2 className="mb-3 text-sm font-medium text-text-secondary">
+            Session Comments
+          </h2>
+          <CommentSection
+            targetUserId={user.uid}
+            targetType="practice_session"
+            targetId={session.id}
+          />
         </div>
 
         {/* Actions */}

@@ -13,6 +13,7 @@ const publicPaths = [
   /^\/levels\/.*/,
   "/songs",
   /^\/songs\/.*/,
+  "/glossary",
 ];
 
 export async function middleware(request: NextRequest) {

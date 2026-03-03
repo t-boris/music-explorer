@@ -4,8 +4,6 @@ import { getLevels, getLessons, getExercisesForLesson } from "@/lib/content";
 import { EditSessionClient } from "./edit-session-client";
 import type { Exercise, Level } from "@/types/index";
 
-export const dynamic = "force-dynamic";
-
 /**
  * Server component that fetches content data (exercises, levels) and
  * passes them to the client component that handles session fetching.

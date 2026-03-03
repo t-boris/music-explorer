@@ -12,6 +12,7 @@ import {
 import { getFirebaseDb } from "@/lib/firebase";
 import { updateSkillScore } from "@/lib/progress-service";
 import { logActivity } from "@/lib/activity-service";
+import { emitGamificationEvent } from "@/lib/gamification-service";
 import type { TestAttempt, TestError, SkillType } from "@/types/index";
 
 // ─── Collection Path Helper ───
@@ -63,6 +64,17 @@ export async function saveTestAttempt(
     });
   } catch (err) {
     console.error("Failed to log test activity:", err);
+  }
+
+  // Gamification event (non-critical)
+  try {
+    await emitGamificationEvent(userId, {
+      type: "test_completed",
+      sourceId: data.testId,
+      levelId: data.levelId,
+    });
+  } catch (err) {
+    console.error("Failed to emit gamification event:", err);
   }
 
   return docRef.id;

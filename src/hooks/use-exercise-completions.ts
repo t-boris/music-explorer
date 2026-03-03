@@ -35,7 +35,7 @@ export function useExerciseCompletions(
 
     async function fetchCompletions() {
       try {
-        const completions = await getCompletionsForLesson(user!.uid, lessonId);
+        const completions = await getCompletionsForLesson(user!.uid, lessonId, levelId);
         if (!cancelled) {
           setCompletedIds(new Set(completions.map((c) => c.exerciseId)));
         }
@@ -54,7 +54,7 @@ export function useExerciseCompletions(
     return () => {
       cancelled = true;
     };
-  }, [user, lessonId]);
+  }, [user, lessonId, levelId]);
 
   const toggle = useCallback(
     async (exercise: ToggleExerciseData) => {

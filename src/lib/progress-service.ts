@@ -10,6 +10,7 @@ import {
   limit as firestoreLimit,
   getDocs,
   updateDoc,
+  runTransaction,
   serverTimestamp,
 } from "firebase/firestore";
 import { getFirebaseDb } from "@/lib/firebase";
@@ -68,13 +69,24 @@ export async function getSessionHistory(
 export async function updateSkillScore(
   userId: string,
   skillType: SkillType,
-  score: number
+  scoreIncrement: number
 ): Promise<void> {
-  const userRef = doc(getFirebaseDb(), "users", userId);
-  await updateDoc(userRef, {
-    [`progressSummary.${skillType}.score`]: score,
-    [`progressSummary.${skillType}.lastUpdated`]: serverTimestamp(),
-    updatedAt: serverTimestamp(),
+  const db = getFirebaseDb();
+  const userRef = doc(db, "users", userId);
+
+  await runTransaction(db, async (transaction) => {
+    const userSnap = await transaction.get(userRef);
+    if (!userSnap.exists()) return;
+
+    const data = userSnap.data() as User;
+    const currentScore = data.progressSummary?.[skillType]?.score ?? 0;
+    const newScore = Math.min(currentScore + scoreIncrement, 1);
+
+    transaction.update(userRef, {
+      [`progressSummary.${skillType}.score`]: newScore,
+      [`progressSummary.${skillType}.lastUpdated`]: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
   });
 }
 

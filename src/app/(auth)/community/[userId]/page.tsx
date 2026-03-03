@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -11,62 +10,17 @@ import {
   ClipboardCheck,
   CheckCircle,
   BookOpen,
-  ChevronDown,
-  ChevronRight,
-  MessageCircle,
 } from "lucide-react";
 import { useSharedDashboard } from "@/hooks/use-shared-dashboard";
 import { StreakDisplay } from "@/components/dashboard/streak-display";
 import { ProgressOverview } from "@/components/dashboard/progress-overview";
-import { CommentSection } from "@/components/community/comment-section";
+import { CommentAccordion } from "@/components/community/comment-accordion";
 import type {
   PracticeSession,
   Recording,
   TestAttempt,
   ExerciseCompletion,
 } from "@/types/index";
-
-// ─── Accordion Item Wrapper ───
-
-function CommentAccordion({
-  targetUserId,
-  targetType,
-  targetId,
-  commentCount,
-}: {
-  targetUserId: string;
-  targetType: "recording" | "test_attempt" | "exercise_completion" | "practice_session";
-  targetId: string;
-  commentCount?: number;
-}) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="mt-2 border-t border-surface-700 pt-2">
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 text-xs text-text-muted hover:text-text-secondary transition-colors"
-      >
-        {open ? (
-          <ChevronDown className="h-3.5 w-3.5" />
-        ) : (
-          <ChevronRight className="h-3.5 w-3.5" />
-        )}
-        <MessageCircle className="h-3.5 w-3.5" />
-        Comments
-      </button>
-      {open && (
-        <div className="mt-2">
-          <CommentSection
-            targetUserId={targetUserId}
-            targetType={targetType}
-            targetId={targetId}
-          />
-        </div>
-      )}
-    </div>
-  );
-}
 
 // ─── Item Cards ───
 

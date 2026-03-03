@@ -9,10 +9,13 @@ import { StreakDisplay } from "@/components/dashboard/streak-display";
 import { ProgressOverview } from "@/components/dashboard/progress-overview";
 import { StaffReference } from "@/components/dashboard/staff-reference";
 import { NoteExplorer } from "@/components/dashboard/note-explorer";
+import { DailyMissions } from "@/components/gamification/daily-missions";
+import { useGamification } from "@/hooks/use-gamification";
 
 export default function DashboardPage() {
   const { user: authUser, loading: authLoading, error: authError } = useAuth();
   const { data, loading, error } = useDashboard();
+  const { missions, allMissionsComplete, claimDailyBonus } = useGamification();
 
   const displayName =
     data?.user?.displayName ?? authUser?.displayName ?? "Musician";
@@ -59,6 +62,13 @@ export default function DashboardPage() {
         <TodayPlan
           todaySession={data?.todaySession ?? null}
           user={data?.user ?? null}
+        />
+
+        {/* Daily Missions */}
+        <DailyMissions
+          missions={missions}
+          allComplete={allMissionsComplete}
+          onClaimBonus={claimDailyBonus}
         />
 
         {/* Streak Display */}

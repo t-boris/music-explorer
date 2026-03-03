@@ -1,5 +1,5 @@
 import { getLevels, getLessons, getLevelsWithContent } from "@/lib/content";
-import { LevelCard } from "@/components/content/level-card";
+import { LevelsWithProgress } from "@/components/content/levels-with-progress";
 
 export const metadata = {
   title: "Learning Roadmap | Music Explorer",
@@ -10,6 +10,12 @@ export const metadata = {
 export default function LevelsPage() {
   const levels = getLevels();
   const activeLevelIds = getLevelsWithContent();
+
+  // Pre-compute lesson counts server-side so the client component doesn't need content.ts
+  const lessonCounts: Record<string, number> = {};
+  for (const id of activeLevelIds) {
+    lessonCounts[id] = getLessons(id).length;
+  }
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
@@ -23,22 +29,11 @@ export default function LevelsPage() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
-        {levels.map((level) => {
-          const isActive = activeLevelIds.has(level.id);
-          const lessonCount = isActive
-            ? getLessons(level.id).length
-            : 0;
-          return (
-            <LevelCard
-              key={level.id}
-              level={level}
-              isActive={isActive}
-              lessonCount={lessonCount}
-            />
-          );
-        })}
-      </div>
+      <LevelsWithProgress
+        levels={levels}
+        activeLevelIds={Array.from(activeLevelIds)}
+        lessonCounts={lessonCounts}
+      />
     </main>
   );
 }

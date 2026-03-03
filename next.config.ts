@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
     "/levels/\\[levelId\\]/lessons/\\[lessonId\\]": ["./content/levels/**/*"],
     "/levels/\\[levelId\\]/lessons/\\[lessonId\\]/test": ["./content/levels/**/*"],
     "/songs/\\[songId\\]": ["./content/songs/**/*"],
+    "/practice/new": ["./content/levels/**/*"],
+    "/practice/\\[sessionId\\]/edit": ["./content/levels/**/*"],
   },
 };
 

@@ -60,7 +60,7 @@ export function SessionList({ userId }: SessionListProps) {
   return (
     <div className="space-y-3">
       {sessions.map((session) => (
-        <SessionCard key={session.id} session={session} />
+        <SessionCard key={session.id} session={session} userId={userId} />
       ))}
     </div>
   );

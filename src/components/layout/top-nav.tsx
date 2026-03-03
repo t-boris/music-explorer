@@ -13,12 +13,14 @@ import {
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import { UserMenu } from "@/components/auth/user-menu";
+import { XpHud } from "@/components/gamification/xp-hud";
 import { useAuth } from "@/hooks/use-auth";
 import { useState } from "react";
 
 const publicLinks = [
   { href: "/levels", label: "Levels" },
   { href: "/songs", label: "Songs" },
+  { href: "/glossary", label: "Glossary" },
 ];
 
 const authLinks = [
@@ -115,6 +117,11 @@ export function TopNav() {
 
         {/* Right side: user menu + mobile menu */}
         <div className="flex items-center gap-3">
+          {user && !loading && (
+            <div className="hidden md:block">
+              <XpHud />
+            </div>
+          )}
           <div className="hidden md:block">
             <UserMenu />
           </div>
@@ -156,6 +163,11 @@ export function TopNav() {
                       />
                     ))}
                   </>
+                )}
+                {user && !loading && (
+                  <div className="py-1">
+                    <XpHud />
+                  </div>
                 )}
                 <Separator className="my-2" />
                 <div onClick={() => setMobileOpen(false)}>

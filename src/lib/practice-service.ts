@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import { getFirebaseDb } from "@/lib/firebase";
 import { logActivity } from "@/lib/activity-service";
+import { emitGamificationEvent } from "@/lib/gamification-service";
 import type { PracticeSession } from "@/types/index";
 
 // ─── Collection Path Helper ───
@@ -35,6 +36,7 @@ export interface CreatePracticeSessionData {
   notes: string;
   exerciseIds: string[];
   levelId: string;
+  title?: string;
 }
 
 export async function createPracticeSession(
@@ -50,6 +52,7 @@ export async function createPracticeSession(
     notes: data.notes,
     exerciseIds: data.exerciseIds,
     levelId: data.levelId,
+    ...(data.title ? { title: data.title } : {}),
     createdAt: serverTimestamp(),
   });
 
@@ -67,6 +70,17 @@ export async function createPracticeSession(
     });
   } catch (err) {
     console.error("Failed to log practice session activity:", err);
+  }
+
+  // Gamification event (non-critical)
+  try {
+    await emitGamificationEvent(userId, {
+      type: "session_logged",
+      sourceId: docRef.id,
+      levelId: data.levelId,
+    });
+  } catch (err) {
+    console.error("Failed to emit gamification event:", err);
   }
 
   return docRef.id;

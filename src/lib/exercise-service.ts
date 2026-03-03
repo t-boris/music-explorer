@@ -15,6 +15,7 @@ import {
 import { getFirebaseDb } from "@/lib/firebase";
 import { updateSkillScore, createProgressEntry } from "@/lib/progress-service";
 import { logActivity } from "@/lib/activity-service";
+import { emitGamificationEvent } from "@/lib/gamification-service";
 import type { Exercise, ExerciseCompletion, SkillType } from "@/types/index";
 
 // ─── Collection Path Helper ───
@@ -119,6 +120,18 @@ export async function toggleExerciseCompletion(
     console.error("Failed to log exercise activity:", err);
   }
 
+  // Gamification event (non-critical)
+  try {
+    await emitGamificationEvent(userId, {
+      type: "exercise_completed",
+      sourceId: data.exerciseId,
+      levelId: data.levelId,
+      lessonId: data.lessonId,
+    });
+  } catch (err) {
+    console.error("Failed to emit gamification event:", err);
+  }
+
   return true;
 }
 
@@ -126,10 +139,15 @@ export async function toggleExerciseCompletion(
 
 export async function getCompletionsForLesson(
   userId: string,
-  lessonId: string
+  lessonId: string,
+  levelId: string
 ): Promise<ExerciseCompletion[]> {
   const col = completionsCollection(userId);
-  const q = query(col, where("lessonId", "==", lessonId));
+  const q = query(
+    col,
+    where("lessonId", "==", lessonId),
+    where("levelId", "==", levelId)
+  );
   const snapshot = await getDocs(q);
   return snapshot.docs.map((d) => ({
     id: d.id,
